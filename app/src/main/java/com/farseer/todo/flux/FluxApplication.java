@@ -19,10 +19,11 @@ import com.farseer.todo.flux.di.component.ApplicationComponent;
 public class FluxApplication extends Application {
 
     private ApplicationComponent component;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        initApplication();
+        initializeApplication();
     }
 
     public ApplicationComponent component() {
@@ -30,7 +31,11 @@ public class FluxApplication extends Application {
     }
 
     //初始化Application
-    private void initApplication() {
+    private void initializeApplication() {
+        initializeInjector();
+    }
+
+    private void initializeInjector() {
         component = ApplicationComponent.Initializer.init(this);
     }
 }
