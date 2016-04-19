@@ -7,6 +7,7 @@ package com.farseer.todo.flux.store;
 
 import com.farseer.todo.flux.action.TodoDataAction;
 import com.farseer.todo.flux.action.TodoViewAction;
+import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
@@ -15,7 +16,9 @@ import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,7 +31,8 @@ import javax.inject.Inject;
  */
 public class TodoStore {
 
-    private List<TodoItem> todoItemList;
+    private Map<Long, TodoItem> todoItemMap = new HashMap<>();
+    private TodoListModel.Filter filter = TodoListModel.Filter.ALL;
 
     private DataDispatcher dataDispatcher;
     private ActionDispatcher actionDispatcher;
@@ -37,25 +41,35 @@ public class TodoStore {
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;
-
-        todoItemList = new ArrayList<>();
     }
 
     @Subscribe
     public final void processTodoDataAction(TodoDataAction action) {
         LogTool.debug(action.toString());
+        DataBundle<TodoDataAction.Key> data = action.getBundle();
+        Long id = (Long)data.get(TodoDataAction.Key.ID, -1L);
+        String description = (String) data.get(TodoDataAction.Key.DESCRIPTION, "");
         switch ((TodoDataAction.Type) action.getType()) {
             case NEW:
+                long newId = System.currentTimeMillis();
+                TodoItem newItem = new TodoItem(newId, description, false);
+                todoItemMap.put(newId, newItem);
                 break;
             case EDIT:
+                TodoItem oldItem = todoItemMap.get(id);
+                todoItemMap.put(oldItem.getId(), new TodoItem(oldItem.getId(), description, oldItem.isCompleted()));
                 break;
             case DELETE:
+                todoItemMap.remove(id);
                 break;
             case DELETE_ALL:
+                todoItemMap.clear();
                 break;
             case UNDO_DELETE_ALL:
                 break;
         }
+
+        notifyTodoModelChanged();
     }
 
     @Subscribe
@@ -63,15 +77,17 @@ public class TodoStore {
         LogTool.debug(action.toString());
         switch ((TodoViewAction.Type) action.getType()) {
             case VIEW_ALL:
-                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.ALL));
+                filter = TodoListModel.Filter.ALL;
                 break;
             case VIEW_ACTIVE:
-                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.ACTIVE));
+                filter = TodoListModel.Filter.ACTIVE;
                 break;
             case VIEW_COMPLETE:
-                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.COMPLETED));
+                filter = TodoListModel.Filter.COMPLETED;
                 break;
         }
+
+        notifyTodoModelChanged();
     }
 
     public void onResume() {
@@ -84,5 +100,11 @@ public class TodoStore {
         actionDispatcher.unregister(this);
     }
 
+    private void notifyTodoModelChanged(){
+        List<TodoItem> todoItemList = new ArrayList<>();
+        todoItemList.addAll(todoItemMap.values());
+        TodoListModel todoListModel = new TodoListModel(todoItemList, filter);
+        dataDispatcher.post(todoListModel);
+    }
 
 }
