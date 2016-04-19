@@ -3,12 +3,13 @@
  * Copyright (c) 2016 hujiang Co.Ltd. All right reserved(http://www.hujiang.com).
  * 
  */
-package com.farseer.todo.flux.di.activity;
+package com.farseer.todo.flux.di.component;
 
 import com.farseer.todo.flux.FluxApplication;
 import com.farseer.todo.flux.base.BaseActivity;
+import com.farseer.todo.flux.base.BaseFragment;
 import com.farseer.todo.flux.di.PerActivity;
-import com.farseer.todo.flux.di.application.ApplicationComponent;
+import com.farseer.todo.flux.di.module.ActivityModule;
 
 import dagger.Component;
 
@@ -36,6 +37,8 @@ public interface ActivityComponent {
     }
 
     public void inject(BaseActivity activity);
+
+    public void inject(BaseFragment activity);
 
     BaseActivity activity();
 

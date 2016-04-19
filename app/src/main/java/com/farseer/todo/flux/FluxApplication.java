@@ -7,10 +7,10 @@ package com.farseer.todo.flux;
 
 import android.app.Application;
 
-import com.farseer.todo.flux.di.application.ApplicationComponent;
+import com.farseer.todo.flux.di.component.ApplicationComponent;
 
 /**
- * class description here
+ * Flux Application
  *
  * @author zhaosc
  * @version 1.0.0

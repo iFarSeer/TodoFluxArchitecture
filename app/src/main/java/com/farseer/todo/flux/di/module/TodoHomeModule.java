@@ -3,12 +3,10 @@
  * Copyright (c) 2016 hujiang Co.Ltd. All right reserved(http://www.hujiang.com).
  * 
  */
-package com.farseer.todo.flux.di.activity;
+package com.farseer.todo.flux.di.module;
 
-import android.app.Activity;
-
-import com.farseer.todo.flux.base.BaseActivity;
 import com.farseer.todo.flux.di.PerActivity;
+import com.farseer.todo.flux.view.TodoActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,17 +18,17 @@ import dagger.Provides;
  * @version 1.0.0
  * @since 2016-04-19
  */
-@Module
-public class ActivityModule {
-    private BaseActivity activity;
+@Module( includes = ActivityModule.class)
+public class TodoHomeModule {
+    private TodoActivity activity;
 
-    public ActivityModule(BaseActivity activity) {
+    public TodoHomeModule(TodoActivity activity) {
         this.activity = activity;
     }
 
     @Provides
     @PerActivity
-    BaseActivity activity() {
+    TodoActivity activity() {
         return activity;
     }
 }

@@ -3,10 +3,13 @@
  * Copyright (c) 2016 hujiang Co.Ltd. All right reserved(http://www.hujiang.com).
  * 
  */
-package com.farseer.todo.flux.di.application;
+package com.farseer.todo.flux.di.module;
 
 import android.app.Application;
 import android.content.res.Resources;
+
+import com.farseer.todo.flux.dispatcher.ActionDispatcher;
+import com.farseer.todo.flux.dispatcher.DataDispatcher;
 
 import javax.inject.Singleton;
 
@@ -40,6 +43,18 @@ public class ApplicationModule {
     @Singleton
     Resources resources() {
         return application.getResources();
+    }
+
+    @Provides
+    @Singleton
+    ActionDispatcher actionDispatcher() {
+        return new ActionDispatcher();
+    }
+
+    @Provides
+    @Singleton
+    DataDispatcher dataDispatcher() {
+        return new DataDispatcher();
     }
 
 }
