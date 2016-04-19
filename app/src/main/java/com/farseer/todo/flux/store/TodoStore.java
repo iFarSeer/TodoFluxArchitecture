@@ -9,8 +9,13 @@ import com.farseer.todo.flux.action.TodoDataAction;
 import com.farseer.todo.flux.action.TodoViewAction;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.model.TodoListModel;
+import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,6 +28,8 @@ import javax.inject.Inject;
  */
 public class TodoStore {
 
+    private List<TodoItem> todoItemList;
+
     private DataDispatcher dataDispatcher;
     private ActionDispatcher actionDispatcher;
 
@@ -30,6 +37,8 @@ public class TodoStore {
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;
+
+        todoItemList = new ArrayList<>();
     }
 
     @Subscribe
@@ -54,12 +63,13 @@ public class TodoStore {
         LogTool.debug(action.toString());
         switch ((TodoViewAction.Type) action.getType()) {
             case VIEW_ALL:
+                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.ALL));
                 break;
             case VIEW_ACTIVE:
+                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.ACTIVE));
                 break;
             case VIEW_COMPLETE:
-                break;
-            case MARK_EDITABLE:
+                dataDispatcher.post(new TodoListModel(todoItemList, TodoListModel.Filter.COMPLETED));
                 break;
         }
     }

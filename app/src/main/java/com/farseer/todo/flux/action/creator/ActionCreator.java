@@ -67,11 +67,4 @@ public class ActionCreator {
     public final void createCompleteViewAction() {
         actionDispatcher.post(new TodoViewAction(TodoViewAction.Type.VIEW_COMPLETE));
     }
-
-    public final void createCompleteViewAction(final String id) {
-        DataBundle<TodoViewAction.Key> bundle = new DataBundle<>();
-        bundle.put(TodoViewAction.Key.ID, id);
-        actionDispatcher.post(new TodoViewAction(TodoViewAction.Type.MARK_EDITABLE, bundle));
-    }
-
 }

@@ -9,7 +9,11 @@ import android.view.MenuItem;
 import com.farseer.todo.flux.R;
 import com.farseer.todo.flux.base.BaseActivity;
 import com.farseer.todo.flux.di.component.TodoHomeComponent;
+import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.store.TodoStore;
+import com.farseer.todo.flux.tool.LogTool;
+import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
@@ -27,6 +31,12 @@ public class TodoActivity extends BaseActivity {
 
     @Inject
     TodoStore todoStore;
+
+    @Inject
+    DataDispatcher dataDispatcher;
+
+    private TodoListModel todoListModel;
+
     private TodoHomeComponent component;
 
     @Override
@@ -44,12 +54,14 @@ public class TodoActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         todoStore.onResume();
+        dataDispatcher.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         todoStore.onPause();
+        dataDispatcher.unregister(this);
     }
 
     @OnClick(R.id.fab)
@@ -71,6 +83,13 @@ public class TodoActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Subscribe
+    public void onTodoModelChanged(final TodoListModel todoListModel) {
+       this.todoListModel = todoListModel;
+        LogTool.debug(todoListModel.toString());
     }
 
     public void initializeInjector() {
