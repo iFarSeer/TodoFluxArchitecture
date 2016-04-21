@@ -118,7 +118,7 @@ public class TodoActivity extends BaseActivity {
 
     private void initView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(TodoActivity.this));
-        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setNestedScrollingEnabled(true);
         recyclerAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -156,9 +156,13 @@ public class TodoActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             TodoItem item = todoListModel.list.get(position);
+
             holder.isActiveImageView.setSelected(item.isCompleted());
             holder.isStarImageView.setSelected(item.isStar());
             holder.descriptionTextView.setText(item.getDescription());
+
+            LogTool.debug("getLayoutPosition = " + holder.getLayoutPosition());
+            LogTool.debug("getAdapterPosition = " + holder.getAdapterPosition());
         }
 
         @Override
