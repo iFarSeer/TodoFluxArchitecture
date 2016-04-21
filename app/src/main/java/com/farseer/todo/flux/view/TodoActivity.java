@@ -2,10 +2,12 @@ package com.farseer.todo.flux.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
@@ -124,8 +126,11 @@ public class TodoActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean flag = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    actionCreator.createNewAction(inputEditText.getText().toString());
-                    inputEditText.setText("");
+                    String text = inputEditText.getText().toString();
+                    if (!TextUtils.isEmpty(text)) {
+                        actionCreator.createNewAction(text);
+                        inputEditText.setText("");
+                    }
                     flag = true;
                 }
                 return flag;
@@ -152,7 +157,7 @@ public class TodoActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final TodoItem item = todoListModel.list.get(position);
-            
+
             holder.isCompletedImageView.setSelected(item.isCompleted());
             holder.isStarImageView.setSelected(item.isStar());
             holder.descriptionTextView.setText(item.getDescription());
@@ -169,6 +174,14 @@ public class TodoActivity extends BaseActivity {
                 @Override
                 public void onClick(View view) {
                     actionCreator.createEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar());
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    actionCreator.createDeleteAction(item.getId());
+                    return false;
                 }
             });
         }
