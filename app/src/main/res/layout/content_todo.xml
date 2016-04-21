@@ -16,7 +16,11 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/border_editor">
+                android:layout_height="@dimen/border_editor"
+                android:layout_marginLeft="@dimen/item_margin"
+                android:layout_marginStart="@dimen/item_margin"
+                android:layout_marginRight="@dimen/item_margin"
+                android:layout_marginEnd="@dimen/item_margin">
             <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/inputEditText"
                     android:layout_width="match_parent"
