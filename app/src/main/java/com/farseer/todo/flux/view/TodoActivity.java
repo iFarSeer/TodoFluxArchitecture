@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.*;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.Bind;
@@ -106,6 +107,7 @@ public class TodoActivity extends BaseActivity {
     public void onTodoModelChanged(final TodoListModel todoListModel) {
         this.todoListModel = todoListModel;
         LogTool.debug(todoListModel.toString());
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     public void initializeInjector() {
@@ -120,21 +122,23 @@ public class TodoActivity extends BaseActivity {
         recyclerAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
 
-        inputEditText.setOnKeyListener(new View.OnKeyListener() {
+        inputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (KeyEvent.KEYCODE_ENTER == keyCode) {
-
-                    String text = inputEditText.getText().toString();
-                    if (TextUtils.isEmpty(text)) {
-                        return false;
-                    }
-
-
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean flag = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    actionCreator.createNewAction(inputEditText.getText().toString());
                     inputEditText.setText("");
-                    return true;
+                    flag = true;
                 }
-                return false;
+                return flag;
+            }
+        });
+
+        inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
             }
         });
     }

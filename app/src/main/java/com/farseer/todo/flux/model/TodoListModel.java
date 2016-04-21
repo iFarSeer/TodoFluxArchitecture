@@ -25,7 +25,7 @@ public class TodoListModel {
 
     public TodoListModel(List<TodoItem> list, Filter filter) {
         this.filter = filter;
-        list = filter(list, filter);
+        this.list = filter(list, filter);
     }
 
     private List<TodoItem> filter(List<TodoItem> list, Filter filter) {
@@ -56,7 +56,7 @@ public class TodoListModel {
         Collections.sort(tmpList, new Comparator<TodoItem>() {
             @Override
             public int compare(TodoItem lhs, TodoItem rhs) {
-                return (int) (lhs.getId() - rhs.getId());
+                return (int) (rhs.getId() - lhs.getId());
             }
         });
 
