@@ -2,17 +2,17 @@ package com.farseer.todo.flux.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.text.TextUtils;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.farseer.todo.flux.R;
 import com.farseer.todo.flux.base.BaseActivity;
 import com.farseer.todo.flux.di.component.TodoHomeComponent;
@@ -24,10 +24,6 @@ import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TodoActivity extends BaseActivity {
 
@@ -49,6 +45,8 @@ public class TodoActivity extends BaseActivity {
     FloatingActionButton floatingActionButton;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+    @Bind(R.id.inputEditText)
+    AppCompatEditText inputEditText;
 
 
     private TodoListModel todoListModel;
@@ -121,6 +119,24 @@ public class TodoActivity extends BaseActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
+
+        inputEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (KeyEvent.KEYCODE_ENTER == keyCode) {
+
+                    String text = inputEditText.getText().toString();
+                    if (TextUtils.isEmpty(text)) {
+                        return false;
+                    }
+
+
+                    inputEditText.setText("");
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 

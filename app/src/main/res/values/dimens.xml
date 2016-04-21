@@ -7,4 +7,5 @@
     <dimen name="item_height">64dp</dimen>
     <dimen name="item_margin">16dp</dimen>
     <dimen name="default_padding">8dp</dimen>
+    <dimen name="border_editor">64dp</dimen>
 </resources>
