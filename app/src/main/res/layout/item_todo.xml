@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/isActiveImageView"
+        android:id="@+id/isCompletedImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/checkbox_circle"
@@ -38,8 +38,8 @@
         android:layout_centerInParent="true"
         android:layout_toLeftOf="@id/isStarImageView"
         android:layout_toStartOf="@id/isStarImageView"
-        android:layout_toRightOf="@id/isActiveImageView"
-        android:layout_toEndOf="@id/isActiveImageView"
+        android:layout_toRightOf="@id/isCompletedImageView"
+        android:layout_toEndOf="@id/isCompletedImageView"
         tools:text="测试内容"
         />
 </RelativeLayout>

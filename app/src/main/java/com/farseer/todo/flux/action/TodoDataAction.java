@@ -40,5 +40,7 @@ public class TodoDataAction extends Action {
     public enum Key implements DataKey {
         ID,
         DESCRIPTION,
+        IS_COMPLETED,
+        IS_STAR
     }
 }

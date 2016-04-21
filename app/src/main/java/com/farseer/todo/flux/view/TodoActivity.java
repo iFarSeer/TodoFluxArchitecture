@@ -6,7 +6,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
@@ -29,7 +28,6 @@ import javax.inject.Inject;
 public class TodoActivity extends BaseActivity {
 
 
-
     private TodoHomeComponent component;
 
     @Inject
@@ -37,7 +35,6 @@ public class TodoActivity extends BaseActivity {
 
     @Inject
     DataDispatcher dataDispatcher;
-
 
 
     @Bind(R.id.toolbar)
@@ -148,21 +145,42 @@ public class TodoActivity extends BaseActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            ViewHolder holder = new ViewHolder(LayoutInflater.from(TodoActivity.this).
-                    inflate(R.layout.item_todo, parent, false));
+            ViewHolder holder = new ViewHolder(LayoutInflater.from(TodoActivity.this).inflate(R.layout.item_todo, parent, false));
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            TodoItem item = todoListModel.list.get(position);
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
+            final TodoItem item = todoListModel.list.get(position);
 
-            holder.isActiveImageView.setSelected(item.isCompleted());
-            holder.isStarImageView.setSelected(item.isStar());
+            if (item.isCompleted()) {
+                holder.isCompletedImageView.setImageResource(R.drawable.checkbox_circle_selected);
+            } else {
+                holder.isCompletedImageView.setImageResource(R.drawable.checkbox_circle_unselected);
+            }
+            if (item.isStar()) {
+                holder.isStarImageView.setImageResource(R.drawable.checkbox_circle_selected);
+            } else {
+                holder.isStarImageView.setImageResource(R.drawable.checkbox_circle_unselected);
+            }
+//            holder.isCompletedImageView.setSelected(item.isCompleted());
+//            holder.isStarImageView.setSelected(item.isStar());
             holder.descriptionTextView.setText(item.getDescription());
 
-            LogTool.debug("getLayoutPosition = " + holder.getLayoutPosition());
-            LogTool.debug("getAdapterPosition = " + holder.getAdapterPosition());
+
+            holder.isCompletedImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    actionCreator.createEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar());
+                }
+            });
+
+            holder.isStarImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    actionCreator.createEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar());
+                }
+            });
         }
 
         @Override
@@ -176,8 +194,8 @@ public class TodoActivity extends BaseActivity {
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            @Bind(R.id.isActiveImageView)
-            ImageView isActiveImageView;
+            @Bind(R.id.isCompletedImageView)
+            ImageView isCompletedImageView;
             @Bind(R.id.isStarImageView)
             ImageView isStarImageView;
             @Bind(R.id.descriptionTextView)

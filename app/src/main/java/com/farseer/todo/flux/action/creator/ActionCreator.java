@@ -34,14 +34,16 @@ public class ActionCreator {
         actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.NEW, bundle));
     }
 
-    public final void createEditAction(final String id, final String description) {
+    public final void createEditAction(final Long id, final String description, boolean isCompleted, boolean isStar) {
         DataBundle<TodoDataAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoDataAction.Key.ID, id);
         bundle.put(TodoDataAction.Key.DESCRIPTION, description);
+        bundle.put(TodoDataAction.Key.IS_COMPLETED, isCompleted);
+        bundle.put(TodoDataAction.Key.IS_STAR, isStar);
         actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.EDIT, bundle));
     }
 
-    public final void createDeleteAction(final String id) {
+    public final void createDeleteAction(final Long id) {
         DataBundle<TodoDataAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoDataAction.Key.ID, id);
         actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.DELETE, bundle));
