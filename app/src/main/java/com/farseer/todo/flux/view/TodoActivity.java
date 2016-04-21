@@ -152,19 +152,9 @@ public class TodoActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final TodoItem item = todoListModel.list.get(position);
-
-            if (item.isCompleted()) {
-                holder.isCompletedImageView.setImageResource(R.drawable.checkbox_circle_selected);
-            } else {
-                holder.isCompletedImageView.setImageResource(R.drawable.checkbox_circle_unselected);
-            }
-            if (item.isStar()) {
-                holder.isStarImageView.setImageResource(R.drawable.checkbox_circle_selected);
-            } else {
-                holder.isStarImageView.setImageResource(R.drawable.checkbox_circle_unselected);
-            }
-//            holder.isCompletedImageView.setSelected(item.isCompleted());
-//            holder.isStarImageView.setSelected(item.isStar());
+            
+            holder.isCompletedImageView.setSelected(item.isCompleted());
+            holder.isStarImageView.setSelected(item.isStar());
             holder.descriptionTextView.setText(item.getDescription());
 
 
