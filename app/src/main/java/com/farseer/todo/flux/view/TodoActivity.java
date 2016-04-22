@@ -1,20 +1,5 @@
 package com.farseer.todo.flux.view;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.view.*;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
-import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.farseer.todo.flux.R;
 import com.farseer.todo.flux.base.BaseActivity;
 import com.farseer.todo.flux.di.component.TodoHomeComponent;
@@ -24,8 +9,30 @@ import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.store.TodoStore;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Subscribe;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TodoActivity extends BaseActivity {
 
@@ -118,7 +125,14 @@ public class TodoActivity extends BaseActivity {
     private void initView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(TodoActivity.this));
         recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.addItemDecoration(
+                new HorizontalDividerItemDecoration.Builder(this)
+                        .colorResId(R.color.transport_color)
+                        .sizeResId(R.dimen.todo_list_divider_height)
+                        .marginResId(R.dimen.item_margin, R.dimen.item_margin)
+                        .build());
         recyclerAdapter = new RecyclerAdapter();
+
         recyclerView.setAdapter(recyclerAdapter);
 
         inputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

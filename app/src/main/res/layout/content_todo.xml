@@ -30,6 +30,10 @@
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/item_margin"
+            android:layout_marginEnd="@dimen/item_margin"
+            android:layout_marginLeft="@dimen/item_margin"
+            android:layout_marginStart="@dimen/item_margin" />
 
 </LinearLayout>
