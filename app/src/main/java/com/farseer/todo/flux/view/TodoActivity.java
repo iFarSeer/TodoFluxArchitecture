@@ -125,7 +125,7 @@ public class TodoActivity extends BaseActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean flag = false;
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String text = inputEditText.getText().toString();
                     if (!TextUtils.isEmpty(text)) {
                         actionCreator.createNewAction(text);
