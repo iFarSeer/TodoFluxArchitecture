@@ -9,6 +9,6 @@
     <dimen name="default_padding">8dp</dimen>
     <dimen name="border_editor">64dp</dimen>
 
-    <dimen name="todo_list_divider_height">4dp</dimen>
+    <dimen name="todo_list_divider_height">2dp</dimen>
     <dimen name="divider_height">1dp</dimen>
 </resources>
