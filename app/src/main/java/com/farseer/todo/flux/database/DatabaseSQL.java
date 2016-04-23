@@ -10,9 +10,7 @@ public class DatabaseSQL {
     public static final String[] SQL_ALL_V1 = {
             TBTodoItem.CREATE_SQL_V1, TBTodoItem.INDEX_SQL_V1
     };
-
-
-
+    
     public static final String[][] SQL_ALL = {SQL_ALL_V1};
 
     public static final int VERSION = SQL_ALL.length;
