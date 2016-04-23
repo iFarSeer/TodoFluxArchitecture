@@ -7,7 +7,7 @@ package com.farseer.todo.flux.action.creator;
 import com.farseer.todo.flux.action.TodoItemAction;
 import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
-import com.farseer.todo.flux.database.contants.TodoItemTable;
+import com.farseer.todo.flux.database.table.TodoItemTable;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.squareup.sqlbrite.BriteDatabase;

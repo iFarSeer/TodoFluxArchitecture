@@ -1,6 +1,6 @@
 package com.farseer.todo.flux.database;
 
-import com.farseer.todo.flux.database.contants.TodoItemTable;
+import com.farseer.todo.flux.database.table.TodoItemTable;
 
 import android.content.Context;
 import android.database.DatabaseErrorHandler;

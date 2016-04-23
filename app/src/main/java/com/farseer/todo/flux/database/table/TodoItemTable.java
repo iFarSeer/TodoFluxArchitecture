@@ -1,4 +1,4 @@
-package com.farseer.todo.flux.database.contants;
+package com.farseer.todo.flux.database.table;
 
 import com.farseer.todo.flux.tool.CursorTool;
 import com.farseer.todo.flux.pojo.TodoItem;
