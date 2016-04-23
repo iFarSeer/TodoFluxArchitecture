@@ -1,7 +1,6 @@
 /*
  * ActionType      2016-04-19
- * Copyright (c) 2016 hujiang Co.Ltd. All right reserved(http://www.hujiang.com).
- * 
+ *
  */
 package com.farseer.todo.flux.action.base;
 
