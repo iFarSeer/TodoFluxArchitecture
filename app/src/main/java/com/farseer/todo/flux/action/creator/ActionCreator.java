@@ -7,7 +7,7 @@ package com.farseer.todo.flux.action.creator;
 import com.farseer.todo.flux.action.TodoItemAction;
 import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
-import com.farseer.todo.flux.database.table.TodoItemTable;
+import com.farseer.todo.flux.database.table.TBTodoItem;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.squareup.sqlbrite.BriteDatabase;
@@ -38,7 +38,7 @@ public class ActionCreator {
 
         long id = System.currentTimeMillis();
         TodoItem item = new TodoItem(id, description, false, false);
-        briteDatabase.insert(TodoItemTable.TABLE, TodoItemTable.contentValue(item));
+        briteDatabase.insert(TBTodoItem.TABLE_NAME, TBTodoItem.contentValue(item));
 
         DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoItemAction.Key.ITEM, item);
@@ -47,7 +47,7 @@ public class ActionCreator {
 
     public final void createItemEditAction(final Long id, final String description, boolean isCompleted, boolean isStar) {
         TodoItem item = new TodoItem(id, description, isCompleted, isStar);
-        briteDatabase.update(TodoItemTable.TABLE, TodoItemTable.contentValue(item), String.format("%s = %s", TodoItemTable.ID, item.getId()));
+        briteDatabase.update(TBTodoItem.TABLE_NAME, TBTodoItem.contentValue(item), String.format("%s = %s", TBTodoItem.ID, item.getId()));
 
         DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoItemAction.Key.ID, id);
@@ -63,9 +63,9 @@ public class ActionCreator {
 
 
     public final void createListLoadAction() {
-        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        QueryObservable queryObservable = briteDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
         queryObservable.
-                mapToList(TodoItemTable.MAPPER)
+                mapToList(TBTodoItem.MAPPER)
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);
@@ -74,9 +74,9 @@ public class ActionCreator {
     }
 
     public final void createListAllAction() {
-        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        QueryObservable queryObservable = briteDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
         queryObservable.
-                mapToList(TodoItemTable.MAPPER)
+                mapToList(TBTodoItem.MAPPER)
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);
@@ -85,9 +85,9 @@ public class ActionCreator {
     }
 
     public final void createListCompletedAction() {
-        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        QueryObservable queryObservable = briteDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
         queryObservable.
-                mapToList(TodoItemTable.MAPPER)
+                mapToList(TBTodoItem.MAPPER)
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);

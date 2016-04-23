@@ -1,9 +1,9 @@
 package com.farseer.todo.flux.database;
 
-import com.farseer.todo.flux.database.table.TodoItemTable;
+import com.farseer.todo.flux.tool.LogTool;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,32 +12,48 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int VERSION = 1;
-
-
-    private static final String CREATE_TABLE_ITEM = ""
-            + "CREATE TABLE " + TodoItemTable.TABLE + "("
-            + TodoItemTable.ID + " INTEGER NOT NULL PRIMARY KEY,"
-            + TodoItemTable.DESCRIPTION + " TEXT NOT NULL,"
-            + TodoItemTable.IS_COMPLETE + " INTEGER NOT NULL DEFAULT 0,"
-            + TodoItemTable.IS_STAR + " INTEGER NOT NULL DEFAULT 0"
-            + ")";
-
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
+    public DatabaseHelper(Context context, String databaseName) {
+        super(context, databaseName, null, DatabaseSQL.VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_ITEM);
+        db.beginTransaction();
+        try {
+            for (int i = 0; i < DatabaseSQL.SQL_ALL.length; i++) {
+                String[] tmp = DatabaseSQL.SQL_ALL[i];
+                for (int j = 0; j < tmp.length; j++) {
+                    db.execSQL(tmp[j]);
+                }
+            }
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+        }
+
+        LogTool.debug("DatabaseHelper.onCreate finish");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.beginTransaction();
+        try {
+            for (int i = oldVersion; i < DatabaseSQL.SQL_ALL.length; i++) {
+                String[] tmp = DatabaseSQL.SQL_ALL[i];
+                for (int j = 0; j < tmp.length; j++) {
+                    db.execSQL(tmp[j]);
+                }
+            }
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+        }
+
+        LogTool.debug("DatabaseHelper.onUpgrade finish");
 
     }
 }

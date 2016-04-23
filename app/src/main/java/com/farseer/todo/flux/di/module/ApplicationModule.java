@@ -55,7 +55,7 @@ public class ApplicationModule {
     BriteDatabase briteDatabase() {
         SqlBrite sqlBrite = SqlBrite.create(message -> LogTool.debug("Database", message));
 
-        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseHelper(application, application.getPackageName(), null, DatabaseHelper.VERSION);
+        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseHelper(application, application.getPackageName());
         BriteDatabase db = sqlBrite.wrapDatabaseHelper(sqLiteOpenHelper);
         db.setLoggingEnabled(BuildConfig.DEBUG);
         return db;
