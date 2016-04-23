@@ -9,7 +9,6 @@ import com.farseer.todo.flux.pojo.TodoItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class TodoListModel {
             case ALL:
                 tmpList.addAll(list);
                 break;
-            case ACTIVE:
+            case COMPLETED:
                 for (TodoItem item : list) {
                     if (!item.isCompleted()) {
                         tmpList.add(item);
@@ -53,18 +52,13 @@ public class TodoListModel {
                 break;
         }
 
-        Collections.sort(tmpList, new Comparator<TodoItem>() {
-            @Override
-            public int compare(TodoItem lhs, TodoItem rhs) {
-                return (int) (rhs.getId() - lhs.getId());
-            }
-        });
+        Collections.sort(tmpList, (lhs, rhs) -> (int) (rhs.getId() - lhs.getId()));
 
         return tmpList;
     }
 
     public enum Filter {
-        ALL, ACTIVE, COMPLETED
+        ALL, COMPLETED, COMPLETED
     }
 
     @Override

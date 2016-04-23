@@ -1,5 +1,5 @@
 /*
- * TodoAction      2016-04-19
+ * ViewAction      2016-04-19
  * Copyright (c) 2016 hujiang Co.Ltd. All right reserved(http://www.hujiang.com).
  * 
  */
@@ -11,36 +11,32 @@ import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.action.base.DataKey;
 
 /**
- * Todo数据相关Action
+ * Todo视图相关Action
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2016-04-19
  */
-public class TodoDataAction extends Action {
+public class TodoListAction extends Action {
 
-    public TodoDataAction(Type type) {
+    public TodoListAction(Type type) {
         this.type = type;
         this.bundle = new DataBundle<>();
     }
 
-    public TodoDataAction(Type type, DataBundle<Key> data) {
+    public TodoListAction(Type type, DataBundle<Key> bundle) {
         this.type = type;
-        this.bundle = data;
+        this.bundle = bundle;
     }
 
+
     public enum Type implements ActionType {
-        NEW,
-        EDIT,
-        DELETE,
-        DELETE_ALL,
-        UNDO_DELETE_ALL
+        LOAD,
+        SHOW_ALL,
+        SHOW_COMPLETED
     }
 
     public enum Key implements DataKey {
-        ID,
-        DESCRIPTION,
-        IS_COMPLETED,
-        IS_STAR
+        LIST
     }
 }

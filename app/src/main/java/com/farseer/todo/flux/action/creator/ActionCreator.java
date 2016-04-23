@@ -5,10 +5,14 @@
  */
 package com.farseer.todo.flux.action.creator;
 
-import com.farseer.todo.flux.action.TodoDataAction;
-import com.farseer.todo.flux.action.TodoViewAction;
+import com.farseer.todo.flux.action.TodoItemAction;
+import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
+import com.farseer.todo.flux.database.contants.TodoItemTable;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
+import com.farseer.todo.flux.pojo.TodoItem;
+import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite.QueryObservable;
 
 import javax.inject.Inject;
 
@@ -23,50 +27,72 @@ public class ActionCreator {
 
     private ActionDispatcher actionDispatcher;
 
+    private BriteDatabase briteDatabase;
+
     @Inject
-    public ActionCreator(ActionDispatcher actionDispatcher) {
+    public ActionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
         this.actionDispatcher = actionDispatcher;
+        this.briteDatabase = briteDatabase;
     }
 
-    public final void createNewAction(final String description) {
-        DataBundle<TodoDataAction.Key> bundle = new DataBundle<>();
-        bundle.put(TodoDataAction.Key.DESCRIPTION, description);
-        actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.NEW, bundle));
+    public final void createItemNewAction(final String description) {
+
+        long id = System.currentTimeMillis();
+        TodoItem item = new TodoItem(id, description, false, false);
+        briteDatabase.insert(TodoItemTable.TABLE, TodoItemTable.contentValue(item));
+
+        DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
+        bundle.put(TodoItemAction.Key.ITEM, item);
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.NEW, bundle));
     }
 
-    public final void createEditAction(final Long id, final String description, boolean isCompleted, boolean isStar) {
-        DataBundle<TodoDataAction.Key> bundle = new DataBundle<>();
-        bundle.put(TodoDataAction.Key.ID, id);
-        bundle.put(TodoDataAction.Key.DESCRIPTION, description);
-        bundle.put(TodoDataAction.Key.IS_COMPLETED, isCompleted);
-        bundle.put(TodoDataAction.Key.IS_STAR, isStar);
-        actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.EDIT, bundle));
+    public final void createItemEditAction(final Long id, final String description, boolean isCompleted, boolean isStar) {
+        TodoItem item = new TodoItem(id, description, isCompleted, isStar);
+        briteDatabase.update(TodoItemTable.TABLE, TodoItemTable.contentValue(item), String.format("%s = %s", TodoItemTable.ID, item.getId()));
+
+        DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
+        bundle.put(TodoItemAction.Key.ID, id);
+        bundle.put(TodoItemAction.Key.ITEM, item);
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.EDIT, bundle));
     }
 
-    public final void createDeleteAction(final Long id) {
-        DataBundle<TodoDataAction.Key> bundle = new DataBundle<>();
-        bundle.put(TodoDataAction.Key.ID, id);
-        actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.DELETE, bundle));
-    }
-
-    public final void createDeleteAllAction() {
-        actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.DELETE_ALL));
-    }
-
-    public final void createUndoDeleteAllAction() {
-        actionDispatcher.post(new TodoDataAction(TodoDataAction.Type.UNDO_DELETE_ALL));
+    public final void createItemDeleteAction(final Long id) {
+        DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
+        bundle.put(TodoItemAction.Key.ID, id);
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.DELETE, bundle));
     }
 
 
-    public final void createAllViewAction() {
-        actionDispatcher.post(new TodoViewAction(TodoViewAction.Type.VIEW_ALL));
+    public final void createListLoadAction() {
+        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        queryObservable.
+                mapToList(TodoItemTable.MAPPER)
+                .subscribe(list -> {
+                    DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
+                    bundle.put(TodoListAction.Key.LIST, list);
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.LOAD, bundle));
+                });
     }
 
-    public final void createActiveViewAction() {
-        actionDispatcher.post(new TodoViewAction(TodoViewAction.Type.VIEW_ACTIVE));
+    public final void createListAllAction() {
+        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        queryObservable.
+                mapToList(TodoItemTable.MAPPER)
+                .subscribe(list -> {
+                    DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
+                    bundle.put(TodoListAction.Key.LIST, list);
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.LOAD, bundle));
+                });
     }
 
-    public final void createCompleteViewAction() {
-        actionDispatcher.post(new TodoViewAction(TodoViewAction.Type.VIEW_COMPLETE));
+    public final void createListCompletedAction() {
+        QueryObservable queryObservable = briteDatabase.createQuery(TodoItemTable.TABLE, "select * from " + TodoItemTable.TABLE);
+        queryObservable.
+                mapToList(TodoItemTable.MAPPER)
+                .subscribe(list -> {
+                    DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
+                    bundle.put(TodoListAction.Key.LIST, list);
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL, bundle));
+                });
     }
 }

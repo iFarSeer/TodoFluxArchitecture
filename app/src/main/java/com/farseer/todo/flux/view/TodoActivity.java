@@ -78,6 +78,8 @@ public class TodoActivity extends BaseActivity {
         super.onResume();
         todoStore.onResume();
         dataDispatcher.register(this);
+
+        actionCreator.createListLoadAction();
     }
 
     @Override
@@ -89,7 +91,7 @@ public class TodoActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void clickFloatingActionButton() {
-        actionCreator.createNewAction("天亮啦");
+        actionCreator.createItemNewAction("天亮啦");
     }
 
     @Override
@@ -135,27 +137,17 @@ public class TodoActivity extends BaseActivity {
 
         recyclerView.setAdapter(recyclerAdapter);
 
-        inputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean flag = false;
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    String text = inputEditText.getText().toString();
-                    if (!TextUtils.isEmpty(text)) {
-                        actionCreator.createNewAction(text);
-                        inputEditText.setText("");
-                    }
-                    flag = true;
+        inputEditText.setOnEditorActionListener((view, actionId, event) -> {
+            boolean flag = false;
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                String text = inputEditText.getText().toString();
+                if (!TextUtils.isEmpty(text)) {
+                    actionCreator.createItemNewAction(text);
+                    inputEditText.setText("");
                 }
-                return flag;
+                flag = true;
             }
-        });
-
-        inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-            }
+            return flag;
         });
     }
 
@@ -177,27 +169,19 @@ public class TodoActivity extends BaseActivity {
             holder.descriptionTextView.setText(item.getDescription());
 
 
-            holder.isCompletedImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    actionCreator.createEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar());
-                }
-            });
+            holder.isCompletedImageView.setOnClickListener(view ->
+                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar())
+            );
 
-            holder.isStarImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    actionCreator.createEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar());
-                }
-            });
+            holder.isStarImageView.setOnClickListener(view ->
+                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar())
+            );
 
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    actionCreator.createDeleteAction(item.getId());
-                    return false;
-                }
-            });
+            holder.itemView.setOnLongClickListener(view -> {
+                        actionCreator.createItemDeleteAction(item.getId());
+                        return false;
+                    }
+            );
         }
 
         @Override

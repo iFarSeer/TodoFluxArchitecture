@@ -5,26 +5,27 @@
  */
 package com.farseer.todo.flux.di.component;
 
-import android.app.Application;
-import android.content.res.Resources;
-
-
+import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.di.module.ApplicationModule;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.squareup.sqlbrite.BriteDatabase;
+
+import android.app.Application;
+import android.content.res.Resources;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import dagger.Provides;
 
 /**
- * class description here
+ * ApplicationComponent
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2016-04-19
  */
+@ForApplication
 @Singleton
 @Component(
         modules = {ApplicationModule.class}
@@ -43,25 +44,26 @@ public interface ApplicationComponent {
 
     /**
      * 获得Application
-     * @return
      */
     Application application();
 
     /**
      * 获得Resources
-     * @return
      */
     Resources resources();
 
     /**
+     * 获得数据库
+     */
+    BriteDatabase briteDatabase();
+
+    /**
      * 获得Action处理器
-     * @return
      */
     ActionDispatcher actionDispatcher();
 
     /**
      * 获得Data处理器
-     * @return
      */
     DataDispatcher dataDispatcher();
 }

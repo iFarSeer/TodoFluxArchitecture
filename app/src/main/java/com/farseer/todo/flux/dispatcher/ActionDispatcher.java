@@ -18,6 +18,6 @@ import com.squareup.otto.ThreadEnforcer;
 public class ActionDispatcher extends Bus {
 
     public ActionDispatcher(){
-        super(ThreadEnforcer.ANY);
+        super(ThreadEnforcer.MAIN);
     }
 }
