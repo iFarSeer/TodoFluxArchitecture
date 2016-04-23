@@ -41,13 +41,6 @@ public class TodoListModel {
                     }
                 }
                 break;
-            case COMPLETED:
-                for (TodoItem item : list) {
-                    if (item.isCompleted()) {
-                        tmpList.add(item);
-                    }
-                }
-                break;
             default:
                 break;
         }
@@ -58,7 +51,7 @@ public class TodoListModel {
     }
 
     public enum Filter {
-        ALL, COMPLETED, COMPLETED
+        ALL, COMPLETED
     }
 
     @Override
