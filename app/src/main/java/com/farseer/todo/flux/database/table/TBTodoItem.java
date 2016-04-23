@@ -37,10 +37,6 @@ public class TBTodoItem {
                     + IS_STAR
                     + ");";
 
-    public static final String CREATE_SQL_V2 = "UPDATE " + TABLE_NAME + " SET " + IS_COMPLETE + " = " + 0;
-    public static final String CREATE_SQL_V3 = "UPDATE " + TABLE_NAME + " SET " + IS_STAR + " = " + 0;
-
-
     public static ContentValues contentValue(TodoItem item) {
         ContentValues values = new ContentValues();
         values.put(ID, item.getId());
