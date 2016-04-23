@@ -48,7 +48,7 @@ public class TodoStore {
         LogTool.debug(action.toString());
         DataBundle<TodoItemAction.Key> data = action.getBundle();
         Long id = (Long) data.get(TodoItemAction.Key.ID, -1L);
-        TodoItem item = (TodoItem) data.get(TodoItemAction.Key.ITEM, "");
+        TodoItem item = (TodoItem) data.get(TodoItemAction.Key.ITEM, null);
         switch ((TodoItemAction.Type) action.getType()) {
             case NEW:
                 if (item != null) {
