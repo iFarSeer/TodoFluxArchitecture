@@ -28,7 +28,6 @@ public class ActionCreator {
 
     private BriteDatabase briteDatabase;
 
-    @Inject
     public ActionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
         this.actionDispatcher = actionDispatcher;
         this.briteDatabase = briteDatabase;

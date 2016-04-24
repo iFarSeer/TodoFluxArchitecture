@@ -1,13 +1,14 @@
 package com.farseer.todo.flux.view;
 
 import com.farseer.todo.flux.R;
-import com.farseer.todo.flux.base.BaseActivity;
-import com.farseer.todo.flux.di.component.TodoHomeComponent;
+import com.farseer.todo.flux.action.creator.ActionCreator;
+import com.farseer.todo.flux.di.component.FluxComponent;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.store.TodoStore;
 import com.farseer.todo.flux.tool.LogTool;
+import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -18,7 +19,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,16 +34,16 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TodoActivity extends BaseActivity {
-
-
-    private TodoHomeComponent component;
+public class TodoListActivity extends BaseActivity {
 
     @Inject
     TodoStore todoStore;
 
     @Inject
     DataDispatcher dataDispatcher;
+
+    @Inject
+    ActionCreator actionCreator;
 
 
     @Bind(R.id.toolbar)
@@ -89,10 +89,6 @@ public class TodoActivity extends BaseActivity {
         dataDispatcher.unregister(this);
     }
 
-    @OnClick(R.id.fab)
-    public void clickFloatingActionButton() {
-        actionCreator.createItemNewAction("天亮啦");
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,6 +106,10 @@ public class TodoActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.fab)
+    public void clickFloatingActionButton() {
+        actionCreator.createItemNewAction("天亮啦");
+    }
 
     @Subscribe
     public void onTodoModelChanged(final TodoListModel todoListModel) {
@@ -118,14 +118,13 @@ public class TodoActivity extends BaseActivity {
         recyclerAdapter.notifyDataSetChanged();
     }
 
+
     public void initializeInjector() {
-        component = TodoHomeComponent.Initializer.init(this);
-        component.inject(this);
+        FluxComponent.Initializer.init(getApplication(), "aa").inject(this);
     }
 
-
     private void initView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(TodoActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(TodoListActivity.this));
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(this)
@@ -151,12 +150,11 @@ public class TodoActivity extends BaseActivity {
         });
     }
 
-
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            ViewHolder holder = new ViewHolder(LayoutInflater.from(TodoActivity.this).inflate(R.layout.item_todo, parent, false));
+            ViewHolder holder = new ViewHolder(LayoutInflater.from(TodoListActivity.this).inflate(R.layout.item_todo, parent, false));
             return holder;
         }
 

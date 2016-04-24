@@ -50,19 +50,4 @@ public interface ApplicationComponent {
      * 获得Resources
      */
     Resources resources();
-
-    /**
-     * 获得数据库
-     */
-    BriteDatabase briteDatabase();
-
-    /**
-     * 获得Action处理器
-     */
-    ActionDispatcher actionDispatcher();
-
-    /**
-     * 获得Data处理器
-     */
-    DataDispatcher dataDispatcher();
 }

@@ -36,7 +36,6 @@ public class TodoStore {
     private DataDispatcher dataDispatcher;
     private ActionDispatcher actionDispatcher;
 
-    @Inject
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;

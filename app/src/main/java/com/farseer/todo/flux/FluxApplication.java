@@ -6,6 +6,7 @@ package com.farseer.todo.flux;
 
 import android.app.Application;
 
+import com.farseer.todo.flux.di.HasComponent;
 import com.farseer.todo.flux.di.component.ApplicationComponent;
 
 /**
@@ -15,14 +16,14 @@ import com.farseer.todo.flux.di.component.ApplicationComponent;
  * @version 1.0.0
  * @since 2016-04-18
  */
-public class FluxApplication extends Application {
+public class FluxApplication extends Application implements HasComponent<ApplicationComponent>{
 
     private ApplicationComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        initializeApplication();
+        initApplication();
     }
 
     public ApplicationComponent component() {
@@ -30,11 +31,16 @@ public class FluxApplication extends Application {
     }
 
     //初始化Application
-    private void initializeApplication() {
-        initializeInjector();
+    private void initApplication() {
+        initInjector();
     }
 
-    private void initializeInjector() {
+    private void initInjector() {
         component = ApplicationComponent.Initializer.init(this);
+    }
+
+    @Override
+    public ApplicationComponent getComponent() {
+        return component;
     }
 }

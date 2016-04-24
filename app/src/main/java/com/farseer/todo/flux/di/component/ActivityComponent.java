@@ -5,8 +5,8 @@
 package com.farseer.todo.flux.di.component;
 
 import com.farseer.todo.flux.FluxApplication;
-import com.farseer.todo.flux.base.BaseActivity;
-import com.farseer.todo.flux.base.BaseFragment;
+import com.farseer.todo.flux.view.base.BaseActivity;
+import com.farseer.todo.flux.view.base.BaseFragment;
 import com.farseer.todo.flux.di.PerActivity;
 import com.farseer.todo.flux.di.module.ActivityModule;
 
@@ -40,5 +40,4 @@ public interface ActivityComponent {
     public void inject(BaseFragment activity);
 
     BaseActivity activity();
-
 }

@@ -49,28 +49,4 @@ public class ApplicationModule {
     Resources resources() {
         return application.getResources();
     }
-
-    @Provides
-    @Singleton
-    BriteDatabase briteDatabase() {
-        SqlBrite sqlBrite = SqlBrite.create(message -> LogTool.debug("Database", message));
-
-        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseHelper(application, application.getPackageName());
-        BriteDatabase db = sqlBrite.wrapDatabaseHelper(sqLiteOpenHelper);
-        db.setLoggingEnabled(BuildConfig.DEBUG);
-        return db;
-    }
-
-    @Provides
-    @Singleton
-    ActionDispatcher actionDispatcher() {
-        return new ActionDispatcher();
-    }
-
-    @Provides
-    @Singleton
-    DataDispatcher dataDispatcher() {
-        return new DataDispatcher();
-    }
-
 }

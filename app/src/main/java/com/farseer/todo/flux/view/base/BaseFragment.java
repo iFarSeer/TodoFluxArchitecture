@@ -2,7 +2,7 @@
  * BaseFragment      2016-04-19
  *
  */
-package com.farseer.todo.flux.base;
+package com.farseer.todo.flux.view.base;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -19,13 +19,8 @@ import javax.inject.Inject;
  */
 public class BaseFragment extends Fragment {
 
-    @Inject
-    protected Resources resources;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        ((BaseActivity)context).getComponent().inject(this);
     }
 }
