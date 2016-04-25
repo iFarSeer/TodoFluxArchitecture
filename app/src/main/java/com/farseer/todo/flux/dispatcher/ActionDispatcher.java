@@ -4,6 +4,7 @@
  */
 package com.farseer.todo.flux.dispatcher;
 
+import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -16,7 +17,8 @@ import com.squareup.otto.ThreadEnforcer;
  */
 public class ActionDispatcher extends Bus {
 
-    public ActionDispatcher(){
+    public ActionDispatcher() {
         super(ThreadEnforcer.MAIN);
+        LogTool.debug("构造 ActionDispatcher");
     }
 }

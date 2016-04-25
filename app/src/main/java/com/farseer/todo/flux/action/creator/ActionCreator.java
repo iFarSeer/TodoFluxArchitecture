@@ -10,6 +10,7 @@ import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.database.table.TBTodoItem;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
+import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.QueryObservable;
 
@@ -29,6 +30,7 @@ public class ActionCreator {
     private BriteDatabase briteDatabase;
 
     public ActionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
+        LogTool.debug("构造 ActionCreator");
         this.actionDispatcher = actionDispatcher;
         this.briteDatabase = briteDatabase;
     }

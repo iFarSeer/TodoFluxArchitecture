@@ -12,6 +12,7 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -28,21 +29,16 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity {
 
-    @Inject
     TodoStore todoStore;
 
-    @Inject
     DataDispatcher dataDispatcher;
 
-    @Inject
     ActionCreator actionCreator;
 
 
@@ -54,7 +50,6 @@ public class TodoListActivity extends BaseActivity {
     RecyclerView recyclerView;
     @Bind(R.id.inputEditText)
     AppCompatEditText inputEditText;
-
 
     private TodoListModel todoListModel;
 
@@ -108,7 +103,8 @@ public class TodoListActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void clickFloatingActionButton() {
-        actionCreator.createItemNewAction("天亮啦");
+        Intent intent = new Intent(this, TodoListActivity.class);
+        startActivity(intent);
     }
 
     @Subscribe
@@ -120,7 +116,11 @@ public class TodoListActivity extends BaseActivity {
 
 
     public void initializeInjector() {
-        FluxComponent.Initializer.init(getApplication(), "aa").inject(this);
+        FluxComponent component = FluxComponent.Initializer.init(getApplication(), "aa");
+        component.inject(this);
+        actionCreator = component.actionCreator();
+        dataDispatcher = component.dataDispatcher();
+        todoStore = component.todoStore();
     }
 
     private void initView() {

@@ -4,6 +4,7 @@
  */
 package com.farseer.todo.flux.dispatcher;
 
+import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -18,6 +19,7 @@ public class DataDispatcher extends Bus {
 
     public DataDispatcher() {
         super(ThreadEnforcer.MAIN);
+        LogTool.debug("构造 DataDispatcher");
     }
 
 //    public DataDispatcher(ThreadEnforcer thread) {

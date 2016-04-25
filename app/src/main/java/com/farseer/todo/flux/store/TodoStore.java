@@ -37,6 +37,7 @@ public class TodoStore {
     private ActionDispatcher actionDispatcher;
 
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
+        LogTool.debug("构造 TodoStore");
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;
     }
