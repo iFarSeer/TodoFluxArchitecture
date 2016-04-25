@@ -29,7 +29,6 @@ public class TodoActionCreator implements ActionCreator {
 
     private BriteDatabase briteDatabase;
 
-    @Inject
     public TodoActionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
         LogTool.debug("构造 TodoActionCreator");
         this.actionDispatcher = actionDispatcher;

@@ -36,7 +36,6 @@ public class TodoStore implements Store {
     private DataDispatcher dataDispatcher;
     private ActionDispatcher actionDispatcher;
 
-    @Inject
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
         LogTool.debug("构造 TodoStore");
         this.dataDispatcher = dataDispatcher;

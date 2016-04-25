@@ -1,11 +1,13 @@
 package com.farseer.todo.flux.view;
 
 import com.farseer.todo.flux.R;
+import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.action.creator.TodoActionCreator;
-import com.farseer.todo.flux.di.component.FluxComponent;
+import com.farseer.todo.flux.di.component.ActivityComponent;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;
+import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.store.TodoStore;
 import com.farseer.todo.flux.tool.LogTool;
 import com.farseer.todo.flux.view.base.BaseActivity;
@@ -35,11 +37,11 @@ import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity {
 
-    TodoStore todoStore;
+    Store todoStore;
 
     DataDispatcher dataDispatcher;
 
-    TodoActionCreator actionCreator;
+    ActionCreator actionCreator;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -115,7 +117,7 @@ public class TodoListActivity extends BaseActivity {
 
 
     public void initializeInjector() {
-        FluxComponent component = FluxComponent.Initializer.init(getApplication(), "aa");
+        ActivityComponent component = ActivityComponent.Initializer.init(this);
         component.inject(this);
         actionCreator = component.actionCreator();
         dataDispatcher = component.dataDispatcher();
