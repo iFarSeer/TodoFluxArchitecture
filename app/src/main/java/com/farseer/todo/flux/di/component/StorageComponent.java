@@ -1,8 +1,6 @@
 package com.farseer.todo.flux.di.component;
 
-import com.farseer.todo.flux.FluxApplication;
 import com.farseer.todo.flux.di.module.StorageModule;
-import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.sqlbrite.BriteDatabase;
 
 import android.app.Application;

@@ -5,14 +5,11 @@
 package com.farseer.todo.flux.di.component;
 
 import com.farseer.todo.flux.action.creator.ActionCreator;
-import com.farseer.todo.flux.action.creator.TodoActionCreator;
 import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.di.module.ApplicationModule;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.store.Store;
-import com.farseer.todo.flux.store.TodoStore;
-import com.squareup.sqlbrite.BriteDatabase;
 
 import android.app.Application;
 import android.content.res.Resources;

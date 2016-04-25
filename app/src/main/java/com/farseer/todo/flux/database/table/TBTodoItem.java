@@ -1,7 +1,7 @@
 package com.farseer.todo.flux.database.table;
 
-import com.farseer.todo.flux.tool.CursorTool;
 import com.farseer.todo.flux.pojo.TodoItem;
+import com.farseer.todo.flux.tool.CursorTool;
 
 import android.content.ContentValues;
 import android.database.Cursor;

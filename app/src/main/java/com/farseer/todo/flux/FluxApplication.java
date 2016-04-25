@@ -4,10 +4,10 @@
  */
 package com.farseer.todo.flux;
 
-import android.app.Application;
-
 import com.farseer.todo.flux.di.HasComponent;
 import com.farseer.todo.flux.di.component.ApplicationComponent;
+
+import android.app.Application;
 
 /**
  * Flux Application

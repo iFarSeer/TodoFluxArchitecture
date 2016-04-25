@@ -14,8 +14,6 @@ import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.QueryObservable;
 
-import javax.inject.Inject;
-
 /**
  * TodoActionCreator
  *

@@ -4,8 +4,8 @@
  */
 package com.farseer.todo.flux.di.module;
 
-import com.farseer.todo.flux.view.base.BaseActivity;
 import com.farseer.todo.flux.di.PerActivity;
+import com.farseer.todo.flux.view.base.BaseActivity;
 
 import dagger.Module;
 import dagger.Provides;
