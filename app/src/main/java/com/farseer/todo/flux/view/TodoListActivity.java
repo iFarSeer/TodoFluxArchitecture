@@ -4,6 +4,7 @@ import com.farseer.todo.flux.R;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.component.ActivityComponent;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.store.Store;
@@ -37,7 +38,7 @@ public class TodoListActivity extends BaseActivity {
 
     Store todoStore;
 
-    DataDispatcher dataDispatcher;
+    Dispatcher dataDispatcher;
 
     ActionCreator actionCreator;
 

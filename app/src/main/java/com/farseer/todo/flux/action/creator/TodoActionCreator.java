@@ -9,6 +9,7 @@ import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.database.table.TBTodoItem;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
@@ -23,11 +24,11 @@ import com.squareup.sqlbrite.QueryObservable;
  */
 public class TodoActionCreator implements ActionCreator {
 
-    private ActionDispatcher actionDispatcher;
+    private Dispatcher actionDispatcher;
 
     private BriteDatabase briteDatabase;
 
-    public TodoActionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
+    public TodoActionCreator(Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
         LogTool.debug("构造 TodoActionCreator");
         this.actionDispatcher = actionDispatcher;
         this.briteDatabase = briteDatabase;

@@ -8,6 +8,8 @@ import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
+import javax.inject.Inject;
+
 /**
  * class description here
  *
@@ -15,14 +17,27 @@ import com.squareup.otto.ThreadEnforcer;
  * @version 1.0.0
  * @since 2016-04-19
  */
-public class DataDispatcher extends Bus {
+public class DataDispatcher implements Dispatcher {
 
+    private Bus bus = new Bus(ThreadEnforcer.MAIN);
+
+    @Inject
     public DataDispatcher() {
-        super(ThreadEnforcer.MAIN);
         LogTool.debug("构造 DataDispatcher");
     }
 
-//    public DataDispatcher(ThreadEnforcer thread) {
-//        super(thread);
-//    }
+    @Override
+    public void register(Object object) {
+        bus.register(object);
+    }
+
+    @Override
+    public void unregister(Object object) {
+        bus.unregister(object);
+    }
+
+    @Override
+    public void post(Object event) {
+        bus.post(event);
+    }
 }

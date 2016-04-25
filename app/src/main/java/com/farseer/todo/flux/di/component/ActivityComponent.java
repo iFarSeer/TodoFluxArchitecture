@@ -10,12 +10,15 @@ import com.farseer.todo.flux.di.PerActivity;
 import com.farseer.todo.flux.di.module.ActivityModule;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.view.base.BaseActivity;
 import com.farseer.todo.flux.view.base.BaseFragment;
 
 import android.app.Application;
 import android.content.res.Resources;
+
+import javax.inject.Named;
 
 import dagger.Component;
 
@@ -63,12 +66,14 @@ public interface ActivityComponent {
     /**
      * 获得Action处理器
      */
-    ActionDispatcher actionDispatcher();
+    @Named("actionDispatcher")
+    Dispatcher actionDispatcher();
 
     /**
      * 获得Data处理器
      */
-    DataDispatcher dataDispatcher();
+    @Named("dataDispatcher")
+    Dispatcher dataDispatcher();
 
     /**
      * 获得TodoStore

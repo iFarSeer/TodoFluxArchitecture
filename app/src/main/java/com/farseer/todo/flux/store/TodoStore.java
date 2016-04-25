@@ -9,6 +9,7 @@ import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;
@@ -31,10 +32,10 @@ public class TodoStore implements Store {
     private Map<Long, TodoItem> todoItemMap = new HashMap<>();
     private TodoListModel.Filter filter = TodoListModel.Filter.ALL;
 
-    private DataDispatcher dataDispatcher;
-    private ActionDispatcher actionDispatcher;
+    private Dispatcher dataDispatcher;
+    private Dispatcher actionDispatcher;
 
-    public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
+    public TodoStore(Dispatcher dataDispatcher, Dispatcher actionDispatcher) {
         LogTool.debug("构造 TodoStore");
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;

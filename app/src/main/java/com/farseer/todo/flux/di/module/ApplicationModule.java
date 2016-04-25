@@ -8,6 +8,7 @@ import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.action.creator.TodoActionCreator;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.store.TodoStore;
 import com.squareup.sqlbrite.BriteDatabase;
@@ -15,6 +16,7 @@ import com.squareup.sqlbrite.BriteDatabase;
 import android.app.Application;
 import android.content.res.Resources;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -51,25 +53,27 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    ActionDispatcher actionDispatcher() {
-        return new ActionDispatcher();
+    @Named("actionDispatcher")
+    Dispatcher actionDispatcher(ActionDispatcher actionDispatcher) {
+        return actionDispatcher;
     }
 
     @Provides
     @Singleton
-    DataDispatcher dataDispatcher() {
-        return new DataDispatcher();
+    @Named("dataDispatcher")
+    Dispatcher dataDispatcher(DataDispatcher dataDispatcher) {
+        return dataDispatcher;
     }
 
     @Provides
     @Singleton
-    Store todoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
+    Store todoStore(@Named("dataDispatcher") Dispatcher dataDispatcher, @Named("actionDispatcher") Dispatcher actionDispatcher) {
         return new TodoStore(dataDispatcher, actionDispatcher);
     }
 
     @Provides
     @Singleton
-    ActionCreator actionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
+    ActionCreator actionCreator(@Named("actionDispatcher") Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
         return new TodoActionCreator(actionDispatcher, briteDatabase);
     }
 }
