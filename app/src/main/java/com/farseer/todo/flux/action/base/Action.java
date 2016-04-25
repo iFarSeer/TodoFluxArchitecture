@@ -1,7 +1,3 @@
-/*
- * Action      2016-04-19
- *
- */
 package com.farseer.todo.flux.action.base;
 
 /**

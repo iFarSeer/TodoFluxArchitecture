@@ -1,7 +1,3 @@
-/*
- * DataDispatcher      2016-04-19
- *
- */
 package com.farseer.todo.flux.dispatcher;
 
 import com.farseer.todo.flux.tool.LogTool;

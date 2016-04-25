@@ -1,7 +1,3 @@
-/*
- * BaseActivity      2016-04-19
- *
- */
 package com.farseer.todo.flux.view.base;
 
 import android.support.v7.app.AppCompatActivity;

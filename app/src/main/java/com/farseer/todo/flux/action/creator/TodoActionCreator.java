@@ -1,14 +1,9 @@
-/*
- * ActionCreator      2016-04-19
- *
- */
 package com.farseer.todo.flux.action.creator;
 
 import com.farseer.todo.flux.action.TodoItemAction;
 import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.database.table.TBTodoItem;
-import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;

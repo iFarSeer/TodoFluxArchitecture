@@ -1,7 +1,3 @@
-/*
- * ViewAction      2016-04-19
- *
- */
 package com.farseer.todo.flux.action;
 
 import com.farseer.todo.flux.action.base.Action;

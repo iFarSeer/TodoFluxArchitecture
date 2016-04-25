@@ -1,7 +1,3 @@
-/*
- * TodoItem      2016-04-19
- *
- */
 package com.farseer.todo.flux.pojo;
 
 /**

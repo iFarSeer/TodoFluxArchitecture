@@ -1,7 +1,3 @@
-/*
- * FluxApplication      2016-04-18
- *
- */
 package com.farseer.todo.flux;
 
 import com.farseer.todo.flux.di.HasComponent;

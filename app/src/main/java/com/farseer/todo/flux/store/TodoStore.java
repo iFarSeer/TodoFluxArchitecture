@@ -1,14 +1,8 @@
-/*
- * TodoStore      2016-04-19
- *
- */
 package com.farseer.todo.flux.store;
 
 import com.farseer.todo.flux.action.TodoItemAction;
 import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
-import com.farseer.todo.flux.dispatcher.ActionDispatcher;
-import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;

@@ -1,7 +1,3 @@
-/*
- * ApplicationModule      2016-04-19
- *
- */
 package com.farseer.todo.flux.di.module;
 
 import com.farseer.todo.flux.action.creator.ActionCreator;

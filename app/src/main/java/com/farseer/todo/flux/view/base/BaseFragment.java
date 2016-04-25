@@ -1,7 +1,3 @@
-/*
- * BaseFragment      2016-04-19
- *
- */
 package com.farseer.todo.flux.view.base;
 
 import android.content.Context;

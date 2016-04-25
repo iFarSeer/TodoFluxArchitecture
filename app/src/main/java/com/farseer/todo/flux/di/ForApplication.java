@@ -1,7 +1,3 @@
-/*
- * ForApplication      2016-04-18
- *
- */
 package com.farseer.todo.flux.di;
 
 import java.lang.annotation.Retention;

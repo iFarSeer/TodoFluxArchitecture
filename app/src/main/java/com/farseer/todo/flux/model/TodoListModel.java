@@ -1,7 +1,3 @@
-/*
- * TodoListModel      2016-04-19
- *
- */
 package com.farseer.todo.flux.model;
 
 import com.farseer.todo.flux.pojo.TodoItem;
