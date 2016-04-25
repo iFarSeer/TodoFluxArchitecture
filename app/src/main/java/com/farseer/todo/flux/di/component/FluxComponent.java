@@ -1,7 +1,6 @@
 package com.farseer.todo.flux.di.component;
 
-import com.farseer.todo.flux.action.creator.ActionCreator;
-import com.farseer.todo.flux.di.ForApplication;
+import com.farseer.todo.flux.action.creator.TodoActionCreator;
 import com.farseer.todo.flux.di.module.FluxModule;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
@@ -36,7 +35,6 @@ public interface FluxComponent {
 
     void inject(TodoListActivity activity);
 
-
     /**
      * 获得Action处理器
      */
@@ -55,6 +53,6 @@ public interface FluxComponent {
     /**
      * 获得actionCreator
      */
-    ActionCreator actionCreator();
+    TodoActionCreator actionCreator();
 
 }

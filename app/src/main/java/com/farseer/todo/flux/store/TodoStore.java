@@ -28,7 +28,7 @@ import javax.inject.Inject;
  * @version 1.0.0
  * @since 2016-04-19
  */
-public class TodoStore {
+public class TodoStore implements Store {
 
     private Map<Long, TodoItem> todoItemMap = new HashMap<>();
     private TodoListModel.Filter filter = TodoListModel.Filter.ALL;
@@ -36,10 +36,21 @@ public class TodoStore {
     private DataDispatcher dataDispatcher;
     private ActionDispatcher actionDispatcher;
 
+    @Inject
     public TodoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
         LogTool.debug("构造 TodoStore");
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;
+    }
+
+    @Override
+    public void register() {
+        actionDispatcher.register(this);
+    }
+
+    @Override
+    public void unregister() {
+        actionDispatcher.unregister(this);
     }
 
     @Subscribe
@@ -93,14 +104,6 @@ public class TodoStore {
         }
 
         notifyTodoListModelChanged();
-    }
-
-    public void onResume() {
-        actionDispatcher.register(this);
-    }
-
-    public void onPause() {
-        actionDispatcher.unregister(this);
     }
 
     private void notifyTodoListModelChanged() {

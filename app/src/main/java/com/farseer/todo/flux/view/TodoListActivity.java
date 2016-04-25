@@ -1,7 +1,7 @@
 package com.farseer.todo.flux.view;
 
 import com.farseer.todo.flux.R;
-import com.farseer.todo.flux.action.creator.ActionCreator;
+import com.farseer.todo.flux.action.creator.TodoActionCreator;
 import com.farseer.todo.flux.di.component.FluxComponent;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
@@ -39,8 +39,7 @@ public class TodoListActivity extends BaseActivity {
 
     DataDispatcher dataDispatcher;
 
-    ActionCreator actionCreator;
-
+    TodoActionCreator actionCreator;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -71,7 +70,7 @@ public class TodoListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        todoStore.onResume();
+        todoStore.register();
         dataDispatcher.register(this);
 
         actionCreator.createListLoadAction();
@@ -80,7 +79,7 @@ public class TodoListActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        todoStore.onPause();
+        todoStore.unregister();
         dataDispatcher.unregister(this);
     }
 

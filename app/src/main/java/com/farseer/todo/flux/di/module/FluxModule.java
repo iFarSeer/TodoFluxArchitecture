@@ -1,10 +1,12 @@
 package com.farseer.todo.flux.di.module;
 
 import com.farseer.todo.flux.action.creator.ActionCreator;
+import com.farseer.todo.flux.action.creator.TodoActionCreator;
+import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
 import com.farseer.todo.flux.dispatcher.DataDispatcher;
+import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.store.TodoStore;
-import com.squareup.sqlbrite.BriteDatabase;
 
 import javax.inject.Singleton;
 
@@ -35,13 +37,13 @@ public class FluxModule {
 
     @Provides
     @Singleton
-    TodoStore todoStore(DataDispatcher dataDispatcher, ActionDispatcher actionDispatcher) {
-        return new TodoStore(dataDispatcher, actionDispatcher);
+    Store todoStore(TodoStore todoStore) {
+        return todoStore;
     }
 
     @Provides
     @Singleton
-    ActionCreator actionCreator(ActionDispatcher actionDispatcher, BriteDatabase briteDatabase) {
-        return new ActionCreator(actionDispatcher, briteDatabase);
+    ActionCreator actionCreator(TodoActionCreator actionCreator) {
+        return actionCreator;
     }
 }
