@@ -31,6 +31,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * Todo Store
  *
@@ -46,7 +49,9 @@ public class TodoStore implements Store {
     private Dispatcher dataDispatcher;
     private Dispatcher actionDispatcher;
 
-    public TodoStore(Dispatcher dataDispatcher, Dispatcher actionDispatcher) {
+    @Inject
+    public TodoStore(@Named("dataDispatcher") Dispatcher dataDispatcher,
+                     @Named("actionDispatcher") Dispatcher actionDispatcher) {
         LogTool.debug("构造 TodoStore");
         this.dataDispatcher = dataDispatcher;
         this.actionDispatcher = actionDispatcher;

@@ -80,13 +80,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Store todoStore(@Named("dataDispatcher") Dispatcher dataDispatcher, @Named("actionDispatcher") Dispatcher actionDispatcher) {
-        return new TodoStore(dataDispatcher, actionDispatcher);
+    Store todoStore(TodoStore todoStore) {
+        return todoStore;
     }
 
     @Provides
     @Singleton
-    ActionCreator actionCreator(@Named("actionDispatcher") Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
-        return new TodoActionCreator(actionDispatcher, briteDatabase);
+    ActionCreator actionCreator(TodoActionCreator todoActionCreator) {
+        return todoActionCreator;
     }
 }

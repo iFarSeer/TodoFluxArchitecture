@@ -27,6 +27,9 @@ import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.QueryObservable;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * TodoActionCreator
  *
@@ -40,7 +43,8 @@ public class TodoActionCreator implements ActionCreator {
 
     private BriteDatabase briteDatabase;
 
-    public TodoActionCreator(Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
+    @Inject
+    public TodoActionCreator(@Named("actionDispatcher") Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
         LogTool.debug("构造 TodoActionCreator");
         this.actionDispatcher = actionDispatcher;
         this.briteDatabase = briteDatabase;
