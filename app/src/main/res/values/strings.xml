@@ -2,4 +2,9 @@
     <string name="app_name">TodoFlux</string>
     <string name="action_settings">Settings</string>
     <string name="snack_bar_text">SnackbarText</string>
+
+    <string name="action_sure">确定</string>
+    <string name="action_cancel">取消</string>
+
+    <string name="todo_item_delete_content">确定要删除吗?</string>
 </resources>

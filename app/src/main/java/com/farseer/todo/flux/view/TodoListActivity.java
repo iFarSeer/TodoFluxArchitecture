@@ -17,6 +17,7 @@
 
 package com.farseer.todo.flux.view;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.farseer.todo.flux.R;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.component.ActivityComponent;
@@ -29,7 +30,9 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -52,6 +55,8 @@ import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity {
 
+    Resources resources;
+
     Store todoStore;
 
     Dispatcher dataDispatcher;
@@ -70,6 +75,8 @@ public class TodoListActivity extends BaseActivity {
     private TodoListModel todoListModel;
 
     private RecyclerAdapter recyclerAdapter;
+
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,9 +171,62 @@ public class TodoListActivity extends BaseActivity {
             }
             return flag;
         });
+
+        recyclerAdapter.setOnClickListener(view -> {
+            TodoItem item = (TodoItem) view.getTag();
+        });
+
+        recyclerAdapter.setOnLongClickListener(view -> {
+            TodoItem item = (TodoItem) view.getTag();
+            hideDialog();
+            showDeleteDialog(item.getId());
+            return false;
+        });
+
     }
 
+    private void showEditDialog() {
+
+    }
+
+    private void showDeleteDialog(long id) {
+
+        materialDialog = new MaterialDialog.Builder(this)
+                .content(R.string.todo_item_delete_content)
+                .positiveColorRes(R.color.positive_color)
+                .negativeColorRes(R.color.positive_color)
+                .positiveText(R.string.action_sure)
+                .negativeText(R.string.action_cancel)
+                .onPositive((dialog, which) -> {
+                            actionCreator.createItemDeleteAction(id);
+                            dialog.dismiss();
+                        }
+                )
+                .onNegative((dialog, which) -> dialog.dismiss())
+                .build();
+        materialDialog.show();
+    }
+
+    private void hideDialog() {
+        if (materialDialog != null) {
+            materialDialog.dismiss();
+            materialDialog = null;
+        }
+    }
+
+
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+
+        private View.OnClickListener onClickListener;
+        private View.OnLongClickListener onLongClickListener;
+
+        public void setOnClickListener(View.OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
+        }
+
+        public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
+            this.onLongClickListener = onLongClickListener;
+        }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -191,11 +251,9 @@ public class TodoListActivity extends BaseActivity {
                     actionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar())
             );
 
-            holder.itemView.setOnLongClickListener(view -> {
-                        actionCreator.createItemDeleteAction(item.getId());
-                        return false;
-                    }
-            );
+            holder.itemView.setTag(item);
+            holder.itemView.setOnClickListener(onClickListener);
+            holder.itemView.setOnLongClickListener(onLongClickListener);
         }
 
         @Override
