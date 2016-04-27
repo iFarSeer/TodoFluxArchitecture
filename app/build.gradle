@@ -78,6 +78,10 @@ dependencies {
 //    compile "com.snappydb:snappydb-lib:$snappydb_version"
 //    compile "com.esotericsoftware.kryo:kryo:$kryo_version"
 
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.8@aar') {
+        transitive = true
+    }
+
     def daggerCompiler = "com.google.dagger:dagger-compiler:$dagger_version"
     // APT dependencies
     apt daggerCompiler
