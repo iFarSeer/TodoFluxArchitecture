@@ -170,22 +170,46 @@ public class TodoListActivity extends BaseActivity {
 
         recyclerAdapter.setOnClickListener(view -> {
             TodoItem item = (TodoItem) view.getTag();
+            showEditDialog(item);
         });
 
         recyclerAdapter.setOnLongClickListener(view -> {
             TodoItem item = (TodoItem) view.getTag();
             hideDialog();
-            showDeleteDialog(item.getId());
+            showDeleteDialog(item);
             return false;
         });
 
     }
 
-    private void showEditDialog() {
+    private void showEditDialog(TodoItem item) {
 
+        View customView = LayoutInflater.from(this).inflate(R.layout.dialog_todo_edit, null);
+        final AppCompatEditText editText = ButterKnife.findById(customView, R.id.inputEditText);
+        editText.setText(item.getDescription());
+        editText.setSelection(item.getDescription().length());
+
+        materialDialog = new MaterialDialog.Builder(this)
+                .customView(customView, false)
+                .positiveColorRes(R.color.positive_color)
+                .negativeColorRes(R.color.positive_color)
+                .positiveText(R.string.action_sure)
+                .negativeText(R.string.action_cancel)
+                .onPositive((dialog, which) -> {
+                            String text = editText.getText().toString();
+                            if (!TextUtils.isEmpty(text)) {
+                                actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStar());
+                                dialog.dismiss();
+                            }
+                        }
+                )
+                .build();
+
+
+        materialDialog.show();
     }
 
-    private void showDeleteDialog(long id) {
+    private void showDeleteDialog(TodoItem item) {
 
         materialDialog = new MaterialDialog.Builder(this)
                 .content(R.string.todo_item_delete_content)
@@ -194,7 +218,7 @@ public class TodoListActivity extends BaseActivity {
                 .positiveText(R.string.action_sure)
                 .negativeText(R.string.action_cancel)
                 .onPositive((dialog, which) -> {
-                            actionCreator.createItemDeleteAction(id);
+                            actionCreator.createItemDeleteAction(item.getId());
                             dialog.dismiss();
                         }
                 )
