@@ -30,9 +30,7 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -54,8 +52,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity {
-
-    Resources resources;
 
     Store todoStore;
 
