@@ -48,7 +48,14 @@ public class TodoListModel {
                 break;
             case COMPLETED:
                 for (TodoItem item : list) {
-                    if (!item.isCompleted()) {
+                    if (item.isCompleted()) {
+                        tmpList.add(item);
+                    }
+                }
+                break;
+            case STARED:
+                for (TodoItem item : list) {
+                    if (item.isStar()) {
                         tmpList.add(item);
                     }
                 }
@@ -63,7 +70,7 @@ public class TodoListModel {
     }
 
     public enum Filter {
-        ALL, COMPLETED
+        ALL, COMPLETED, STARED
     }
 
     @Override

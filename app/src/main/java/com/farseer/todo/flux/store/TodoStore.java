@@ -115,6 +115,9 @@ public class TodoStore implements Store {
             case SHOW_COMPLETED:
                 filter = TodoListModel.Filter.COMPLETED;
                 break;
+            case SHOW_STARED:
+                filter = TodoListModel.Filter.STARED;
+                break;
         }
 
         notifyTodoListModelChanged();

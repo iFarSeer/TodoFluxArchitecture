@@ -55,4 +55,9 @@ public interface ActionCreator {
      * 创建显示List Compeleted Item 事件
      */
     void createListCompletedAction();
+
+    /**
+     * 创建显示List Stared Item 事件
+     */
+    void createListStaredAction();
 }

@@ -45,7 +45,8 @@ public class TodoListAction extends Action {
     public enum Type implements ActionType {
         LOAD,
         SHOW_ALL,
-        SHOW_COMPLETED
+        SHOW_COMPLETED,
+        SHOW_STARED
     }
 
     public enum Key implements DataKey {

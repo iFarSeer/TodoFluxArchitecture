@@ -114,11 +114,7 @@ public class TodoListActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_filter) {
-            hideDialog();
-            showFilterDialog();
-            return true;
-        } else if (id == R.id.action_about) {
+        if (id == R.id.action_about) {
             hideDialog();
             showAboutDialog();
             return true;

@@ -95,25 +95,17 @@ public class TodoActionCreator implements ActionCreator {
 
     @Override
     public void createListAllAction() {
-        QueryObservable queryObservable = briteDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
-        queryObservable.
-                mapToList(TBTodoItem.MAPPER)
-                .subscribe(list -> {
-                    DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
-                    bundle.put(TodoListAction.Key.LIST, list);
-                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL, bundle));
-                });
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL));
     }
 
     @Override
     public void createListCompletedAction() {
-        QueryObservable queryObservable = briteDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
-        queryObservable.
-                mapToList(TBTodoItem.MAPPER)
-                .subscribe(list -> {
-                    DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
-                    bundle.put(TodoListAction.Key.LIST, list);
-                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_COMPLETED, bundle));
-                });
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_COMPLETED));
+    }
+
+    @Override
+    public void createListStaredAction() {
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_STARED));
+
     }
 }
