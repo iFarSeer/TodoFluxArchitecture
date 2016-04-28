@@ -101,7 +101,7 @@ public class TodoActionCreator implements ActionCreator {
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);
-                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.LOAD, bundle));
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL, bundle));
                 });
     }
 
@@ -113,7 +113,7 @@ public class TodoActionCreator implements ActionCreator {
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);
-                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL, bundle));
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_COMPLETED, bundle));
                 });
     }
 }

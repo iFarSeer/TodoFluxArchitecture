@@ -37,6 +37,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -113,7 +114,13 @@ public class TodoListActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter) {
+            hideDialog();
+            showFilterDialog();
+            return true;
+        } else if (id == R.id.action_about) {
+            hideDialog();
+            showAboutDialog();
             return true;
         }
 
@@ -132,7 +139,6 @@ public class TodoListActivity extends BaseActivity {
         LogTool.debug(todoListModel.toString());
         recyclerAdapter.notifyDataSetChanged();
     }
-
 
     public void initializeInjector() {
         ActivityComponent component = ActivityComponent.Initializer.init(this);
@@ -182,6 +188,7 @@ public class TodoListActivity extends BaseActivity {
 
     }
 
+    //显示编辑对话框
     private void showEditDialog(TodoItem item) {
 
         View customView = LayoutInflater.from(this).inflate(R.layout.dialog_todo_edit, null);
@@ -209,8 +216,8 @@ public class TodoListActivity extends BaseActivity {
         materialDialog.show();
     }
 
+    //显示删除对话框
     private void showDeleteDialog(TodoItem item) {
-
         materialDialog = new MaterialDialog.Builder(this)
                 .content(R.string.todo_item_delete_content)
                 .positiveColorRes(R.color.positive_color)
@@ -227,6 +234,41 @@ public class TodoListActivity extends BaseActivity {
         materialDialog.show();
     }
 
+    //显示过滤条件
+    private void showFilterDialog() {
+        materialDialog = new MaterialDialog.Builder(this)
+                .title(R.string.action_filter)
+                .items(R.array.todo_filter_array)
+                .itemsCallback((dialog, view, which, text) -> {
+                    switch (which) {
+                        case 0:
+                            actionCreator.createListAllAction();
+                            break;
+                        case 1:
+                            actionCreator.createListCompletedAction();
+                            break;
+                        case 2:
+                            actionCreator.createListCompletedAction();
+                            break;
+                    }
+                })
+                .build();
+
+        materialDialog.show();
+    }
+
+
+    //显示About对话框
+    private void showAboutDialog(){
+        materialDialog = new MaterialDialog.Builder(this)
+                .title(R.string.action_about)
+                .content(Html.fromHtml(getString(R.string.about_content)))
+                .contentLineSpacing(1.6f)
+                .build();
+        materialDialog.show();
+    }
+
+    //隐藏对话框
     private void hideDialog() {
         if (materialDialog != null) {
             materialDialog.dismiss();

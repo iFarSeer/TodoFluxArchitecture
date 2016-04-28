@@ -1,10 +1,28 @@
 <resources>
     <string name="app_name">TodoFlux</string>
-    <string name="action_settings">Settings</string>
-    <string name="snack_bar_text">SnackbarText</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_about">About</string>
 
-    <string name="action_sure">确定</string>
-    <string name="action_cancel">取消</string>
+    <string name="action_sure">Sure</string>
+    <string name="action_cancel">Cancel</string>
 
-    <string name="todo_item_delete_content">确定要删除吗?</string>
+    <string name="todo_item_delete_content">Are you want to delete it?</string>
+
+    <string name="todo_filter_all">All</string>
+    <string name="todo_filter_completed">Completed</string>
+    <string name="todo_filter_stared">Stared</string>
+
+    <array name="todo_filter_array">
+        <item>@string/todo_filter_all</item>
+        <item>@string/todo_filter_completed</item>
+        <item>@string/todo_filter_stared</item>
+    </array>
+
+    <string name="about_content"><![CDATA[
+        TodoFluxArchitecture, a android demo for flux architecture by <b>farseer</b>.<br/>
+        <a href=\'http://http://ifarseer.github.io/.com\'>Website</a>&nbsp;&nbsp;
+        <a href=\'https://twitter.com/zhaoshuchao\'>Twitter</a>&nbsp;&nbsp;
+        <a href=\'https://plus.google.com/117233387937781187519\'>Google+</a>&nbsp;&nbsp;
+        <a href=\'https://github.com/iFarSeer\'>GitHub</a>
+    ]]></string>
 </resources>
