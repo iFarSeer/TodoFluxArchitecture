@@ -115,11 +115,11 @@ public class TodoListActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         setTitleTextView(toolbar, R.string.app_name);
-        setActionImageView(toolbar, R.drawable.checkbox_circle, (view) -> {
+        setActionImageView(toolbar, R.drawable.action_more, (view) -> {
             hideDialog();
             showAboutDialog();
         });
-        setOtherActionImageView(toolbar, R.drawable.checkbox_circle, (view) -> {
+        setOtherActionImageView(toolbar, R.drawable.action_filter, (view) -> {
             hideDialog();
             showFilterDialog();
         });
