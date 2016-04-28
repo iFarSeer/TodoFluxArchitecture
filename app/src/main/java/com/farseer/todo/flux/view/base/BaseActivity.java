@@ -17,7 +17,17 @@
 
 package com.farseer.todo.flux.view.base;
 
+import com.farseer.todo.flux.R;
+
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import butterknife.ButterKnife;
 
 /**
  * Activity基类
@@ -27,5 +37,37 @@ import android.support.v7.app.AppCompatActivity;
  * @since 2016-04-19
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+    public void setTitleTextView(Toolbar toolbar, @StringRes int resId) {
+        setTitleTextView(toolbar, getString(resId));
+    }
+
+    public void setTitleTextView(Toolbar toolbar, String text) {
+        TextView titleTextView = ButterKnife.findById(toolbar, R.id.titleTextView);
+        if (titleTextView != null) {
+            titleTextView.setText(text);
+            titleTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
+        View actionView = ButterKnife.findById(toolbar, R.id.actionView);
+        ImageView actionImageView = ButterKnife.findById(toolbar, R.id.actionImageView);
+        if (actionImageView != null) {
+            actionView.setVisibility(View.VISIBLE);
+            actionImageView.setImageResource(resId);
+            actionView.setOnClickListener(onClickListener);
+        }
+    }
+
+    public void setOtherActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
+        View otherActionView = ButterKnife.findById(toolbar, R.id.otherActionView);
+        ImageView otherActionImageView = ButterKnife.findById(toolbar, R.id.otherActionImageView);
+        if (otherActionImageView != null) {
+            otherActionView.setVisibility(View.VISIBLE);
+            otherActionImageView.setImageResource(resId);
+            otherActionView.setOnClickListener(onClickListener);
+        }
+    }
 
 }

@@ -40,8 +40,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -81,7 +79,6 @@ public class TodoListActivity extends BaseActivity {
         setContentView(R.layout.activity_todo);
 
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
         initializeInjector();
 
@@ -102,25 +99,6 @@ public class TodoListActivity extends BaseActivity {
         super.onPause();
         todoStore.unregister();
         dataDispatcher.unregister(this);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_todo, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_about) {
-            hideDialog();
-            showAboutDialog();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.fab)
@@ -145,6 +123,18 @@ public class TodoListActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        setSupportActionBar(toolbar);
+        setTitleTextView(toolbar, R.string.app_name);
+        setActionImageView(toolbar, R.drawable.checkbox_circle, (view) -> {
+            hideDialog();
+            showAboutDialog();
+        });
+        setOtherActionImageView(toolbar, R.drawable.checkbox_circle, (view) -> {
+            hideDialog();
+            showFilterDialog();
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(TodoListActivity.this));
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.addItemDecoration(
@@ -255,7 +245,7 @@ public class TodoListActivity extends BaseActivity {
 
 
     //显示About对话框
-    private void showAboutDialog(){
+    private void showAboutDialog() {
         materialDialog = new MaterialDialog.Builder(this)
                 .title(R.string.action_about)
                 .content(Html.fromHtml(getString(R.string.about_content)))

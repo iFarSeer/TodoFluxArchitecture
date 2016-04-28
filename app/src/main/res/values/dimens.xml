@@ -11,4 +11,7 @@
 
     <dimen name="todo_list_divider_height">2dp</dimen>
     <dimen name="divider_height">1dp</dimen>
+
+
+    <dimen name="toolBarHeight">50dp</dimen>
 </resources>
