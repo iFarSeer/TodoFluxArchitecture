@@ -223,7 +223,7 @@ public class TodoListActivity extends BaseActivity {
                             actionCreator.createListCompletedAction();
                             break;
                         case 2:
-                            actionCreator.createListCompletedAction();
+                            actionCreator.createListStaredAction();
                             break;
                     }
                 })
