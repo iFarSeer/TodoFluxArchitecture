@@ -30,6 +30,7 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
@@ -232,7 +233,6 @@ public class TodoListActivity extends BaseActivity {
         materialDialog.show();
     }
 
-
     //显示About对话框
     private void showAboutDialog() {
         materialDialog = new MaterialDialog.Builder(this)
@@ -250,7 +250,6 @@ public class TodoListActivity extends BaseActivity {
             materialDialog = null;
         }
     }
-
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
@@ -277,8 +276,13 @@ public class TodoListActivity extends BaseActivity {
 
             holder.isCompletedImageView.setSelected(item.isCompleted());
             holder.isStarImageView.setSelected(item.isStar());
-            holder.descriptionTextView.setText(item.getDescription());
 
+            holder.descriptionTextView.setText(item.getDescription());
+            if (item.isCompleted()) {
+                holder.descriptionTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+            } else {
+                holder.descriptionTextView.getPaint().setFlags(0);
+            }
 
             holder.isCompletedImageView.setOnClickListener(view ->
                     actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar())

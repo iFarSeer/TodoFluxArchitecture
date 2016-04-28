@@ -8,6 +8,8 @@
     <color name="divider_color">#dcdbdb</color>
     <color name="transport_color">#00000000</color>
 
+    <color name="white_color">#ffffff</color>
+
     <color name="positive_color">#3F51B5</color>
     <color name="negative_color">#4254b9</color>
     <color name="neutral_color">#e1e3f1</color>
