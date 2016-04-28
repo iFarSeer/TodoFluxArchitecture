@@ -30,9 +30,7 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,7 +46,6 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity {
 
@@ -60,8 +57,6 @@ public class TodoListActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.fab)
-    FloatingActionButton floatingActionButton;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.inputEditText)
@@ -99,12 +94,6 @@ public class TodoListActivity extends BaseActivity {
         super.onPause();
         todoStore.unregister();
         dataDispatcher.unregister(this);
-    }
-
-    @OnClick(R.id.fab)
-    public void clickFloatingActionButton() {
-        Intent intent = new Intent(this, TodoListActivity.class);
-        startActivity(intent);
     }
 
     @Subscribe
