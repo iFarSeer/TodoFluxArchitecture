@@ -42,6 +42,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -274,7 +275,7 @@ public class TodoListActivity extends BaseActivity {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final TodoItem item = todoListModel.list.get(position);
 
-            holder.isCompletedImageView.setSelected(item.isCompleted());
+            holder.isCompletedCheckBox.setChecked(item.isCompleted());
             holder.isStarImageView.setSelected(item.isStar());
 
             holder.descriptionTextView.setText(item.getDescription());
@@ -284,7 +285,7 @@ public class TodoListActivity extends BaseActivity {
                 holder.descriptionTextView.getPaint().setFlags(0);
             }
 
-            holder.isCompletedImageView.setOnClickListener(view ->
+            holder.isCompletedCheckBox.setOnClickListener(view ->
                     actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar())
             );
 
@@ -308,8 +309,8 @@ public class TodoListActivity extends BaseActivity {
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            @Bind(R.id.isCompletedImageView)
-            ImageView isCompletedImageView;
+            @Bind(R.id.isCompletedCheckBox)
+            CheckBox isCompletedCheckBox;
             @Bind(R.id.isStarImageView)
             ImageView isStarImageView;
             @Bind(R.id.descriptionTextView)

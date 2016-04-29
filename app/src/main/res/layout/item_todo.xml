@@ -9,15 +9,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height">
 
-        <ImageView
-                android:id="@+id/isCompletedImageView"
+        <CheckBox
+                android:id="@+id/isCompletedCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/checkbox_circle"
-                android:padding="@dimen/default_padding"
                 android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:padding="@dimen/default_padding"
         />
 
         <ImageView
@@ -25,10 +22,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/checkbox_star"
-                android:paddingLeft="@dimen/default_padding"
-                android:paddingStart="@dimen/default_padding"
-                android:paddingRight="@dimen/default_padding"
-                android:paddingEnd="@dimen/default_padding"
+                android:padding="@dimen/default_padding"
+                android:tint="@color/colorAccent"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
         />
@@ -41,8 +37,8 @@
                 android:singleLine="true"
                 android:layout_toLeftOf="@id/isStarImageView"
                 android:layout_toStartOf="@id/isStarImageView"
-                android:layout_toRightOf="@id/isCompletedImageView"
-                android:layout_toEndOf="@id/isCompletedImageView"
+                android:layout_toRightOf="@id/isCompletedCheckBox"
+                android:layout_toEndOf="@id/isCompletedCheckBox"
                 tools:text="测试内容"
         />
     </RelativeLayout>
