@@ -19,6 +19,7 @@ package com.farseer.todo.flux;
 
 import com.farseer.todo.flux.di.HasComponent;
 import com.farseer.todo.flux.di.component.ApplicationComponent;
+import com.farseer.todo.flux.tool.ProcessTool;
 
 import android.app.Application;
 
@@ -36,6 +37,10 @@ public class FluxApplication extends Application implements HasComponent<Applica
     @Override
     public void onCreate() {
         super.onCreate();
+        String processName = ProcessTool.getProcessName(getApplicationContext());
+        if (!BuildConfig.APPLICATION_ID.equals(processName)) {
+            return;
+        }
         initApplication();
     }
 
