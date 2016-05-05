@@ -32,6 +32,11 @@ import android.content.ContentValues;
  */
 public class DatabaseValuer {
 
+    /**
+     * 把TodoItem转换成ContentValues
+     * @param item
+     * @return
+     */
     public static ContentValues todoItemValues(TodoItem item) {
         ContentValues values = new ContentValues();
         values.put(TBTodoItem.ID, item.getId());

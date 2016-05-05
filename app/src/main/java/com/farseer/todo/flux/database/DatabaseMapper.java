@@ -28,13 +28,16 @@ import rx.functions.Func1;
 /**
  * Created by zhaosc.
  *
- * class description
+ * Rx map Cursor to Object
  *
  * @version 1.0.0
  * @since 16/5/5
  */
 public class DatabaseMapper {
 
+    /**
+     * Rx map Cursor to TodoItem
+     */
     public static Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
         long id = CursorTool.getLong(cursor, TBTodoItem.ID);
         String description = CursorTool.getString(cursor, TBTodoItem.DESCRIPTION);

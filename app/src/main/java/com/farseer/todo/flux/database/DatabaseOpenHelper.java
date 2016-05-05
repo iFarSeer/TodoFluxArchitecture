@@ -25,11 +25,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by zhaosc on 16/4/23.
+ * Created by zhaosc.
+ *
+ * DatabaseOpenHelper
+ *
+ * @version 1.0.0
+ * @since 16/4/23
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
-    public DatabaseHelper(Context context, String databaseName) {
+    public DatabaseOpenHelper(Context context, String databaseName) {
         super(context, databaseName, null, DatabaseSQL.VERSION);
     }
 
@@ -50,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
 
-        LogTool.debug("DatabaseHelper.onCreate finish");
+        LogTool.debug("DatabaseOpenHelper.onCreate finish");
     }
 
     @Override
@@ -70,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
 
-        LogTool.debug("DatabaseHelper.onUpgrade finish");
+        LogTool.debug("DatabaseOpenHelper.onUpgrade finish");
 
     }
 }

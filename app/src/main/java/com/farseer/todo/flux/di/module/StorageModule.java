@@ -18,7 +18,7 @@
 package com.farseer.todo.flux.di.module;
 
 import com.farseer.todo.flux.BuildConfig;
-import com.farseer.todo.flux.database.DatabaseHelper;
+import com.farseer.todo.flux.database.DatabaseOpenHelper;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
@@ -51,7 +51,7 @@ public class StorageModule {
     BriteDatabase briteDatabase() {
         SqlBrite sqlBrite = SqlBrite.create(message -> LogTool.debug("Database", message));
 
-        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseHelper(application, userId);
+        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseOpenHelper(application, userId);
         BriteDatabase db = sqlBrite.wrapDatabaseHelper(sqLiteOpenHelper);
         db.setLoggingEnabled(BuildConfig.DEBUG);
         return db;
