@@ -42,7 +42,7 @@ public class DatabaseValuer {
         values.put(TBTodoItem.ID, item.getId());
         values.put(TBTodoItem.DESCRIPTION, item.getDescription());
         values.put(TBTodoItem.IS_COMPLETE, item.isCompleted() ? 1 : 0);
-        values.put(TBTodoItem.IS_STAR, item.isStar() ? 1 : 0);
+        values.put(TBTodoItem.IS_STAR, item.isStared() ? 1 : 0);
         return values;
     }
 }

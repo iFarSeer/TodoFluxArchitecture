@@ -182,7 +182,7 @@ public class TodoListActivity extends BaseActivity {
                 .onPositive((dialog, which) -> {
                             String text = editText.getText().toString();
                             if (!TextUtils.isEmpty(text)) {
-                                actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStar());
+                                actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStared());
                                 dialog.dismiss();
                             }
                         }
@@ -276,7 +276,7 @@ public class TodoListActivity extends BaseActivity {
             final TodoItem item = todoListModel.list.get(position);
 
             holder.isCompletedCheckBox.setChecked(item.isCompleted());
-            holder.isStarImageView.setSelected(item.isStar());
+            holder.isStarImageView.setSelected(item.isStared());
 
             holder.descriptionTextView.setText(item.getDescription());
             if (item.isCompleted()) {
@@ -286,11 +286,11 @@ public class TodoListActivity extends BaseActivity {
             }
 
             holder.isCompletedCheckBox.setOnClickListener(view ->
-                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStar())
+                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStared())
             );
 
             holder.isStarImageView.setOnClickListener(view ->
-                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStar())
+                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStared())
             );
 
             holder.itemView.setTag(item);

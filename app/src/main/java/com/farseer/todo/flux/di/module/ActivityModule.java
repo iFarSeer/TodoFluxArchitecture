@@ -40,7 +40,7 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    BaseActivity activity() {
+    BaseActivity getActivity() {
         return activity;
     }
 

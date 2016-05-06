@@ -27,20 +27,20 @@ package com.farseer.todo.flux.pojo;
 public class TodoItem {
     private Long id;
     private String description;
-    private boolean isCompleted;
-    private boolean isStar;
+    private boolean completed;
+    private boolean stared;
 
     public TodoItem(Long id, String description) {
         this(id, description, false, false);
     }
 
-    public TodoItem(Long id, String description, boolean isCompleted) {
-        this(id, description, isCompleted, false);
+    public TodoItem(Long id, String description, boolean completed) {
+        this(id, description, completed, false);
     }
 
-    public TodoItem(Long id, String description, boolean isCompleted, boolean isStar) {
-        this.isStar = isStar;
-        this.isCompleted = isCompleted;
+    public TodoItem(Long id, String description, boolean completed, boolean stared) {
+        this.stared = stared;
+        this.completed = completed;
         this.description = description;
         this.id = id;
     }
@@ -62,19 +62,19 @@ public class TodoItem {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
-        isCompleted = completed;
+        this.completed = completed;
     }
 
-    public boolean isStar() {
-        return isStar;
+    public boolean isStared() {
+        return stared;
     }
 
-    public void setStar(boolean star) {
-        isStar = star;
+    public void setStared(boolean stared) {
+        this.stared = stared;
     }
 
     @Override
@@ -82,8 +82,8 @@ public class TodoItem {
         return "TodoItem{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", isCompleted=" + isCompleted +
-                ", isStar=" + isStar +
+                ", isCompleted=" + completed +
+                ", isStared=" + stared +
                 '}';
     }
 

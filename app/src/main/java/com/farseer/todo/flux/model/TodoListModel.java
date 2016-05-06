@@ -36,10 +36,10 @@ public class TodoListModel {
 
     public TodoListModel(List<TodoItem> list, Filter filter) {
         this.filter = filter;
-        this.list = filter(list, filter);
+        this.list = filterTodoItemList(list, filter);
     }
 
-    private List<TodoItem> filter(List<TodoItem> list, Filter filter) {
+    private List<TodoItem> filterTodoItemList(List<TodoItem> list, Filter filter) {
         List<TodoItem> tmpList = new ArrayList<>();
 
         switch (filter) {
@@ -55,7 +55,7 @@ public class TodoListModel {
                 break;
             case STARED:
                 for (TodoItem item : list) {
-                    if (item.isStar()) {
+                    if (item.isStared()) {
                         tmpList.add(item);
                     }
                 }
@@ -77,7 +77,7 @@ public class TodoListModel {
     public String toString() {
         return "TodoListModel{" +
                 "list=" + list +
-                ", filter=" + filter +
+                ", filterTodoItemList=" + filter +
                 '}';
     }
 }

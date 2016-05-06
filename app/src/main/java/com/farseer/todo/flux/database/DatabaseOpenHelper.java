@@ -50,7 +50,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             }
             db.setTransactionSuccessful();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LogTool.error(e.getMessage());
         } finally {
             db.endTransaction();
         }
@@ -70,7 +70,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             }
             db.setTransactionSuccessful();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LogTool.error(e.getMessage());
         } finally {
             db.endTransaction();
         }

@@ -40,7 +40,7 @@ public class LogTool {
 
     static {
         className = LogTool.class.getName();
-        methods = new ArrayList<String>();
+        methods = new ArrayList<>();
 
         Method[] ms = LogTool.class.getDeclaredMethods();
         for (Method m : ms) {

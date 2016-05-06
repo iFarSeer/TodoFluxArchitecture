@@ -38,7 +38,7 @@ public class DatabaseMapper {
     /**
      * Rx map Cursor to TodoItem
      */
-    public static Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
+    public final static Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
         long id = CursorTool.getLong(cursor, TBTodoItem.ID);
         String description = CursorTool.getString(cursor, TBTodoItem.DESCRIPTION);
         boolean isComplete = CursorTool.getBoolean(cursor, TBTodoItem.IS_COMPLETE);

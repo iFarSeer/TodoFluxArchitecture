@@ -24,7 +24,6 @@ import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.store.TodoStore;
-import com.squareup.sqlbrite.BriteDatabase;
 
 import android.app.Application;
 import android.content.res.Resources;
@@ -46,22 +45,22 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final Application application;
+    private final Application app;
 
     public ApplicationModule(Application application) {
-        this.application = application;
+        this.app = application;
     }
 
     @Provides
     @Singleton
     Application application() {
-        return application;
+        return app;
     }
 
     @Provides
     @Singleton
     Resources resources() {
-        return application.getResources();
+        return app.getResources();
     }
 
     @Provides
