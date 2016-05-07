@@ -32,10 +32,10 @@ import javax.inject.Inject;
  */
 public class DataDispatcher implements Dispatcher {
 
-    private Bus mBus = new Bus(ThreadEnforcer.MAIN);
+    private Bus bus = new Bus(ThreadEnforcer.MAIN);
 
     /**
-     * 构造数据分发器
+     * 构造数据分发器.
      */
     @Inject
     public DataDispatcher() {
@@ -44,16 +44,16 @@ public class DataDispatcher implements Dispatcher {
 
     @Override
     public void register(Object object) {
-        mBus.register(object);
+        bus.register(object);
     }
 
     @Override
     public void unregister(Object object) {
-        mBus.unregister(object);
+        bus.unregister(object);
     }
 
     @Override
     public void post(Object event) {
-        mBus.post(event);
+        bus.post(event);
     }
 }

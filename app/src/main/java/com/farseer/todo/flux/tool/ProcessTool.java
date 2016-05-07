@@ -14,6 +14,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
 package com.farseer.todo.flux.tool;
 
 import android.app.ActivityManager;
@@ -33,7 +34,7 @@ public final class ProcessTool {
     }
 
     /**
-     * 获得进程名称
+     * 获得进程名称.
      *
      * @param context 上下文
      * @return 获得进程名称

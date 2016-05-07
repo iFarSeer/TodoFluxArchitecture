@@ -32,20 +32,20 @@ import dagger.Provides;
  */
 @Module
 public class ActivityModule {
-    private BaseActivity mActivity;
+    private BaseActivity activity;
 
     /**
-     * 构造ActivityModule
+     * 构造ActivityModule.
      *
      * @param activity activity
      */
     public ActivityModule(BaseActivity activity) {
-        this.mActivity = activity;
+        this.activity = activity;
     }
 
     @Provides
     @PerActivity
     BaseActivity getActivity() {
-        return mActivity;
+        return activity;
     }
 }

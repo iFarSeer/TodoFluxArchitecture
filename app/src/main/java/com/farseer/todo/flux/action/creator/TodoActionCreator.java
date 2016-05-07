@@ -41,77 +41,77 @@ import javax.inject.Named;
  */
 public class TodoActionCreator implements ActionCreator {
 
-    private Dispatcher mActionDispatcher;
+    private Dispatcher actionDispatcher;
 
-    private BriteDatabase mDatabase;
+    private BriteDatabase database;
 
     /**
-     * 构造TodoActionCreator
+     * 构造TodoActionCreator.
      *
-     * @param actionDispatcher mActionDispatcher
+     * @param actionDispatcher actionDispatcher
      * @param briteDatabase    database
      */
     @Inject
-    public TodoActionCreator(@Named("mActionDispatcher") Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
+    public TodoActionCreator(@Named("actionDispatcher") Dispatcher actionDispatcher, BriteDatabase briteDatabase) {
         LogTool.debug("构造 TodoActionCreator");
-        this.mActionDispatcher = actionDispatcher;
-        this.mDatabase = briteDatabase;
+        this.actionDispatcher = actionDispatcher;
+        this.database = briteDatabase;
     }
 
     @Override
     public void createItemNewAction(final String description) {
         long id = System.currentTimeMillis();
         TodoItem item = new TodoItem(id, description, false, false);
-        mDatabase.insert(TBTodoItem.TABLE_NAME, DatabaseValuer.todoItemValues(item));
+        database.insert(TBTodoItem.TABLE_NAME, DatabaseValuer.todoItemValues(item));
 
         DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoItemAction.Key.ITEM, item);
-        mActionDispatcher.post(new TodoItemAction(TodoItemAction.Type.NEW, bundle));
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.NEW, bundle));
     }
 
     @Override
     public void createItemEditAction(final Long id, final String description, boolean completed, boolean stared) {
         TodoItem item = new TodoItem(id, description, completed, stared);
-        mDatabase.update(TBTodoItem.TABLE_NAME, DatabaseValuer.todoItemValues(item), String.format("%s = %s", TBTodoItem.ID, item.getId()));
+        database.update(TBTodoItem.TABLE_NAME, DatabaseValuer.todoItemValues(item), String.format("%s = %s", TBTodoItem.ID, item.getId()));
 
         DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoItemAction.Key.ID, id);
         bundle.put(TodoItemAction.Key.ITEM, item);
-        mActionDispatcher.post(new TodoItemAction(TodoItemAction.Type.EDIT, bundle));
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.EDIT, bundle));
     }
 
     @Override
     public void createItemDeleteAction(final Long id) {
         DataBundle<TodoItemAction.Key> bundle = new DataBundle<>();
         bundle.put(TodoItemAction.Key.ID, id);
-        mActionDispatcher.post(new TodoItemAction(TodoItemAction.Type.DELETE, bundle));
+        actionDispatcher.post(new TodoItemAction(TodoItemAction.Type.DELETE, bundle));
     }
 
     @Override
     public void createListLoadAction() {
-        QueryObservable queryObservable = mDatabase.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
-        queryObservable.
-                mapToList(DatabaseMapper.MAPPER_TODO_ITEM)
+        QueryObservable queryObservable = database.createQuery(TBTodoItem.TABLE_NAME, "select * from " + TBTodoItem.TABLE_NAME);
+        queryObservable
+                .mapToList(DatabaseMapper.MAPPER_TODO_ITEM)
                 .subscribe(list -> {
                     DataBundle<TodoListAction.Key> bundle = new DataBundle<>();
                     bundle.put(TodoListAction.Key.LIST, list);
-                    mActionDispatcher.post(new TodoListAction(TodoListAction.Type.LOAD, bundle));
+                    actionDispatcher.post(new TodoListAction(TodoListAction.Type.LOAD, bundle));
                 });
     }
 
     @Override
     public void createListAllAction() {
-        mActionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL));
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_ALL));
     }
 
     @Override
     public void createListCompletedAction() {
-        mActionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_COMPLETED));
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_COMPLETED));
     }
 
     @Override
     public void createListStaredAction() {
-        mActionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_STARED));
+        actionDispatcher.post(new TodoListAction(TodoListAction.Type.SHOW_STARED));
 
     }
 }

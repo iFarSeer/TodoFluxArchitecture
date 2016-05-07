@@ -18,20 +18,20 @@
 package com.farseer.todo.flux.pojo;
 
 /**
- * Todo事项
+ * Todo事项.
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2016-04-19
  */
 public class TodoItem {
-    private Long mId;
-    private String mDescription;
-    private boolean mCompleted;
-    private boolean mStared;
+    private Long id;
+    private String description;
+    private boolean completed;
+    private boolean stared;
 
     /**
-     * 构造Todo事项
+     * 构造Todo事项.
      * @param id                    id
      * @param description           描述
      */
@@ -40,7 +40,7 @@ public class TodoItem {
     }
 
     /**
-     * 构造Todo事项
+     * 构造Todo事项.
      * @param id                    构造Todo事项
      * @param description           描述
      * @param completed             是否已完成
@@ -50,62 +50,62 @@ public class TodoItem {
     }
 
     /**
-     * 构造Todo事项
+     * 构造Todo事项.
      * @param id                    id
      * @param description           描述
      * @param completed             是否已完成
      * @param stared                是否重要
      */
     public TodoItem(Long id, String description, boolean completed, boolean stared) {
-        this.mStared = stared;
-        this.mCompleted = completed;
-        this.mDescription = description;
-        this.mId = id;
+        this.stared = stared;
+        this.completed = completed;
+        this.description = description;
+        this.id = id;
     }
 
     public Long getId() {
-        return mId;
+        return id;
     }
 
     public void setId(Long id) {
-        this.mId = id;
+        this.id = id;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public void setDescription(String description) {
-        this.mDescription = description;
+        this.description = description;
     }
 
     public boolean isCompleted() {
-        return mCompleted;
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
-        this.mCompleted = completed;
+        this.completed = completed;
     }
 
     public boolean isStared() {
-        return mStared;
+        return stared;
     }
 
     public void setStared(boolean stared) {
-        this.mStared = stared;
+        this.stared = stared;
     }
 
     @Override
     public String toString() {
         return "TodoItem{"
-                + "mId="
-                + mId
-                + ", mDescription='"
-                + mDescription
+                + "id="
+                + id
+                + ", description='"
+                + description
                 +  ", isCompleted="
-                + mCompleted
+                + completed
                 + ", isStared="
-                + mStared
+                + stared
                 + "}";
     }
 }

@@ -26,22 +26,21 @@ import android.database.Cursor;
 import rx.functions.Func1;
 
 /**
- * Created by zhaosc.
- *
  * Rx map Cursor to Object
  *
+ * @author zhaosc
  * @version 1.0.0
- * @since 16/5/5
+ * @since 2016-04-18
  */
-public class DatabaseMapper {
+public final class DatabaseMapper {
 
 
     /**
-     * Rx map Cursor to TodoItem
+     * Rx map Cursor to TodoItem.
      *
      * @return func1
      */
-    public final static Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
+    public static final Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
         long id = CursorTool.getLong(cursor, TBTodoItem.ID);
         String description = CursorTool.getString(cursor, TBTodoItem.DESCRIPTION);
         boolean isComplete = CursorTool.getBoolean(cursor, TBTodoItem.IS_COMPLETE);

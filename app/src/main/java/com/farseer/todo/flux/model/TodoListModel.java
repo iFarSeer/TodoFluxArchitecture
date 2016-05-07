@@ -24,24 +24,24 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Todo事项列表模型
+ * Todo事项列表模型.
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2016-04-19
  */
 public class TodoListModel {
-    private List<TodoItem> mTodoItemList;
-    private Filter mFilter;
+    public List<TodoItem> todoItemList;
+    private Filter filter;
 
     /**
-     * TodoListModel构造方法
+     * TodoListModel构造方法.
      * @param todoItemList          todo事项列表
      * @param filter                显示方式
      */
     public TodoListModel(List<TodoItem> todoItemList, Filter filter) {
-        this.mFilter = filter;
-        this.mTodoItemList = filterTodoItemList(todoItemList, filter);
+        this.filter = filter;
+        this.todoItemList = filterTodoItemList(todoItemList, filter);
     }
 
     private List<TodoItem> filterTodoItemList(List<TodoItem> todoItemList, Filter filter) {
@@ -74,21 +74,21 @@ public class TodoListModel {
     }
 
     /**
-     * Filter方式
+     * Filter方式.
      */
     public enum Filter {
         /**
-         * 显示全部
+         * 显示全部.
          */
         ALL,
 
         /**
-         * 显示已完成
+         * 显示已完成.
          */
         COMPLETED,
 
         /**
-         * 显示重要
+         * 显示重要.
          */
         STARED
     }
@@ -96,10 +96,10 @@ public class TodoListModel {
     @Override
     public String toString() {
         return "TodoListModel{"
-                + "mTodoItemList="
-                + mTodoItemList
+                + "todoItemList="
+                + todoItemList
                 + ", filterTodoItemList="
-                + mFilter
+                + filter
                 + '}';
     }
 }

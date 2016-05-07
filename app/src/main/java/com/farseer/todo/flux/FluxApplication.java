@@ -17,10 +17,12 @@
 
 package com.farseer.todo.flux;
 
+import android.app.Application;
+
 import com.farseer.todo.flux.di.component.ApplicationComponent;
 import com.farseer.todo.flux.tool.ProcessTool;
 
-import android.app.Application;
+
 
 /**
  * Flux Application
@@ -31,7 +33,7 @@ import android.app.Application;
  */
 public class FluxApplication extends Application {
 
-    private ApplicationComponent mComponent;
+    private ApplicationComponent component;
 
     @Override
     public void onCreate() {
@@ -49,15 +51,15 @@ public class FluxApplication extends Application {
     }
 
     private void initInjector() {
-        mComponent = ApplicationComponent.Initializer.init(this);
+        component = ApplicationComponent.Initializer.init(this);
     }
 
     /**
-     * 获得ApplicationComponent
+     * 获得ApplicationComponent.
      *
-     * @return mComponent
+     * @return component
      */
     public ApplicationComponent getComponent() {
-        return mComponent;
+        return component;
     }
 }

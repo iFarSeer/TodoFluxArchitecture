@@ -27,12 +27,12 @@ package com.farseer.todo.flux.store;
 public interface Store {
 
     /**
-     * 注册Store需要的Bus
+     * 注册Store需要的Bus.
      */
     void register();
 
     /**
-     * 注销Store需要的Bus
+     * 注销Store需要的Bus.
      */
     void unregister();
 }

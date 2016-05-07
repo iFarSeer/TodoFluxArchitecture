@@ -52,7 +52,7 @@ public final class LogTool {
     }
 
     /**
-     * debug
+     * debug.
      *
      * @param tag tag
      * @param msg msg
@@ -64,7 +64,7 @@ public final class LogTool {
     }
 
     /**
-     * error
+     * error.
      *
      * @param tag tag
      * @param msg msg
@@ -76,7 +76,7 @@ public final class LogTool {
     }
 
     /**
-     * info
+     * info.
      *
      * @param tag tag
      * @param msg msg
@@ -88,7 +88,7 @@ public final class LogTool {
     }
 
     /**
-     * warn
+     * warn.
      *
      * @param tag tag
      * @param msg msg
@@ -100,7 +100,7 @@ public final class LogTool {
     }
 
     /**
-     * verbose
+     * verbose.
      *
      * @param tag tag
      * @param msg msg
@@ -112,7 +112,7 @@ public final class LogTool {
     }
 
     /**
-     * debug
+     * debug.
      *
      * @param msg msg
      */
@@ -124,7 +124,7 @@ public final class LogTool {
     }
 
     /**
-     * error
+     * error.
      *
      * @param msg msg
      */
@@ -136,7 +136,7 @@ public final class LogTool {
     }
 
     /**
-     * info
+     * info.
      *
      * @param msg msg
      */
@@ -149,7 +149,7 @@ public final class LogTool {
 
 
     /**
-     * warn
+     * warn.
      *
      * @param msg msg
      */
@@ -161,7 +161,7 @@ public final class LogTool {
     }
 
     /**
-     * verbose
+     * verbose.
      *
      * @param msg msg
      */
@@ -178,15 +178,14 @@ public final class LogTool {
                 if (mClassName.equals(st.getClassName()) || mMethods.contains(st.getMethodName())) {
                     continue;
                 } else {
-                    int b = st.getClassName().lastIndexOf(".") + 1;
-                    String tag = st.getClassName().substring(b);
+                    int index = st.getClassName().lastIndexOf(".") + 1;
+                    String tag = st.getClassName().substring(index);
                     String message = tag + "->" + st.getMethodName() + "():" + st.getLineNumber() + "->" + msg;
                     return message;
                 }
 
             }
-        } catch (Exception e) {
-
+        } catch (Exception exception) {
         }
         return msg;
     }
@@ -197,15 +196,15 @@ public final class LogTool {
                 if (mClassName.equals(st.getClassName()) || mMethods.contains(st.getMethodName())) {
                     continue;
                 } else {
-                    int b = st.getClassName().lastIndexOf(".") + 1;
-                    String tag = st.getClassName().substring(b);
+                    int index = st.getClassName().lastIndexOf(".") + 1;
+                    String tag = st.getClassName().substring(index);
                     String message = st.getMethodName() + "():" + st.getLineNumber() + "->" + msg;
                     String[] content = new String[]{tag, message};
                     return content;
                 }
 
             }
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
         }
         return new String[]{"universal tag", msg};

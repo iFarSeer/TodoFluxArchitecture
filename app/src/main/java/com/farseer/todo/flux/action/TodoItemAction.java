@@ -23,7 +23,7 @@ import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.action.base.DataKey;
 
 /**
- * Todo数据相关Action
+ * Todo数据相关Action.
  *
  * @author zhaosc
  * @version 1.0.0
@@ -32,54 +32,54 @@ import com.farseer.todo.flux.action.base.DataKey;
 public class TodoItemAction extends Action {
 
     /**
-     * 构造单个todo事项事件
+     * 构造单个todo事项事件.
      *
      * @param type 事件类型
      */
-    public TodoItemAction(Type type) {
-        this.mType = type;
-        this.mDataBundle = new DataBundle<>();
+    public TodoItemAction(final Type type) {
+        this.type = type;
+        this.dataBundle = new DataBundle<>();
     }
 
     /**
-     * 构造单个todo事项事件
+     * 构造单个todo事项事件.
      *
      * @param type 事件类型
      * @param data 事件数据
      */
-    public TodoItemAction(Type type, DataBundle<Key> data) {
-        this.mType = type;
-        this.mDataBundle = data;
+    public TodoItemAction(final Type type, final DataBundle<Key> data) {
+        this.type = type;
+        this.dataBundle = data;
     }
 
     /**
-     * 事件类型
+     * 事件类型.
      */
     public enum Type implements ActionType {
         /**
-         * 创建todo事项
+         * 创建todo事项.
          */
         NEW,
         /**
-         * 编辑todo事项
+         * 编辑todo事项.
          */
         EDIT,
         /**
-         * 删除todo事项
+         * 删除todo事项.
          */
         DELETE,
     }
 
     /**
-     * 数据key
+     * 数据key.
      */
     public enum Key implements DataKey {
         /**
-         * todo事项id的key
+         * todo事项id的key.
          */
         ID,
         /**
-         * 单个todo事项的key
+         * 单个todo事项的key.
          */
         ITEM
     }

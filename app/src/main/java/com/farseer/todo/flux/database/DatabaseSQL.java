@@ -29,19 +29,19 @@ import com.farseer.todo.flux.database.table.TBTodoItem;
 public final class DatabaseSQL {
 
     /**
-     * 数据第一版本的SQL
+     * 数据第一版本的SQL.
      */
     public static final String[] SQL_ALL_V1 = {
             TBTodoItem.CREATE_SQL_V1, TBTodoItem.INDEX_SQL_V1
     };
 
     /**
-     * 数据所有版本相关的SQL
+     * 数据所有版本相关的SQL.
      */
     public static final String[][] SQL_ALL = {SQL_ALL_V1};
 
     /**
-     * 数据版本
+     * 数据版本.
      */
     public static final int VERSION = SQL_ALL.length;
 

@@ -27,14 +27,14 @@ package com.farseer.todo.flux.action.creator;
 public interface ActionCreator {
 
     /**
-     * 创建新建Item事件
+     * 创建新建Item事件.
      *
      * @param description Item事项描述
      */
     void createItemNewAction(final String description);
 
     /**
-     * 创建编辑Item事件
+     * 创建编辑Item事件.
      *
      * @param id          items事项id
      * @param description Item事项描述
@@ -44,29 +44,29 @@ public interface ActionCreator {
     void createItemEditAction(final Long id, final String description, boolean completed, boolean stared);
 
     /**
-     * 创建删除Item事件
+     * 创建删除Item事件.
      *
      * @param id items事项id
      */
     void createItemDeleteAction(final Long id);
 
     /**
-     * 创建加载List事件
+     * 创建加载List事件.
      */
     void createListLoadAction();
 
     /**
-     * 创建显示List All Item 事件
+     * 创建显示List All Item 事件.
      */
     void createListAllAction();
 
     /**
-     * 创建显示List Compeleted Item 事件
+     * 创建显示List Compeleted Item 事件.
      */
     void createListCompletedAction();
 
     /**
-     * 创建显示List Stared Item 事件
+     * 创建显示List Stared Item 事件.
      */
     void createListStaredAction();
 }

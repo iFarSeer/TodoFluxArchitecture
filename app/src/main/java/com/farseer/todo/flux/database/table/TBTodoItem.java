@@ -18,7 +18,7 @@
 package com.farseer.todo.flux.database.table;
 
 /**
- * TBTodoItem
+ * TBTodoItem.
  *
  * @author zhaosc
  * @version 1.0.0
@@ -27,30 +27,30 @@ package com.farseer.todo.flux.database.table;
 public final class TBTodoItem {
 
     /**
-     * TodoItem表名称
+     * TodoItem表名称.
      */
     public static final String TABLE_NAME = "todo_item";
 
     /**
-     * 字段id
+     * 字段id.
      */
     public static final String ID = "_id";
     /**
-     * 字段description
+     * 字段description.
      */
     public static final String DESCRIPTION = "description";
 
     /**
-     * 字段is_complete
+     * 字段is_complete.
      */
     public static final String IS_COMPLETE = "is_complete";
     /**
-     * 字段is_star
+     * 字段is_star.
      */
     public static final String IS_STAR = "is_star";
 
     /**
-     * 创建表SQL语句
+     * 创建表SQL语句.
      */
     public static final String CREATE_SQL_V1 = ""
             + "CREATE TABLE " + TBTodoItem.TABLE_NAME + "("
@@ -61,7 +61,7 @@ public final class TBTodoItem {
             + ")";
 
     /**
-     * 建立索引SQL语句
+     * 建立索引SQL语句.
      */
     public static final String INDEX_SQL_V1 = ""
             + "CREATE INDEX if not exists INDEX_" + TABLE_NAME + " on "

@@ -29,40 +29,40 @@ import java.util.Map;
  */
 
 /**
- * 数据集合
+ * 数据集合.
  *
  * @param <T> extends DataKey
  */
 public class DataBundle<T extends DataKey> {
 
-    private Map<T, Object> mMap;
+    private Map<T, Object> map;
 
     /**
-     * 构造DataBundle
+     * 构造DataBundle.
      */
     public DataBundle() {
-        mMap = new HashMap<>();
+        map = new HashMap<>();
     }
 
     /**
-     * 添加数据key-data
+     * 添加数据key-data.
      *
      * @param key  数据key
      * @param data 数据内容
      */
     public void put(T key, Object data) {
-        mMap.put(key, data);
+        map.put(key, data);
     }
 
     /**
-     * 获得key对应的数据data
+     * 获得key对应的数据data.
      *
      * @param key          数据key
      * @param defaultValue 默认返回data
      * @return object
      */
     public Object get(T key, Object defaultValue) {
-        Object obj = mMap.get(key);
+        Object obj = map.get(key);
         if (obj == null) {
             obj = defaultValue;
         }
@@ -71,28 +71,28 @@ public class DataBundle<T extends DataKey> {
     }
 
     /**
-     * 获得Map
+     * 获得Map.
      *
      * @return 数据集合
      */
     public Map<T, Object> getMap() {
-        return mMap;
+        return map;
     }
 
     /**
-     * 设置map
+     * 设置map.
      *
      * @param map map
      */
     public void setMap(Map<T, Object> map) {
-        mMap = map;
+        this.map = map;
     }
 
     @Override
     public String toString() {
         return "DataBundle{"
-                + "mMap="
-                + mMap
+                + "map="
+                + map
                 + "}";
     }
 }

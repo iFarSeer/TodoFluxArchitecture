@@ -29,12 +29,12 @@ import android.database.Cursor;
 public final class CursorTool {
 
     /**
-     * 代表boolean false
+     * 代表boolean false.
      */
     public static final int BOOLEAN_FALSE = 0;
 
     /**
-     * 代表boolean true
+     * 代表boolean true.
      */
     public static final int BOOLEAN_TRUE = 1;
 
@@ -43,7 +43,7 @@ public final class CursorTool {
     }
 
     /**
-     * 通过cursor获得字段columnName对应的string
+     * 通过cursor获得字段columnName对应的string.
      *
      * @param cursor     cursor
      * @param columnName 字段名称
@@ -54,7 +54,7 @@ public final class CursorTool {
     }
 
     /**
-     * 通过cursor获得字段columnName对应的boolean
+     * 通过cursor获得字段columnName对应的boolean.
      *
      * @param cursor     cursor
      * @param columnName 字段名称
@@ -65,7 +65,7 @@ public final class CursorTool {
     }
 
     /**
-     * 通过cursor获得字段columnName对应的long
+     * 通过cursor获得字段columnName对应的long.
      *
      * @param cursor     cursor
      * @param columnName 字段名称
@@ -76,7 +76,7 @@ public final class CursorTool {
     }
 
     /**
-     * 通过cursor获得字段columnName对应的int
+     * 通过cursor获得字段columnName对应的int.
      *
      * @param cursor     cursor
      * @param columnName 字段名称

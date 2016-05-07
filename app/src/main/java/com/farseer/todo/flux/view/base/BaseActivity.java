@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     /**
-     * 设置Toolbar的title
+     * 设置Toolbar的title.
      *
      * @param toolbar toolbar
      * @param resId   title的resId
@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置ToolBar的title
+     * 设置ToolBar的title.
      *
      * @param toolbar toolbar
      * @param text    title的内容
@@ -63,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置toolbar最右侧按钮的图片,以及点击事件
+     * 设置toolbar最右侧按钮的图片,以及点击事件.
      *
      * @param toolbar         toolbar
      * @param resId           图片的resId
@@ -80,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置toolbar次右侧按钮的图片,以及点击事件
+     * 设置toolbar次右侧按钮的图片,以及点击事件.
      *
      * @param toolbar         toolbar
      * @param resId           图片的resId

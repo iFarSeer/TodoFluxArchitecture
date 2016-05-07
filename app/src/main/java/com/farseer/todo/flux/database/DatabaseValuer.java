@@ -23,12 +23,11 @@ import com.farseer.todo.flux.pojo.TodoItem;
 import android.content.ContentValues;
 
 /**
- * Created by zhaosc.
+ * DatabaseValuer
  *
- * class description
- *
+ * @author zhaosc
  * @version 1.0.0
- * @since 16/5/5
+ * @since 2016-05-05
  */
 public final class DatabaseValuer {
 
@@ -37,7 +36,7 @@ public final class DatabaseValuer {
     }
 
     /**
-     * 把TodoItem转换成ContentValues
+     * 把TodoItem转换成ContentValues.
      *
      * @param item Item事项
      * @return ContentValues

@@ -37,19 +37,19 @@ import dagger.Component;
 public interface StorageComponent {
 
     /**
-     * 获得数据库
+     * 获得数据库.
      *
      * @return BriteDatabase
      */
     BriteDatabase briteDatabase();
 
     /**
-     * StorageComponent的Initializer
+     * StorageComponent的Initializer.
      */
     public static final class Initializer {
 
         /**
-         * 初始化StorageComponent
+         * 初始化StorageComponent.
          *
          * @param application application
          * @param userId      用户id

@@ -47,7 +47,7 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     /**
-     * 注入application
+     * 注入application.
      * @param application application
      */
     void inject(Application application);
@@ -56,21 +56,21 @@ public interface ApplicationComponent {
     //暴露给对象图
 
     /**
-     * 获得Application
+     * 获得Application.
      *
      * @return Application
      */
     Application application();
 
     /**
-     * 获得Resources
+     * 获得Resources.
      *
      * @return Resources
      */
     Resources resources();
 
     /**
-     * 获得事件分发器
+     * 获得事件分发器.
      *
      * @return 事件分发器
      */
@@ -78,7 +78,7 @@ public interface ApplicationComponent {
     Dispatcher actionDispatcher();
 
     /**
-     * 获得数据分发器
+     * 获得数据分发器.
      *
      * @return 数据分发器
      */
@@ -86,25 +86,25 @@ public interface ApplicationComponent {
     Dispatcher dataDispatcher();
 
     /**
-     * 获得TodoStore
+     * 获得TodoStore.
      *
      * @return Store
      */
     Store todoStore();
 
     /**
-     * 获得actionCreator
+     * 获得actionCreator.
      *
      * @return ActionCreator
      */
     ActionCreator actionCreator();
 
     /**
-     * ApplicationComponent的Initializer
+     * ApplicationComponent的Initializer.
      */
     public static final class Initializer {
         /**
-         * 初始化ApplicationComponent
+         * 初始化ApplicationComponent.
          *
          * @param application application
          * @return ApplicationComponent

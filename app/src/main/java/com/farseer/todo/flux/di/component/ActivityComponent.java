@@ -48,14 +48,14 @@ import dagger.Component;
 public interface ActivityComponent {
 
     /**
-     * 注入BaseActivity
+     * 注入BaseActivity.
      *
      * @param activity activity
      */
     public void inject(BaseActivity activity);
 
     /**
-     * 注入BaseFragment
+     * 注入BaseFragment.
      *
      * @param fragment fragment
      */
@@ -65,36 +65,36 @@ public interface ActivityComponent {
     //暴露给对象图
 
     /**
-     * 获得activity
+     * 获得activity.
      *
      * @return activity
      */
     BaseActivity activity();
 
     /**
-     * 获得Application
+     * 获得Application.
      *
      * @return Application
      */
     Application application();
 
     /**
-     * 获得Resources
+     * 获得Resources.
      *
      * @return Resources
      */
     Resources resources();
 
     /**
-     * 获得事件分发器
+     * 获得事件分发器.
      *
-     * @return Dispatcher
+     * @return Dispatcher.
      */
     @Named("actionDispatcher")
     Dispatcher actionDispatcher();
 
     /**
-     * 获得数据分发器
+     * 获得数据分发器.
      *
      * @return Dispatcher
      */
@@ -102,26 +102,26 @@ public interface ActivityComponent {
     Dispatcher dataDispatcher();
 
     /**
-     * 获得TodoStore
+     * 获得TodoStore.
      *
      * @return Store
      */
     Store todoStore();
 
     /**
-     * 获得actionCreator
+     * 获得actionCreator.
      *
      * @return ActionCreator
      */
     ActionCreator actionCreator();
 
     /**
-     * ActivityComponent的Initializer
+     * ActivityComponent的Initializer.
      */
     public static final class Initializer {
 
         /**
-         * 初始化ActivityComponent
+         * 初始化ActivityComponent.
          *
          * @param activity activity
          * @return ActivityComponent

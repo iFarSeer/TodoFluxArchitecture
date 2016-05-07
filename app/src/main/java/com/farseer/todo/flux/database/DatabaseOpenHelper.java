@@ -25,19 +25,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by zhaosc.
- *
  * DatabaseOpenHelper
  *
+ * @author zhaosc
  * @version 1.0.0
- * @since 16/4/23
+ * @since 2016-04-23
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     /**
-     * 构造DatabaseOpenHelper
-     * @param context       上下文context
-     * @param databaseName  数据库名称
+     * 构造DatabaseOpenHelper.
+     *
+     * @param context      上下文context
+     * @param databaseName 数据库名称
      */
     public DatabaseOpenHelper(Context context, String databaseName) {
         super(context, databaseName, null, DatabaseSQL.VERSION);
@@ -54,8 +54,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 }
             }
             db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            LogTool.error(e.getMessage());
+        } catch (SQLException exception) {
+            LogTool.error(exception.getMessage());
         } finally {
             db.endTransaction();
         }
@@ -74,8 +74,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 }
             }
             db.setTransactionSuccessful();
-        } catch (SQLException e) {
-            LogTool.error(e.getMessage());
+        } catch (SQLException exception) {
+            LogTool.error(exception.getMessage());
         } finally {
             db.endTransaction();
         }
