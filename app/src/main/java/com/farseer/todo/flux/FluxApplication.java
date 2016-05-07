@@ -31,7 +31,7 @@ import android.app.Application;
  */
 public class FluxApplication extends Application {
 
-    private ApplicationComponent component;
+    private ApplicationComponent mComponent;
 
     @Override
     public void onCreate() {
@@ -49,10 +49,15 @@ public class FluxApplication extends Application {
     }
 
     private void initInjector() {
-        component = ApplicationComponent.Initializer.init(this);
+        mComponent = ApplicationComponent.Initializer.init(this);
     }
 
+    /**
+     * 获得ApplicationComponent
+     *
+     * @return mComponent
+     */
     public ApplicationComponent getComponent() {
-        return component;
+        return mComponent;
     }
 }

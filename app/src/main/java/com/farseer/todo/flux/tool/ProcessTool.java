@@ -20,14 +20,24 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 /**
- * class description here
+ * 进程工具类
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2015-12-10
  */
-public class ProcessTool {
+public final class ProcessTool {
 
+    private ProcessTool() {
+        //not called
+    }
+
+    /**
+     * 获得进程名称
+     *
+     * @param context 上下文
+     * @return 获得进程名称
+     */
     public static String getProcessName(Context context) {
         int pid = android.os.Process.myPid();
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

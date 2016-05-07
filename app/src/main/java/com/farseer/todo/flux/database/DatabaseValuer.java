@@ -30,12 +30,17 @@ import android.content.ContentValues;
  * @version 1.0.0
  * @since 16/5/5
  */
-public class DatabaseValuer {
+public final class DatabaseValuer {
+
+    private DatabaseValuer() {
+        //not called
+    }
 
     /**
      * 把TodoItem转换成ContentValues
-     * @param item
-     * @return
+     *
+     * @param item Item事项
+     * @return ContentValues
      */
     public static ContentValues todoItemValues(TodoItem item) {
         ContentValues values = new ContentValues();

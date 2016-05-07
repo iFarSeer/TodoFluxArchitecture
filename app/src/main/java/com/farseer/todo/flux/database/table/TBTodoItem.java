@@ -24,16 +24,35 @@ package com.farseer.todo.flux.database.table;
  * @version 1.0.0
  * @since 2016-04-18
  */
-public class TBTodoItem {
+public final class TBTodoItem {
 
+    /**
+     * TodoItem表名称
+     */
     public static final String TABLE_NAME = "todo_item";
 
+    /**
+     * 字段id
+     */
     public static final String ID = "_id";
+    /**
+     * 字段description
+     */
     public static final String DESCRIPTION = "description";
+
+    /**
+     * 字段is_complete
+     */
     public static final String IS_COMPLETE = "is_complete";
+    /**
+     * 字段is_star
+     */
     public static final String IS_STAR = "is_star";
 
-     public static final String CREATE_SQL_V1 = ""
+    /**
+     * 创建表SQL语句
+     */
+    public static final String CREATE_SQL_V1 = ""
             + "CREATE TABLE " + TBTodoItem.TABLE_NAME + "("
             + TBTodoItem.ID + " INTEGER NOT NULL PRIMARY KEY,"
             + TBTodoItem.DESCRIPTION + " TEXT NOT NULL,"
@@ -41,11 +60,18 @@ public class TBTodoItem {
             + TBTodoItem.IS_STAR + " INTEGER NOT NULL DEFAULT 0"
             + ")";
 
-    public static final String INDEX_SQL_V1 =
-            "create index if not exists INDEX_" + TABLE_NAME + " on "
-                    + TABLE_NAME + "("
-                    + ID + ","
-                    + IS_COMPLETE + ","
-                    + IS_STAR
-                    + ");";
+    /**
+     * 建立索引SQL语句
+     */
+    public static final String INDEX_SQL_V1 = ""
+            + "CREATE INDEX if not exists INDEX_" + TABLE_NAME + " on "
+            + TABLE_NAME + "("
+            + ID + ","
+            + IS_COMPLETE + ","
+            + IS_STAR
+            + ");";
+
+    private TBTodoItem() {
+        //not called
+    }
 }

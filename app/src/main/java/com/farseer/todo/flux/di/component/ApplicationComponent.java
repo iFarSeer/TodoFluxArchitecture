@@ -46,15 +46,10 @@ import dagger.Component;
 )
 public interface ApplicationComponent {
 
-    public static final class Initializer {
-        public static ApplicationComponent init(Application application) {
-            return DaggerApplicationComponent.builder()
-                    .storageComponent(StorageComponent.Initializer.init(application, "aa"))
-                    .applicationModule(new ApplicationModule(application))
-                    .build();
-        }
-    }
-
+    /**
+     * 注入application
+     * @param application application
+     */
     void inject(Application application);
 
 
@@ -62,33 +57,63 @@ public interface ApplicationComponent {
 
     /**
      * 获得Application
+     *
+     * @return Application
      */
     Application application();
 
     /**
      * 获得Resources
+     *
+     * @return Resources
      */
     Resources resources();
 
     /**
-     * 获得Action处理器
+     * 获得事件分发器
+     *
+     * @return 事件分发器
      */
     @Named("actionDispatcher")
     Dispatcher actionDispatcher();
 
     /**
-     * 获得Data处理器
+     * 获得数据分发器
+     *
+     * @return 数据分发器
      */
     @Named("dataDispatcher")
     Dispatcher dataDispatcher();
 
     /**
      * 获得TodoStore
+     *
+     * @return Store
      */
     Store todoStore();
 
     /**
      * 获得actionCreator
+     *
+     * @return ActionCreator
      */
     ActionCreator actionCreator();
+
+    /**
+     * ApplicationComponent的Initializer
+     */
+    public static final class Initializer {
+        /**
+         * 初始化ApplicationComponent
+         *
+         * @param application application
+         * @return ApplicationComponent
+         */
+        public static ApplicationComponent init(Application application) {
+            return DaggerApplicationComponent.builder()
+                    .storageComponent(StorageComponent.Initializer.init(application, "aa"))
+                    .applicationModule(new ApplicationModule(application))
+                    .build();
+        }
+    }
 }

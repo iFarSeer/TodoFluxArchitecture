@@ -35,8 +35,11 @@ import rx.functions.Func1;
  */
 public class DatabaseMapper {
 
+
     /**
      * Rx map Cursor to TodoItem
+     *
+     * @return func1
      */
     public final static Func1<Cursor, TodoItem> MAPPER_TODO_ITEM = cursor -> {
         long id = CursorTool.getLong(cursor, TBTodoItem.ID);
@@ -45,4 +48,8 @@ public class DatabaseMapper {
         boolean isStar = CursorTool.getBoolean(cursor, TBTodoItem.IS_STAR);
         return new TodoItem(id, description, isComplete, isStar);
     };
+
+    private DatabaseMapper() {
+        // not called
+    }
 }

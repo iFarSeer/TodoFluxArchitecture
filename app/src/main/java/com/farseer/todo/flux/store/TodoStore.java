@@ -43,80 +43,100 @@ import javax.inject.Named;
  */
 public class TodoStore implements Store {
 
-    private Map<Long, TodoItem> todoItemMap = new HashMap<>();
-    private TodoListModel.Filter filter = TodoListModel.Filter.ALL;
+    private Map<Long, TodoItem> mTodoItemHashMap = new HashMap<>();
+    private TodoListModel.Filter mFilter = TodoListModel.Filter.ALL;
 
-    private Dispatcher dataDispatcher;
-    private Dispatcher actionDispatcher;
+    private Dispatcher mDataDispatcher;
+    private Dispatcher mActionDispatcher;
 
+    /**
+     * 构造TodoStore
+     *
+     * @param dataDispatcher   Data Dispatcher
+     * @param actionDispatcher Action Dispatcher
+     */
     @Inject
     public TodoStore(@Named("dataDispatcher") Dispatcher dataDispatcher,
                      @Named("actionDispatcher") Dispatcher actionDispatcher) {
         LogTool.debug("构造 TodoStore");
-        this.dataDispatcher = dataDispatcher;
-        this.actionDispatcher = actionDispatcher;
+        this.mDataDispatcher = dataDispatcher;
+        this.mActionDispatcher = actionDispatcher;
     }
 
     @Override
     public void register() {
-        actionDispatcher.register(this);
+        mActionDispatcher.register(this);
     }
 
     @Override
     public void unregister() {
-        actionDispatcher.unregister(this);
+        mActionDispatcher.unregister(this);
     }
 
+    /**
+     * 订阅TodoItemAction事件
+     *
+     * @param todoItemAction 单个todo事项事件
+     */
     @Subscribe
-    public final void subscribeItemAction(TodoItemAction action) {
-        LogTool.debug(action.toString());
-        DataBundle<TodoItemAction.Key> data = action.getBundle();
+    public final void subscribeItemAction(TodoItemAction todoItemAction) {
+        LogTool.debug(todoItemAction.toString());
+        DataBundle<TodoItemAction.Key> data = todoItemAction.getDataBundle();
         Long id = (Long) data.get(TodoItemAction.Key.ID, -1L);
         TodoItem item = (TodoItem) data.get(TodoItemAction.Key.ITEM, null);
-        switch ((TodoItemAction.Type) action.getType()) {
+        switch ((TodoItemAction.Type) todoItemAction.getType()) {
             case NEW:
                 if (item != null) {
-                    todoItemMap.put(item.getId(), item);
+                    mTodoItemHashMap.put(item.getId(), item);
                     notifyTodoListModelChanged();
                 }
                 break;
             case EDIT:
                 if (item != null) {
-                    todoItemMap.put(item.getId(), item);
+                    mTodoItemHashMap.put(item.getId(), item);
                     notifyTodoListModelChanged();
                 }
                 break;
             case DELETE:
-                todoItemMap.remove(id);
+                mTodoItemHashMap.remove(id);
                 notifyTodoListModelChanged();
+                break;
+            default:
                 break;
         }
     }
 
+    /**
+     * 订阅TodoListAction事件
+     *
+     * @param todoListAction todo事项列表事件
+     */
     @Subscribe
-    public final void subscribeListAction(TodoListAction action) {
-        LogTool.debug(action.toString());
-        DataBundle<TodoListAction.Key> data = action.getBundle();
-        switch ((TodoListAction.Type) action.getType()) {
+    public final void subscribeListAction(TodoListAction todoListAction) {
+        LogTool.debug(todoListAction.toString());
+        DataBundle<TodoListAction.Key> data = todoListAction.getDataBundle();
+        switch ((TodoListAction.Type) todoListAction.getType()) {
             case LOAD: {
                 List<TodoItem> list = (List<TodoItem>) data.get(TodoListAction.Key.LIST, null);
                 if (list != null) {
-                    todoItemMap.clear();
+                    mTodoItemHashMap.clear();
                     for (TodoItem item : list) {
-                        todoItemMap.put(item.getId(), item);
+                        mTodoItemHashMap.put(item.getId(), item);
                     }
                 }
-                filter = TodoListModel.Filter.ALL;
+                mFilter = TodoListModel.Filter.ALL;
                 break;
             }
             case SHOW_ALL:
-                filter = TodoListModel.Filter.ALL;
+                mFilter = TodoListModel.Filter.ALL;
                 break;
             case SHOW_COMPLETED:
-                filter = TodoListModel.Filter.COMPLETED;
+                mFilter = TodoListModel.Filter.COMPLETED;
                 break;
             case SHOW_STARED:
-                filter = TodoListModel.Filter.STARED;
+                mFilter = TodoListModel.Filter.STARED;
+                break;
+            default:
                 break;
         }
 
@@ -125,9 +145,9 @@ public class TodoStore implements Store {
 
     private void notifyTodoListModelChanged() {
         List<TodoItem> todoItemList = new ArrayList<>();
-        todoItemList.addAll(todoItemMap.values());
-        TodoListModel todoListModel = new TodoListModel(todoItemList, filter);
-        dataDispatcher.post(todoListModel);
+        todoItemList.addAll(mTodoItemHashMap.values());
+        TodoListModel todoListModel = new TodoListModel(todoItemList, mFilter);
+        mDataDispatcher.post(todoListModel);
     }
 
 }

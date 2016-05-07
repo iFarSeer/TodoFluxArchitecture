@@ -36,7 +36,25 @@ import dagger.Component;
 )
 public interface StorageComponent {
 
+    /**
+     * 获得数据库
+     *
+     * @return BriteDatabase
+     */
+    BriteDatabase briteDatabase();
+
+    /**
+     * StorageComponent的Initializer
+     */
     public static final class Initializer {
+
+        /**
+         * 初始化StorageComponent
+         *
+         * @param application application
+         * @param userId      用户id
+         * @return StorageComponent
+         */
         public static StorageComponent init(Application application, String userId) {
             return DaggerStorageComponent.builder()
                     .storageModule(new StorageModule(application, userId))
@@ -44,8 +62,5 @@ public interface StorageComponent {
         }
     }
 
-    /**
-     * 获得数据库
-     */
-    BriteDatabase briteDatabase();
+
 }

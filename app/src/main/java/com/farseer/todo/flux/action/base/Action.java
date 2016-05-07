@@ -24,24 +24,49 @@ package com.farseer.todo.flux.action.base;
  * @version 1.0.0
  * @since 2016-04-19
  */
+
+/**
+ * 抽象的Action
+ *
+ * @param <A> extends ActionType 事件类型
+ * @param <D> extends DataKey 事件数据key类型
+ */
 public abstract class Action<A extends ActionType, D extends DataKey> {
 
-    protected A type;
-    protected DataBundle<D> bundle;
+    /**
+     * 事件类型
+     */
+    protected A mType;
+    /**
+     * 事件需要传递的数据
+     */
+    protected DataBundle<D> mDataBundle;
 
+    /**
+     * 获得事件类型
+     *
+     * @return mType
+     */
     public A getType() {
-        return type;
+        return mType;
     }
 
-    public DataBundle<D> getBundle() {
-        return bundle;
+    /**
+     * 获得事件需要传递的数据
+     *
+     * @return mDataBundle
+     */
+    public DataBundle<D> getDataBundle() {
+        return mDataBundle;
     }
 
     @Override
     public String toString() {
-        return "Action{" +
-                "type=" + type +
-                ", bundle=" + bundle.toString() +
-                '}';
+        return "Action{"
+                + "mType="
+                + mType
+                + ", mDataBundle="
+                + mDataBundle.toString()
+                + "}";
     }
 }

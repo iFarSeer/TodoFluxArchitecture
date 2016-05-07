@@ -24,7 +24,7 @@ import com.squareup.otto.ThreadEnforcer;
 import javax.inject.Inject;
 
 /**
- * Data Dispatcher
+ * 数据分发器
  *
  * @author zhaosc
  * @version 1.0.0
@@ -32,8 +32,11 @@ import javax.inject.Inject;
  */
 public class DataDispatcher implements Dispatcher {
 
-    private Bus bus = new Bus(ThreadEnforcer.MAIN);
+    private Bus mBus = new Bus(ThreadEnforcer.MAIN);
 
+    /**
+     * 构造数据分发器
+     */
     @Inject
     public DataDispatcher() {
         LogTool.debug("构造 DataDispatcher");
@@ -41,16 +44,16 @@ public class DataDispatcher implements Dispatcher {
 
     @Override
     public void register(Object object) {
-        bus.register(object);
+        mBus.register(object);
     }
 
     @Override
     public void unregister(Object object) {
-        bus.unregister(object);
+        mBus.unregister(object);
     }
 
     @Override
     public void post(Object event) {
-        bus.post(event);
+        mBus.post(event);
     }
 }

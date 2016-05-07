@@ -26,13 +26,26 @@ import com.farseer.todo.flux.database.table.TBTodoItem;
  * @version 1.0.0
  * @since 2016-04-18
  */
-public class DatabaseSQL {
+public final class DatabaseSQL {
 
+    /**
+     * 数据第一版本的SQL
+     */
     public static final String[] SQL_ALL_V1 = {
             TBTodoItem.CREATE_SQL_V1, TBTodoItem.INDEX_SQL_V1
     };
 
+    /**
+     * 数据所有版本相关的SQL
+     */
     public static final String[][] SQL_ALL = {SQL_ALL_V1};
 
+    /**
+     * 数据版本
+     */
     public static final int VERSION = SQL_ALL.length;
+
+    private DatabaseSQL() {
+        //not called
+    }
 }

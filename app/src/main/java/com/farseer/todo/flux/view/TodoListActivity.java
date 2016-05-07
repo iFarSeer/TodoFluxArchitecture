@@ -51,24 +51,24 @@ import butterknife.ButterKnife;
 
 public class TodoListActivity extends BaseActivity {
 
-    Store todoStore;
+    Store mTodoStore;
 
-    Dispatcher dataDispatcher;
+    Dispatcher mDataDispatcher;
 
-    ActionCreator actionCreator;
+    ActionCreator mActionCreator;
 
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
+    RecyclerView mRecyclerView;
     @Bind(R.id.inputEditText)
-    AppCompatEditText inputEditText;
+    AppCompatEditText mInputEditText;
 
-    private TodoListModel todoListModel;
+    private TodoListModel mTodoListModel;
 
-    private RecyclerAdapter recyclerAdapter;
+    private RecyclerAdapter mRecyclerAdapter;
 
-    private MaterialDialog materialDialog;
+    private MaterialDialog mMaterialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,78 +85,83 @@ public class TodoListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        todoStore.register();
-        dataDispatcher.register(this);
+        mTodoStore.register();
+        mDataDispatcher.register(this);
 
-        actionCreator.createListLoadAction();
+        mActionCreator.createListLoadAction();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        todoStore.unregister();
-        dataDispatcher.unregister(this);
+        mTodoStore.unregister();
+        mDataDispatcher.unregister(this);
     }
 
+    /**
+     * 订阅TodoListModel数据事件
+     *
+     * @param todoListModel todoListModel
+     */
     @Subscribe
     public void onTodoModelChanged(final TodoListModel todoListModel) {
-        this.todoListModel = todoListModel;
+        this.mTodoListModel = todoListModel;
         LogTool.debug(todoListModel.toString());
-        recyclerAdapter.notifyDataSetChanged();
+        mRecyclerAdapter.notifyDataSetChanged();
     }
 
-    public void initializeInjector() {
+    private void initializeInjector() {
         ActivityComponent component = ActivityComponent.Initializer.init(this);
         component.inject(this);
-        actionCreator = component.actionCreator();
-        dataDispatcher = component.dataDispatcher();
-        todoStore = component.todoStore();
+        mActionCreator = component.actionCreator();
+        mDataDispatcher = component.dataDispatcher();
+        mTodoStore = component.todoStore();
     }
 
     private void initView() {
 
-        setSupportActionBar(toolbar);
-        setTitleTextView(toolbar, R.string.app_name);
-        setActionImageView(toolbar, R.drawable.action_more, (view) -> {
+        setSupportActionBar(mToolbar);
+        setTitleTextView(mToolbar, R.string.app_name);
+        setActionImageView(mToolbar, R.drawable.action_more, (view) -> {
             hideDialog();
             showAboutDialog();
         });
-        setOtherActionImageView(toolbar, R.drawable.action_filter, (view) -> {
+        setOtherActionImageView(mToolbar, R.drawable.action_filter, (view) -> {
             hideDialog();
             showFilterDialog();
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(TodoListActivity.this));
-        recyclerView.setNestedScrollingEnabled(true);
-        recyclerView.addItemDecoration(
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(TodoListActivity.this));
+        mRecyclerView.setNestedScrollingEnabled(true);
+        mRecyclerView.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(this)
                         .colorResId(R.color.transport_color)
                         .sizeResId(R.dimen.todo_list_divider_height)
                         .marginResId(R.dimen.item_margin, R.dimen.item_margin)
                         .build());
-        recyclerAdapter = new RecyclerAdapter();
+        mRecyclerAdapter = new RecyclerAdapter();
 
-        recyclerView.setAdapter(recyclerAdapter);
+        mRecyclerView.setAdapter(mRecyclerAdapter);
 
-        inputEditText.setOnEditorActionListener((view, actionId, event) -> {
+        mInputEditText.setOnEditorActionListener((view, actionId, event) -> {
             boolean flag = false;
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                String text = inputEditText.getText().toString();
+                String text = mInputEditText.getText().toString();
                 if (!TextUtils.isEmpty(text)) {
-                    actionCreator.createItemNewAction(text);
-                    inputEditText.setText("");
+                    mActionCreator.createItemNewAction(text);
+                    mInputEditText.setText("");
                 }
                 flag = true;
             }
             return flag;
         });
 
-        recyclerAdapter.setOnClickListener(view -> {
+        mRecyclerAdapter.setOnClickListener(view -> {
             TodoItem item = (TodoItem) view.getTag();
             showEditDialog(item);
         });
 
-        recyclerAdapter.setOnLongClickListener(view -> {
+        mRecyclerAdapter.setOnLongClickListener(view -> {
             TodoItem item = (TodoItem) view.getTag();
             hideDialog();
             showDeleteDialog(item);
@@ -173,7 +178,7 @@ public class TodoListActivity extends BaseActivity {
         editText.setText(item.getDescription());
         editText.setSelection(item.getDescription().length());
 
-        materialDialog = new MaterialDialog.Builder(this)
+        mMaterialDialog = new MaterialDialog.Builder(this)
                 .customView(customView, false)
                 .positiveColorRes(R.color.positive_color)
                 .negativeColorRes(R.color.positive_color)
@@ -182,7 +187,7 @@ public class TodoListActivity extends BaseActivity {
                 .onPositive((dialog, which) -> {
                             String text = editText.getText().toString();
                             if (!TextUtils.isEmpty(text)) {
-                                actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStared());
+                                mActionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStared());
                                 dialog.dismiss();
                             }
                         }
@@ -190,79 +195,84 @@ public class TodoListActivity extends BaseActivity {
                 .build();
 
 
-        materialDialog.show();
+        mMaterialDialog.show();
     }
 
     //显示删除对话框
     private void showDeleteDialog(TodoItem item) {
-        materialDialog = new MaterialDialog.Builder(this)
+        mMaterialDialog = new MaterialDialog.Builder(this)
                 .content(R.string.todo_item_delete_content)
                 .positiveColorRes(R.color.positive_color)
                 .negativeColorRes(R.color.positive_color)
                 .positiveText(R.string.action_sure)
                 .negativeText(R.string.action_cancel)
                 .onPositive((dialog, which) -> {
-                            actionCreator.createItemDeleteAction(item.getId());
+                            mActionCreator.createItemDeleteAction(item.getId());
                             dialog.dismiss();
                         }
                 )
                 .onNegative((dialog, which) -> dialog.dismiss())
                 .build();
-        materialDialog.show();
+        mMaterialDialog.show();
     }
 
     //显示过滤条件
     private void showFilterDialog() {
-        materialDialog = new MaterialDialog.Builder(this)
+        mMaterialDialog = new MaterialDialog.Builder(this)
                 .title(R.string.action_filter)
                 .items(R.array.todo_filter_array)
                 .itemsCallback((dialog, view, which, text) -> {
                     switch (which) {
                         case 0:
-                            actionCreator.createListAllAction();
+                            mActionCreator.createListAllAction();
                             break;
                         case 1:
-                            actionCreator.createListCompletedAction();
+                            mActionCreator.createListCompletedAction();
                             break;
                         case 2:
-                            actionCreator.createListStaredAction();
+                            mActionCreator.createListStaredAction();
+                            break;
+                        default:
                             break;
                     }
                 })
                 .build();
 
-        materialDialog.show();
+        mMaterialDialog.show();
     }
 
     //显示About对话框
     private void showAboutDialog() {
-        materialDialog = new MaterialDialog.Builder(this)
+        mMaterialDialog = new MaterialDialog.Builder(this)
                 .title(R.string.action_about)
                 .content(Html.fromHtml(getString(R.string.about_content)))
                 .contentLineSpacing(1.6f)
                 .build();
-        materialDialog.show();
+        mMaterialDialog.show();
     }
 
     //隐藏对话框
     private void hideDialog() {
-        if (materialDialog != null) {
-            materialDialog.dismiss();
-            materialDialog = null;
+        if (mMaterialDialog != null) {
+            mMaterialDialog.dismiss();
+            mMaterialDialog = null;
         }
     }
 
+    /**
+     * RecyclerAdapter
+     */
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-        private View.OnClickListener onClickListener;
-        private View.OnLongClickListener onLongClickListener;
+        private View.OnClickListener mOnClickListener;
+        private View.OnLongClickListener mLongClickListener;
 
         public void setOnClickListener(View.OnClickListener onClickListener) {
-            this.onClickListener = onClickListener;
+            this.mOnClickListener = onClickListener;
         }
 
         public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
-            this.onLongClickListener = onLongClickListener;
+            this.mLongClickListener = onLongClickListener;
         }
 
         @Override
@@ -273,49 +283,57 @@ public class TodoListActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
-            final TodoItem item = todoListModel.list.get(position);
+            final TodoItem item = mTodoListModel.mTodoItemList.get(position);
 
-            holder.isCompletedCheckBox.setChecked(item.isCompleted());
-            holder.isStarImageView.setSelected(item.isStared());
+            holder.mIsCompletedCheckBox.setChecked(item.isCompleted());
+            holder.mIsStarImageView.setSelected(item.isStared());
 
-            holder.descriptionTextView.setText(item.getDescription());
+            holder.mDescriptionTextView.setText(item.getDescription());
             if (item.isCompleted()) {
-                holder.descriptionTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+                holder.mDescriptionTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
             } else {
-                holder.descriptionTextView.getPaint().setFlags(0);
+                holder.mDescriptionTextView.getPaint().setFlags(0);
             }
 
-            holder.isCompletedCheckBox.setOnClickListener(view ->
-                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStared())
+            holder.mIsCompletedCheckBox.setOnClickListener(view ->
+                    mActionCreator.createItemEditAction(item.getId(), item.getDescription(), !item.isCompleted(), item.isStared())
             );
 
-            holder.isStarImageView.setOnClickListener(view ->
-                    actionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStared())
+            holder.mIsStarImageView.setOnClickListener(view ->
+                    mActionCreator.createItemEditAction(item.getId(), item.getDescription(), item.isCompleted(), !item.isStared())
             );
 
             holder.itemView.setTag(item);
-            holder.itemView.setOnClickListener(onClickListener);
-            holder.itemView.setOnLongClickListener(onLongClickListener);
+            holder.itemView.setOnClickListener(mOnClickListener);
+            holder.itemView.setOnLongClickListener(mLongClickListener);
         }
 
         @Override
         public int getItemCount() {
             int count = 0;
-            if (todoListModel != null && todoListModel.list != null) {
-                count = todoListModel.list.size();
+            if (mTodoListModel != null && mTodoListModel.mTodoItemList != null) {
+                count = mTodoListModel.mTodoItemList.size();
             }
             return count;
         }
 
+        /**
+         * RecyclerAdapter's ViewHolder
+         */
         class ViewHolder extends RecyclerView.ViewHolder {
 
             @Bind(R.id.isCompletedCheckBox)
-            CheckBox isCompletedCheckBox;
+            CheckBox mIsCompletedCheckBox;
             @Bind(R.id.isStarImageView)
-            ImageView isStarImageView;
+            ImageView mIsStarImageView;
             @Bind(R.id.descriptionTextView)
-            TextView descriptionTextView;
+            TextView mDescriptionTextView;
 
+            /**
+             * ViewHolder
+             *
+             * @param view view
+             */
             public ViewHolder(View view) {
                 super(view);
                 ButterKnife.bind(this, view);

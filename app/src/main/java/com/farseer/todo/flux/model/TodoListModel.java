@@ -31,30 +31,35 @@ import java.util.List;
  * @since 2016-04-19
  */
 public class TodoListModel {
-    public List<TodoItem> list;
-    public Filter filter;
+    private List<TodoItem> mTodoItemList;
+    private Filter mFilter;
 
-    public TodoListModel(List<TodoItem> list, Filter filter) {
-        this.filter = filter;
-        this.list = filterTodoItemList(list, filter);
+    /**
+     * TodoListModel构造方法
+     * @param todoItemList          todo事项列表
+     * @param filter                显示方式
+     */
+    public TodoListModel(List<TodoItem> todoItemList, Filter filter) {
+        this.mFilter = filter;
+        this.mTodoItemList = filterTodoItemList(todoItemList, filter);
     }
 
-    private List<TodoItem> filterTodoItemList(List<TodoItem> list, Filter filter) {
+    private List<TodoItem> filterTodoItemList(List<TodoItem> todoItemList, Filter filter) {
         List<TodoItem> tmpList = new ArrayList<>();
 
         switch (filter) {
             case ALL:
-                tmpList.addAll(list);
+                tmpList.addAll(todoItemList);
                 break;
             case COMPLETED:
-                for (TodoItem item : list) {
+                for (TodoItem item : todoItemList) {
                     if (item.isCompleted()) {
                         tmpList.add(item);
                     }
                 }
                 break;
             case STARED:
-                for (TodoItem item : list) {
+                for (TodoItem item : todoItemList) {
                     if (item.isStared()) {
                         tmpList.add(item);
                     }
@@ -65,19 +70,36 @@ public class TodoListModel {
         }
 
         Collections.sort(tmpList, (lhs, rhs) -> (int) (rhs.getId() - lhs.getId()));
-
         return tmpList;
     }
 
+    /**
+     * Filter方式
+     */
     public enum Filter {
-        ALL, COMPLETED, STARED
+        /**
+         * 显示全部
+         */
+        ALL,
+
+        /**
+         * 显示已完成
+         */
+        COMPLETED,
+
+        /**
+         * 显示重要
+         */
+        STARED
     }
 
     @Override
     public String toString() {
-        return "TodoListModel{" +
-                "list=" + list +
-                ", filterTodoItemList=" + filter +
-                '}';
+        return "TodoListModel{"
+                + "mTodoItemList="
+                + mTodoItemList
+                + ", filterTodoItemList="
+                + mFilter
+                + '}';
     }
 }

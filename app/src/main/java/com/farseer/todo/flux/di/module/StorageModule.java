@@ -39,19 +39,30 @@ import dagger.Provides;
 @Module
 public class StorageModule {
 
-    private Application application;
-    private String userId;
+    private Application mApplication;
+    private String mUserId;
 
+    /**
+     * 构造StorageModule
+     *
+     * @param application application
+     * @param userId      用户id
+     */
     public StorageModule(Application application, String userId) {
-        this.application = application;
-        this.userId = userId;
+        this.mApplication = application;
+        this.mUserId = userId;
     }
 
+    /**
+     * 提供BriteDatabase注入
+     *
+     * @return BriteDatabase
+     */
     @Provides
     BriteDatabase briteDatabase() {
         SqlBrite sqlBrite = SqlBrite.create(message -> LogTool.debug("Database", message));
 
-        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseOpenHelper(application, userId);
+        SQLiteOpenHelper sqLiteOpenHelper = new DatabaseOpenHelper(mApplication, mUserId);
         BriteDatabase db = sqlBrite.wrapDatabaseHelper(sqLiteOpenHelper);
         db.setLoggingEnabled(BuildConfig.DEBUG);
         return db;

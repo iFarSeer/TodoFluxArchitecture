@@ -27,19 +27,42 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2016-04-19
  */
+
+/**
+ * 数据集合
+ *
+ * @param <T> extends DataKey
+ */
 public class DataBundle<T extends DataKey> {
-    Map<T, Object> map;
 
+    private Map<T, Object> mMap;
+
+    /**
+     * 构造DataBundle
+     */
     public DataBundle() {
-        map = new HashMap<>();
+        mMap = new HashMap<>();
     }
 
+    /**
+     * 添加数据key-data
+     *
+     * @param key  数据key
+     * @param data 数据内容
+     */
     public void put(T key, Object data) {
-        map.put(key, data);
+        mMap.put(key, data);
     }
 
+    /**
+     * 获得key对应的数据data
+     *
+     * @param key          数据key
+     * @param defaultValue 默认返回data
+     * @return object
+     */
     public Object get(T key, Object defaultValue) {
-        Object obj = map.get(key);
+        Object obj = mMap.get(key);
         if (obj == null) {
             obj = defaultValue;
         }
@@ -47,11 +70,30 @@ public class DataBundle<T extends DataKey> {
         return obj;
     }
 
+    /**
+     * 获得Map
+     *
+     * @return 数据集合
+     */
+    public Map<T, Object> getMap() {
+        return mMap;
+    }
+
+    /**
+     * 设置map
+     *
+     * @param map map
+     */
+    public void setMap(Map<T, Object> map) {
+        mMap = map;
+    }
+
     @Override
     public String toString() {
-        return "DataBundle{" +
-                "map=" + map +
-                '}';
+        return "DataBundle{"
+                + "mMap="
+                + mMap
+                + "}";
     }
 }
 

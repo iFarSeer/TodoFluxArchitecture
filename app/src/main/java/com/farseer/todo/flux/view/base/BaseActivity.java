@@ -38,11 +38,23 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public void setTitleTextView(Toolbar toolbar, @StringRes int resId) {
+    /**
+     * 设置Toolbar的title
+     *
+     * @param toolbar toolbar
+     * @param resId   title的resId
+     */
+    protected void setTitleTextView(Toolbar toolbar, @StringRes int resId) {
         setTitleTextView(toolbar, getString(resId));
     }
 
-    public void setTitleTextView(Toolbar toolbar, String text) {
+    /**
+     * 设置ToolBar的title
+     *
+     * @param toolbar toolbar
+     * @param text    title的内容
+     */
+    protected void setTitleTextView(Toolbar toolbar, String text) {
         TextView titleTextView = ButterKnife.findById(toolbar, R.id.titleTextView);
         if (titleTextView != null) {
             titleTextView.setText(text);
@@ -50,7 +62,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void setActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
+    /**
+     * 设置toolbar最右侧按钮的图片,以及点击事件
+     *
+     * @param toolbar         toolbar
+     * @param resId           图片的resId
+     * @param onClickListener 点击事件监听
+     */
+    protected void setActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
         View actionView = ButterKnife.findById(toolbar, R.id.actionView);
         ImageView actionImageView = ButterKnife.findById(toolbar, R.id.actionImageView);
         if (actionImageView != null) {
@@ -60,7 +79,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void setOtherActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
+    /**
+     * 设置toolbar次右侧按钮的图片,以及点击事件
+     *
+     * @param toolbar         toolbar
+     * @param resId           图片的resId
+     * @param onClickListener 点击事件监听
+     */
+    protected void setOtherActionImageView(Toolbar toolbar, @DrawableRes int resId, View.OnClickListener onClickListener) {
         View otherActionView = ButterKnife.findById(toolbar, R.id.otherActionView);
         ImageView otherActionImageView = ButterKnife.findById(toolbar, R.id.otherActionImageView);
         if (otherActionImageView != null) {

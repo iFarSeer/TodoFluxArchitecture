@@ -28,21 +28,24 @@ package com.farseer.todo.flux.dispatcher;
 public interface Dispatcher {
 
     /**
-     * 注册
-     * @param object
+     * 注册分发器
+     *
+     * @param object object注册分发器
      */
     void register(Object object);
 
     /**
-     * 注销
-     * @param object
+     * 注销分发器
+     *
+     * @param object object注销分发器
      */
     void unregister(Object object);
 
     /**
      * 发送通知
-     * @param event
+     *
+     * @param action 事件
      */
-    void post(Object event);
+    void post(Object action);
 
 }

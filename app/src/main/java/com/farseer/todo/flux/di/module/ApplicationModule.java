@@ -35,7 +35,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- *  Application Module
+ * Application Module
  *
  * @author zhaosc
  * @version 1.0.0
@@ -45,24 +45,45 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final Application app;
+    private final Application mApplication;
 
+    /**
+     * 构造ApplicationModule
+     *
+     * @param application application
+     */
     public ApplicationModule(Application application) {
-        this.app = application;
+        this.mApplication = application;
     }
 
+    /**
+     * 获得Application
+     *
+     * @return mApplication
+     */
     @Provides
     @Singleton
     Application application() {
-        return app;
+        return mApplication;
     }
 
+    /**
+     * 获得Resources
+     *
+     * @return resources
+     */
     @Provides
     @Singleton
     Resources resources() {
-        return app.getResources();
+        return mApplication.getResources();
     }
 
+    /**
+     * 获得事件分发器
+     *
+     * @param actionDispatcher 事件分发器
+     * @return actionDispatcher
+     */
     @Provides
     @Singleton
     @Named("actionDispatcher")
@@ -70,6 +91,12 @@ public class ApplicationModule {
         return actionDispatcher;
     }
 
+    /**
+     * 获得数据分发器
+     *
+     * @param dataDispatcher 数据分发器
+     * @return dataDispatcher
+     */
     @Provides
     @Singleton
     @Named("dataDispatcher")
@@ -77,12 +104,25 @@ public class ApplicationModule {
         return dataDispatcher;
     }
 
+    /**
+     * 获得TodoStore
+     *
+     * @param todoStore todoStore
+     * @return todoStore
+     */
     @Provides
     @Singleton
     Store todoStore(TodoStore todoStore) {
         return todoStore;
     }
 
+
+    /**
+     * 获得ActionCreator
+     *
+     * @param todoActionCreator todoActionCreator
+     * @return ActionCreator
+     */
     @Provides
     @Singleton
     ActionCreator actionCreator(TodoActionCreator todoActionCreator) {

@@ -31,25 +31,56 @@ import com.farseer.todo.flux.action.base.DataKey;
  */
 public class TodoListAction extends Action {
 
+    /**
+     * 构造todo事项列表事件
+     *
+     * @param type 事件类型
+     */
     public TodoListAction(Type type) {
-        this.type = type;
-        this.bundle = new DataBundle<>();
+        this.mType = type;
+        this.mDataBundle = new DataBundle<>();
     }
 
+    /**
+     * 构造todo事项列表事件
+     *
+     * @param type   事件类型
+     * @param bundle 事件数据
+     */
     public TodoListAction(Type type, DataBundle<Key> bundle) {
-        this.type = type;
-        this.bundle = bundle;
+        this.mType = type;
+        this.mDataBundle = bundle;
     }
 
-
+    /**
+     * todo事项列表事件类型
+     */
     public enum Type implements ActionType {
+        /**
+         * 加载类型
+         */
         LOAD,
+        /**
+         * 显示全部类型
+         */
         SHOW_ALL,
+        /**
+         * 显示已完成类型
+         */
         SHOW_COMPLETED,
+        /**
+         * 显示重要类型
+         */
         SHOW_STARED
     }
 
+    /**
+     * 数据key
+     */
     public enum Key implements DataKey {
+        /**
+         * 列表数据
+         */
         LIST
     }
 }

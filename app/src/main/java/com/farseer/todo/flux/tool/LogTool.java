@@ -31,98 +31,156 @@ import java.util.ArrayList;
  * @version 1.0.0
  * @since 2016-04-19
  */
-public class LogTool {
+public final class LogTool {
 
-    public static final boolean flag = true;
-
-    private static String className;
-    private static ArrayList<String> methods;
+    private static final boolean FLAG = true;
+    private static String mClassName;
+    private static ArrayList<String> mMethods;
 
     static {
-        className = LogTool.class.getName();
-        methods = new ArrayList<>();
+        mClassName = LogTool.class.getName();
+        mMethods = new ArrayList<>();
 
         Method[] ms = LogTool.class.getDeclaredMethods();
         for (Method m : ms) {
-            methods.add(m.getName());
+            mMethods.add(m.getName());
         }
     }
 
+    private LogTool() {
+        //not called
+    }
+
+    /**
+     * debug
+     *
+     * @param tag tag
+     * @param msg msg
+     */
     public static void debug(String tag, String msg) {
-        if (flag) {
+        if (FLAG) {
             Log.d(tag, getMsgWithLineNumber(msg));
         }
     }
 
+    /**
+     * error
+     *
+     * @param tag tag
+     * @param msg msg
+     */
     public static void error(String tag, String msg) {
-        if (flag) {
+        if (FLAG) {
             Log.e(tag, getMsgWithLineNumber(msg));
         }
     }
 
+    /**
+     * info
+     *
+     * @param tag tag
+     * @param msg msg
+     */
     public static void info(String tag, String msg) {
-        if (flag) {
+        if (FLAG) {
             Log.i(tag, getMsgWithLineNumber(msg));
         }
     }
 
+    /**
+     * warn
+     *
+     * @param tag tag
+     * @param msg msg
+     */
     public static void warn(String tag, String msg) {
-        if (flag) {
+        if (FLAG) {
             Log.w(tag, getMsgWithLineNumber(msg));
         }
     }
 
+    /**
+     * verbose
+     *
+     * @param tag tag
+     * @param msg msg
+     */
     public static void verbose(String tag, String msg) {
-        if (flag) {
+        if (FLAG) {
             Log.v(tag, getMsgWithLineNumber(msg));
         }
     }
 
-
+    /**
+     * debug
+     *
+     * @param msg msg
+     */
     public static void debug(String msg) {
-        if (flag) {
+        if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.d(content[0], content[1]);
         }
     }
 
+    /**
+     * error
+     *
+     * @param msg msg
+     */
     public static void error(String msg) {
-        if (flag) {
+        if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.e(content[0], content[1]);
         }
     }
 
+    /**
+     * info
+     *
+     * @param msg msg
+     */
     public static void info(String msg) {
-        if (flag) {
+        if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.i(content[0], content[1]);
         }
     }
 
+
+    /**
+     * warn
+     *
+     * @param msg msg
+     */
     public static void warn(String msg) {
-        if (flag) {
+        if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.w(content[0], content[1]);
         }
     }
 
+    /**
+     * verbose
+     *
+     * @param msg msg
+     */
     public static void verbose(String msg) {
-        if (flag) {
+        if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.v(content[0], content[1]);
         }
     }
 
-    public static String getMsgWithLineNumber(String msg) {
+    private static String getMsgWithLineNumber(String msg) {
         try {
             for (StackTraceElement st : (new Throwable()).getStackTrace()) {
-                if (className.equals(st.getClassName()) || methods.contains(st.getMethodName())) {
+                if (mClassName.equals(st.getClassName()) || mMethods.contains(st.getMethodName())) {
                     continue;
                 } else {
                     int b = st.getClassName().lastIndexOf(".") + 1;
-                    String TAG = st.getClassName().substring(b);
-                    String message = TAG + "->" + st.getMethodName() + "():" + st.getLineNumber() + "->" + msg;
+                    String tag = st.getClassName().substring(b);
+                    String message = tag + "->" + st.getMethodName() + "():" + st.getLineNumber() + "->" + msg;
                     return message;
                 }
 
@@ -133,16 +191,16 @@ public class LogTool {
         return msg;
     }
 
-    public static String[] getMsgAndTagWithLineNumber(String msg) {
+    private static String[] getMsgAndTagWithLineNumber(String msg) {
         try {
             for (StackTraceElement st : (new Throwable()).getStackTrace()) {
-                if (className.equals(st.getClassName()) || methods.contains(st.getMethodName())) {
+                if (mClassName.equals(st.getClassName()) || mMethods.contains(st.getMethodName())) {
                     continue;
                 } else {
                     int b = st.getClassName().lastIndexOf(".") + 1;
-                    String TAG = st.getClassName().substring(b);
+                    String tag = st.getClassName().substring(b);
                     String message = st.getMethodName() + "():" + st.getLineNumber() + "->" + msg;
-                    String[] content = new String[]{TAG, message};
+                    String[] content = new String[]{tag, message};
                     return content;
                 }
 
@@ -152,7 +210,6 @@ public class LogTool {
         }
         return new String[]{"universal tag", msg};
     }
-
 
 }
 

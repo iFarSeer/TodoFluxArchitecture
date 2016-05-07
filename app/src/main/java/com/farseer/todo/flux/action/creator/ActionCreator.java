@@ -28,16 +28,25 @@ public interface ActionCreator {
 
     /**
      * 创建新建Item事件
+     *
+     * @param description Item事项描述
      */
     void createItemNewAction(final String description);
 
     /**
      * 创建编辑Item事件
+     *
+     * @param id          items事项id
+     * @param description Item事项描述
+     * @param completed   Item事项是否已完成
+     * @param stared      Item事项是否重要
      */
-    void createItemEditAction(final Long id, final String description, boolean isCompleted, boolean isStar);
+    void createItemEditAction(final Long id, final String description, boolean completed, boolean stared);
 
     /**
      * 创建删除Item事件
+     *
+     * @param id items事项id
      */
     void createItemDeleteAction(final Long id);
 

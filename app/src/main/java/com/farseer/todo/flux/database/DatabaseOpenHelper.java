@@ -34,6 +34,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
+    /**
+     * 构造DatabaseOpenHelper
+     * @param context       上下文context
+     * @param databaseName  数据库名称
+     */
     public DatabaseOpenHelper(Context context, String databaseName) {
         super(context, databaseName, null, DatabaseSQL.VERSION);
     }
