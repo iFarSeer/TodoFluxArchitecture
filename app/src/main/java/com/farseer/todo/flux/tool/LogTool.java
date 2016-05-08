@@ -64,54 +64,6 @@ public final class LogTool {
     }
 
     /**
-     * error.
-     *
-     * @param tag tag
-     * @param msg msg
-     */
-    public static void error(String tag, String msg) {
-        if (FLAG) {
-            Log.e(tag, getMsgWithLineNumber(msg));
-        }
-    }
-
-    /**
-     * info.
-     *
-     * @param tag tag
-     * @param msg msg
-     */
-    public static void info(String tag, String msg) {
-        if (FLAG) {
-            Log.i(tag, getMsgWithLineNumber(msg));
-        }
-    }
-
-    /**
-     * warn.
-     *
-     * @param tag tag
-     * @param msg msg
-     */
-    public static void warn(String tag, String msg) {
-        if (FLAG) {
-            Log.w(tag, getMsgWithLineNumber(msg));
-        }
-    }
-
-    /**
-     * verbose.
-     *
-     * @param tag tag
-     * @param msg msg
-     */
-    public static void verbose(String tag, String msg) {
-        if (FLAG) {
-            Log.v(tag, getMsgWithLineNumber(msg));
-        }
-    }
-
-    /**
      * debug.
      *
      * @param msg msg
@@ -120,6 +72,18 @@ public final class LogTool {
         if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.d(content[0], content[1]);
+        }
+    }
+
+    /**
+     * error.
+     *
+     * @param tag tag
+     * @param msg msg
+     */
+    public static void error(String tag, String msg) {
+        if (FLAG) {
+            Log.e(tag, getMsgWithLineNumber(msg));
         }
     }
 
@@ -138,6 +102,18 @@ public final class LogTool {
     /**
      * info.
      *
+     * @param tag tag
+     * @param msg msg
+     */
+    public static void info(String tag, String msg) {
+        if (FLAG) {
+            Log.i(tag, getMsgWithLineNumber(msg));
+        }
+    }
+
+    /**
+     * info.
+     *
      * @param msg msg
      */
     public static void info(String msg) {
@@ -147,6 +123,17 @@ public final class LogTool {
         }
     }
 
+    /**
+     * warn.
+     *
+     * @param tag tag
+     * @param msg msg
+     */
+    public static void warn(String tag, String msg) {
+        if (FLAG) {
+            Log.w(tag, getMsgWithLineNumber(msg));
+        }
+    }
 
     /**
      * warn.
@@ -157,6 +144,18 @@ public final class LogTool {
         if (FLAG) {
             String[] content = getMsgAndTagWithLineNumber(msg);
             Log.w(content[0], content[1]);
+        }
+    }
+
+    /**
+     * verbose.
+     *
+     * @param tag tag
+     * @param msg msg
+     */
+    public static void verbose(String tag, String msg) {
+        if (FLAG) {
+            Log.v(tag, getMsgWithLineNumber(msg));
         }
     }
 
@@ -186,6 +185,7 @@ public final class LogTool {
 
             }
         } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return msg;
     }
@@ -205,7 +205,7 @@ public final class LogTool {
 
             }
         } catch (Exception exception) {
-
+            exception.printStackTrace();
         }
         return new String[]{"universal tag", msg};
     }
