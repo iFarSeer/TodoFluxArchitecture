@@ -17,12 +17,10 @@
 
 package com.farseer.todo.flux.database;
 
+import android.database.Cursor;
 import com.farseer.todo.flux.database.table.TBTodoItem;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.CursorTool;
-
-import android.database.Cursor;
-
 import rx.functions.Func1;
 
 /**

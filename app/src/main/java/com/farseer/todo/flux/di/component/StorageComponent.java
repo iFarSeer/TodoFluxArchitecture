@@ -17,11 +17,9 @@
 
 package com.farseer.todo.flux.di.component;
 
+import android.app.Application;
 import com.farseer.todo.flux.di.module.StorageModule;
 import com.squareup.sqlbrite.BriteDatabase;
-
-import android.app.Application;
-
 import dagger.Component;
 
 /**

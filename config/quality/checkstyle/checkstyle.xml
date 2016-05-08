@@ -158,11 +158,23 @@
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
+        <!--<module name="CustomImportOrder">-->
+            <!--<property name="specialImportsRegExp" value="com.google"/>-->
+            <!--<property name="sortImportsInGroupAlphabetically" value="true"/>-->
+            <!--<property name="customImportOrderRules" value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>-->
+        <!--</module>-->
+        <!--<module name="AvoidStarImport"/>-->
+        <!--<module name="AvoidStaticImport"/>-->
         <module name="CustomImportOrder">
-            <property name="specialImportsRegExp" value="com.google"/>
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>
+            <!--<property name="customImportOrderRules" value="SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE###STATIC"/>-->
+            <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS###STANDARD_JAVA_PACKAGE###STATIC"/>
+            <property name="specialImportsRegExp" value="^$"/>
+            <property name="standardPackageRegExp" value="^(java|javax)\."/>
+            <property name="thirdPartyPackageRegExp" value=".*"/>
+            <property name="sortImportsInGroupAlphabetically" value="false"/>
+            <property name="separateLineBetweenGroups" value="false"/>
         </module>
+        <module name="UnusedImports"/>
         <module name="MethodParamPad"/>
         <module name="OperatorWrap">
             <property name="option" value="NL"/>

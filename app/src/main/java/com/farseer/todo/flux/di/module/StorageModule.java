@@ -17,15 +17,13 @@
 
 package com.farseer.todo.flux.di.module;
 
+import android.app.Application;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.farseer.todo.flux.BuildConfig;
 import com.farseer.todo.flux.database.DatabaseOpenHelper;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
-
-import android.app.Application;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import dagger.Module;
 import dagger.Provides;
 

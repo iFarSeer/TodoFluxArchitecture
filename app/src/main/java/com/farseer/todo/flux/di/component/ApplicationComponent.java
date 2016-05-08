@@ -17,19 +17,17 @@
 
 package com.farseer.todo.flux.di.component;
 
+import android.app.Application;
+import android.content.res.Resources;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.di.module.ApplicationModule;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
-
-import android.app.Application;
-import android.content.res.Resources;
+import dagger.Component;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import dagger.Component;
 
 /**
  * ApplicationComponent

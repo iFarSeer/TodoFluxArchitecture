@@ -17,6 +17,8 @@
 
 package com.farseer.todo.flux.di.component;
 
+import android.app.Application;
+import android.content.res.Resources;
 import com.farseer.todo.flux.FluxApplication;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.PerActivity;
@@ -25,13 +27,9 @@ import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.view.base.BaseActivity;
 import com.farseer.todo.flux.view.base.BaseFragment;
-
-import android.app.Application;
-import android.content.res.Resources;
+import dagger.Component;
 
 import javax.inject.Named;
-
-import dagger.Component;
 
 /**
  * class description here

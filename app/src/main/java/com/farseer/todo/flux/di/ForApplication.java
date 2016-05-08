@@ -17,9 +17,8 @@
 
 package com.farseer.todo.flux.di;
 
-import java.lang.annotation.Retention;
-
 import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

@@ -17,6 +17,8 @@
 
 package com.farseer.todo.flux.di.module;
 
+import android.app.Application;
+import android.content.res.Resources;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.action.creator.TodoActionCreator;
 import com.farseer.todo.flux.dispatcher.ActionDispatcher;
@@ -24,15 +26,11 @@ import com.farseer.todo.flux.dispatcher.DataDispatcher;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.store.TodoStore;
-
-import android.app.Application;
-import android.content.res.Resources;
+import dagger.Module;
+import dagger.Provides;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
 
 /**
  * Application Module.

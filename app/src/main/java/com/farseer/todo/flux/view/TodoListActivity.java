@@ -17,18 +17,6 @@
 
 package com.farseer.todo.flux.view;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.farseer.todo.flux.R;
-import com.farseer.todo.flux.action.creator.ActionCreator;
-import com.farseer.todo.flux.di.component.ActivityComponent;
-import com.farseer.todo.flux.dispatcher.Dispatcher;
-import com.farseer.todo.flux.model.TodoListModel;
-import com.farseer.todo.flux.pojo.TodoItem;
-import com.farseer.todo.flux.store.Store;
-import com.farseer.todo.flux.tool.LogTool;
-import com.farseer.todo.flux.view.base.BaseActivity;
-import com.squareup.otto.Subscribe;
-
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
@@ -44,12 +32,20 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.farseer.todo.flux.R;
+import com.farseer.todo.flux.action.creator.ActionCreator;
+import com.farseer.todo.flux.di.component.ActivityComponent;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
+import com.farseer.todo.flux.model.TodoListModel;
+import com.farseer.todo.flux.pojo.TodoItem;
+import com.farseer.todo.flux.store.Store;
+import com.farseer.todo.flux.tool.LogTool;
+import com.farseer.todo.flux.view.base.BaseActivity;
+import com.squareup.otto.Subscribe;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 public class TodoListActivity extends BaseActivity {
 

@@ -18,10 +18,8 @@
 package com.farseer.todo.flux;
 
 import android.app.Application;
-
 import com.farseer.todo.flux.di.component.ApplicationComponent;
 import com.farseer.todo.flux.tool.ProcessTool;
-
 
 
 /**

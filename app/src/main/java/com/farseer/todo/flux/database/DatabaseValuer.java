@@ -17,10 +17,9 @@
 
 package com.farseer.todo.flux.database;
 
+import android.content.ContentValues;
 import com.farseer.todo.flux.database.table.TBTodoItem;
 import com.farseer.todo.flux.pojo.TodoItem;
-
-import android.content.ContentValues;
 
 /**
  * DatabaseValuer

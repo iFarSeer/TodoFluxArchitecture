@@ -17,12 +17,11 @@
 
 package com.farseer.todo.flux.database;
 
-import com.farseer.todo.flux.tool.LogTool;
-
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.farseer.todo.flux.tool.LogTool;
 
 /**
  * DatabaseOpenHelper

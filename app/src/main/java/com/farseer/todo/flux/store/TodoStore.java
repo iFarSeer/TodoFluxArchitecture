@@ -26,13 +26,12 @@ import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Subscribe;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * Todo Store

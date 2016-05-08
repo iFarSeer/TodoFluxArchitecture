@@ -17,8 +17,6 @@
 
 package com.farseer.todo.flux.view.base;
 
-import com.farseer.todo.flux.R;
-
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +24,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import butterknife.ButterKnife;
+import com.farseer.todo.flux.R;
 
 /**
  * Activity基类
