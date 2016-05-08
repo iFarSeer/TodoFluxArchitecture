@@ -183,13 +183,12 @@ public class TodoListActivity extends BaseActivity {
                 .positiveText(R.string.action_sure)
                 .negativeText(R.string.action_cancel)
                 .onPositive((dialog, which) -> {
-                            String text = editText.getText().toString();
-                            if (!TextUtils.isEmpty(text)) {
-                                actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStared());
-                                dialog.dismiss();
-                            }
-                        }
-                )
+                    String text = editText.getText().toString();
+                    if (!TextUtils.isEmpty(text)) {
+                        actionCreator.createItemEditAction(item.getId(), text, item.isCompleted(), item.isStared());
+                        dialog.dismiss();
+                    }
+                })
                 .build();
 
 
@@ -205,10 +204,9 @@ public class TodoListActivity extends BaseActivity {
                 .positiveText(R.string.action_sure)
                 .negativeText(R.string.action_cancel)
                 .onPositive((dialog, which) -> {
-                            actionCreator.createItemDeleteAction(item.getId());
-                            dialog.dismiss();
-                        }
-                )
+                    actionCreator.createItemDeleteAction(item.getId());
+                    dialog.dismiss();
+                })
                 .onNegative((dialog, which) -> dialog.dismiss())
                 .build();
         materialDialog.show();
