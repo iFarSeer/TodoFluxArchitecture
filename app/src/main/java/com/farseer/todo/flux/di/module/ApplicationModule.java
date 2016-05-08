@@ -61,7 +61,7 @@ public class ApplicationModule {
      */
     @Provides
     @Singleton
-    Application application() {
+    Application getApplication() {
         return application;
     }
 

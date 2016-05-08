@@ -33,6 +33,7 @@ import java.util.ArrayList;
  */
 public final class LogTool {
 
+    private static final String TAG = LogTool.class.getSimpleName();
     private static final boolean FLAG = true;
     private static String mClassName;
     private static ArrayList<String> mMethods;
@@ -185,7 +186,7 @@ public final class LogTool {
 
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            Log.e(TAG, exception.getLocalizedMessage());
         }
         return msg;
     }
@@ -205,7 +206,7 @@ public final class LogTool {
 
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            Log.e(TAG, exception.getLocalizedMessage());
         }
         return new String[]{"universal tag", msg};
     }
