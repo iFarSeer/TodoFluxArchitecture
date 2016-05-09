@@ -42,9 +42,13 @@ public class ActivityModule {
         this.activity = activity;
     }
 
+    /**
+     * 获得Activity
+     * @return activity
+     */
     @Provides
     @PerActivity
-    BaseActivity getActivity() {
+    BaseActivity baseActivity() {
         return activity;
     }
 }
