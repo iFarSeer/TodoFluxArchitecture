@@ -43,26 +43,26 @@ import javax.inject.Singleton;
 @Module
 public class ApplicationModule {
 
-    private final Application application;
+    private final Application app;
 
     /**
      * 构造ApplicationModule.
      *
-     * @param application application
+     * @param application app
      */
     public ApplicationModule(Application application) {
-        this.application = application;
+        this.app = application;
     }
 
     /**
      * 获得Application.
      *
-     * @return application
+     * @return app
      */
     @Provides
     @Singleton
-    Application getApplication() {
-        return application;
+    Application application() {
+        return app;
     }
 
     /**
@@ -73,7 +73,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     Resources resources() {
-        return application.getResources();
+        return app.getResources();
     }
 
     /**
