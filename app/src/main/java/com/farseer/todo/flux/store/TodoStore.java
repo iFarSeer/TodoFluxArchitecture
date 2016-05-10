@@ -20,6 +20,7 @@ package com.farseer.todo.flux.store;
 import com.farseer.todo.flux.action.TodoItemAction;
 import com.farseer.todo.flux.action.TodoListAction;
 import com.farseer.todo.flux.action.base.DataBundle;
+import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.model.TodoListModel;
 import com.farseer.todo.flux.pojo.TodoItem;
@@ -40,6 +41,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2016-04-19
  */
+@ForApplication
 public class TodoStore implements Store {
 
     private Map<Long, TodoItem> todoItemHashMap = new HashMap<>();

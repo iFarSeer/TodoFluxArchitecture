@@ -50,7 +50,6 @@ public interface ApplicationComponent {
      */
     void inject(Application application);
 
-
     //暴露给对象图
 
     /**

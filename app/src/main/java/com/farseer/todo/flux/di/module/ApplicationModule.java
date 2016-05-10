@@ -61,7 +61,7 @@ public class ApplicationModule {
      */
     @Provides
     @Singleton
-    Application application() {
+    Application provideApplication() {
         return app;
     }
 
@@ -72,7 +72,7 @@ public class ApplicationModule {
      */
     @Provides
     @Singleton
-    Resources resources() {
+    Resources provideResources() {
         return app.getResources();
     }
 
@@ -85,7 +85,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     @Named("actionDispatcher")
-    Dispatcher actionDispatcher(ActionDispatcher actionDispatcher) {
+    Dispatcher provideActionDispatcher(ActionDispatcher actionDispatcher) {
         return actionDispatcher;
     }
 
@@ -98,7 +98,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     @Named("dataDispatcher")
-    Dispatcher dataDispatcher(DataDispatcher dataDispatcher) {
+    Dispatcher provideDataDispatcher(DataDispatcher dataDispatcher) {
         return dataDispatcher;
     }
 
@@ -110,7 +110,7 @@ public class ApplicationModule {
      */
     @Provides
     @Singleton
-    Store store(TodoStore todoStore) {
+    Store provideStore(TodoStore todoStore) {
         return todoStore;
     }
 
@@ -123,7 +123,7 @@ public class ApplicationModule {
      */
     @Provides
     @Singleton
-    ActionCreator actionCreator(TodoActionCreator todoActionCreator) {
+    ActionCreator provideActionCreator(TodoActionCreator todoActionCreator) {
         return todoActionCreator;
     }
 }

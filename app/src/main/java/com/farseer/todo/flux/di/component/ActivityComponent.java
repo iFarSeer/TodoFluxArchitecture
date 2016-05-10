@@ -17,22 +17,15 @@
 
 package com.farseer.todo.flux.di.component;
 
-import android.app.Application;
-import android.content.res.Resources;
 import com.farseer.todo.flux.FluxApplication;
-import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.PerActivity;
 import com.farseer.todo.flux.di.module.ActivityModule;
-import com.farseer.todo.flux.dispatcher.Dispatcher;
-import com.farseer.todo.flux.store.Store;
+import com.farseer.todo.flux.view.TodoListActivity;
 import com.farseer.todo.flux.view.base.BaseActivity;
-import com.farseer.todo.flux.view.base.BaseFragment;
 import dagger.Component;
 
-import javax.inject.Named;
-
 /**
- * class description here
+ * ActivityComponent
  *
  * @author zhaosc
  * @version 1.0.0
@@ -40,94 +33,39 @@ import javax.inject.Named;
  */
 @PerActivity
 @Component(
-        dependencies = {ApplicationComponent.class},
-        modules = {ActivityModule.class}
+        dependencies = ApplicationComponent.class,
+        modules = ActivityModule.class
 )
 public interface ActivityComponent {
 
     /**
-     * 注入BaseActivity.
+     * 注入TodoListActivity.
      *
-     * @param activity activity
+     * @param baseActivity TodoListActivity
      */
-    public void inject(BaseActivity activity);
+    void inject(TodoListActivity baseActivity);
 
     /**
-     * 注入BaseFragment.
+     * 获得Activity
      *
-     * @param fragment fragment
+     * @return BaseActivity.
      */
-    public void inject(BaseFragment fragment);
-
-
-    //暴露给对象图
-
-    /**
-     * 获得activity.
-     *
-     * @return activity
-     */
-    BaseActivity activity();
-
-    /**
-     * 获得Application.
-     *
-     * @return Application
-     */
-    Application application();
-
-    /**
-     * 获得Resources.
-     *
-     * @return Resources
-     */
-    Resources resources();
-
-    /**
-     * 获得事件分发器.
-     *
-     * @return Dispatcher.
-     */
-    @Named("actionDispatcher")
-    Dispatcher actionDispatcher();
-
-    /**
-     * 获得数据分发器.
-     *
-     * @return Dispatcher
-     */
-    @Named("dataDispatcher")
-    Dispatcher dataDispatcher();
-
-    /**
-     * 获得TodoStore.
-     *
-     * @return Store
-     */
-    Store todoStore();
-
-    /**
-     * 获得actionCreator.
-     *
-     * @return ActionCreator
-     */
-    ActionCreator actionCreator();
+    BaseActivity baseActivity();
 
     /**
      * ActivityComponent的Initializer.
      */
     public static final class Initializer {
-
         /**
          * 初始化ActivityComponent.
          *
-         * @param activity activity
+         * @param baseActivity baseActivity
          * @return ActivityComponent
          */
-        public static ActivityComponent init(BaseActivity activity) {
+        public static ActivityComponent init(BaseActivity baseActivity) {
             return DaggerActivityComponent.builder()
-                    .applicationComponent(((FluxApplication) activity.getApplicationContext()).getComponent())
-                    .activityModule(new ActivityModule(activity))
+                    .applicationComponent(((FluxApplication) baseActivity.getApplication()).getComponent())
+                    .activityModule(new ActivityModule(baseActivity))
                     .build();
         }
     }

@@ -47,12 +47,19 @@ import com.farseer.todo.flux.view.base.BaseActivity;
 import com.squareup.otto.Subscribe;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public class TodoListActivity extends BaseActivity {
 
+    @Inject
     Store todoStore;
 
+    @Inject
+    @Named("dataDispatcher")
     Dispatcher dataDispatcher;
 
+    @Inject
     ActionCreator actionCreator;
 
     @Bind(R.id.toolbar)
@@ -111,9 +118,6 @@ public class TodoListActivity extends BaseActivity {
     private void initializeInjector() {
         ActivityComponent component = ActivityComponent.Initializer.init(this);
         component.inject(this);
-        actionCreator = component.actionCreator();
-        dataDispatcher = component.dataDispatcher();
-        todoStore = component.todoStore();
     }
 
     private void initView() {

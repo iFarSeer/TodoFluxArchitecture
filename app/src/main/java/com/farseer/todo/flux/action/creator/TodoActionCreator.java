@@ -23,6 +23,7 @@ import com.farseer.todo.flux.action.base.DataBundle;
 import com.farseer.todo.flux.database.DatabaseMapper;
 import com.farseer.todo.flux.database.DatabaseValuer;
 import com.farseer.todo.flux.database.table.TBTodoItem;
+import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.pojo.TodoItem;
 import com.farseer.todo.flux.tool.LogTool;
@@ -39,6 +40,7 @@ import javax.inject.Named;
  * @version 1.0.0
  * @since 2016-04-19
  */
+@ForApplication
 public class TodoActionCreator implements ActionCreator {
 
     private Dispatcher actionDispatcher;

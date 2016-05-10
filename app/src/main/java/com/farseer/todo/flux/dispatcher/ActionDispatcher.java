@@ -17,6 +17,7 @@
 
 package com.farseer.todo.flux.dispatcher;
 
+import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.tool.LogTool;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
@@ -30,6 +31,7 @@ import javax.inject.Inject;
  * @version 1.0.0
  * @since 2016-04-19
  */
+@ForApplication
 public class ActionDispatcher implements Dispatcher {
 
     private Bus bus = new Bus(ThreadEnforcer.MAIN);

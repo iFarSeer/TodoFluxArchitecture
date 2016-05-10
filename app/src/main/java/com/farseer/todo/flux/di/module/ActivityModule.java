@@ -23,32 +23,34 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Activity Module
+ * Activity Module.
  *
  * @author zhaosc
  * @version 1.0.0
  * @since 2016-04-19
  */
+
 @Module
 public class ActivityModule {
-    private BaseActivity activity;
+
+    private final BaseActivity baseActivity;
 
     /**
-     * 构造ActivityModule.
+     * ActivityModule的构造方法.
      *
-     * @param activity activity
+     * @param baseActivity BaseActivity
      */
-    public ActivityModule(BaseActivity activity) {
-        this.activity = activity;
+    public ActivityModule(BaseActivity baseActivity) {
+        this.baseActivity = baseActivity;
     }
 
     /**
-     * 获得Activity
-     * @return activity
+     * 提供BaseActivity.
+     * @return BaseActivity
      */
     @Provides
     @PerActivity
-    BaseActivity baseActivity() {
-        return activity;
+    BaseActivity providerBaseActivity() {
+        return this.baseActivity;
     }
 }
