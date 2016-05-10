@@ -88,7 +88,7 @@ public interface ApplicationComponent {
      *
      * @return Store
      */
-    Store todoStore();
+    Store store();
 
     /**
      * 获得actionCreator.

@@ -105,12 +105,12 @@ public class ApplicationModule {
     /**
      * 获得TodoStore.
      *
-     * @param todoStore todoStore
-     * @return todoStore
+     * @param todoStore store
+     * @return store
      */
     @Provides
     @Singleton
-    Store todoStore(TodoStore todoStore) {
+    Store store(TodoStore todoStore) {
         return todoStore;
     }
 
