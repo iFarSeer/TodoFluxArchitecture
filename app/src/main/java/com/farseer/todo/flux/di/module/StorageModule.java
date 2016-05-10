@@ -57,7 +57,7 @@ public class StorageModule {
      * @return BriteDatabase
      */
     @Provides
-    BriteDatabase provideBriteDatabase() {
+    BriteDatabase briteDatabase() {
         SqlBrite sqlBrite = SqlBrite.create(message -> LogTool.debug("Database", message));
 
         SQLiteOpenHelper sqLiteOpenHelper = new DatabaseOpenHelper(application, userId);

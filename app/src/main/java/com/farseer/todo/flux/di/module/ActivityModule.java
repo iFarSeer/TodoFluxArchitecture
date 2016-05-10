@@ -33,7 +33,7 @@ import dagger.Provides;
 @Module
 public class ActivityModule {
 
-    private final BaseActivity baseActivity;
+    private final BaseActivity activity;
 
     /**
      * ActivityModule的构造方法.
@@ -41,7 +41,7 @@ public class ActivityModule {
      * @param baseActivity BaseActivity
      */
     public ActivityModule(BaseActivity baseActivity) {
-        this.baseActivity = baseActivity;
+        this.activity = baseActivity;
     }
 
     /**
@@ -50,7 +50,7 @@ public class ActivityModule {
      */
     @Provides
     @PerActivity
-    BaseActivity providerBaseActivity() {
-        return this.baseActivity;
+    BaseActivity baseActivity() {
+        return this.activity;
     }
 }
