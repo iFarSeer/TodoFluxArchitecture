@@ -19,7 +19,11 @@ package com.farseer.todo.flux;
 
 import android.app.Application;
 import com.farseer.todo.flux.di.component.ApplicationComponent;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
 import com.farseer.todo.flux.tool.ProcessTool;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
@@ -50,6 +54,7 @@ public class FluxApplication extends Application {
 
     private void initInjector() {
         component = ApplicationComponent.Initializer.init(this);
+        component.inject(this);
     }
 
     /**

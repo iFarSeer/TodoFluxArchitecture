@@ -19,6 +19,7 @@ package com.farseer.todo.flux.di.component;
 
 import android.app.Application;
 import android.content.res.Resources;
+import com.farseer.todo.flux.FluxApplication;
 import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.ForApplication;
 import com.farseer.todo.flux.di.module.ApplicationModule;
@@ -48,7 +49,7 @@ public interface ApplicationComponent {
      * 注入application.
      * @param application application
      */
-    void inject(Application application);
+    void inject(FluxApplication application);
 
     //暴露给对象图
 
