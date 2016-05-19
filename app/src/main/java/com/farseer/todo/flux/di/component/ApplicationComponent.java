@@ -45,10 +45,6 @@ import javax.inject.Singleton;
 )
 public interface ApplicationComponent {
 
-    /**
-     * 注入application.
-     * @param application application
-     */
     void inject(FluxApplication application);
 
     //暴露给对象图

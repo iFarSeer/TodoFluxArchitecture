@@ -18,8 +18,14 @@
 package com.farseer.todo.flux;
 
 import android.app.Application;
+import com.farseer.todo.flux.action.creator.ActionCreator;
 import com.farseer.todo.flux.di.component.ApplicationComponent;
+import com.farseer.todo.flux.dispatcher.Dispatcher;
+import com.farseer.todo.flux.store.Store;
 import com.farseer.todo.flux.tool.ProcessTool;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
@@ -30,6 +36,20 @@ import com.farseer.todo.flux.tool.ProcessTool;
  * @since 2016-04-18
  */
 public class FluxApplication extends Application {
+    @Inject
+    Store todoStore;
+
+    @Inject
+    @Named("dataDispatcher")
+    Dispatcher dataDispatcher;
+
+    @Inject
+    @Named("actionDispatcher")
+    Dispatcher actionDispatcher;
+
+    @Inject
+    ActionCreator actionCreator;
+
 
     private ApplicationComponent component;
 
